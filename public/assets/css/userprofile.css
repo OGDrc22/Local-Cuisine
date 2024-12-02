@@ -1,0 +1,262 @@
+@font-face {
+  font-family: istock-web-regular;
+  src: url(../fonts/Istok_Web/IstokWeb-Regular.ttf);
+}
+
+@font-face {
+  font-family: istock-web-bold;
+  src: url(../fonts/Istok_Web/IstokWeb-Bold.ttf);
+}
+
+@font-face {
+  font-family: lily-script-one;
+  src: url(../fonts/Lily_Script_One/LilyScriptOne-Regular.ttf);
+}
+
+
+.body {
+  background-color: #ffffff;
+}
+
+.navbar {
+  background-color: #ffffff;
+  box-shadow: 0 8px 12px 0 rgba(0, 0, 0, .2);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+}
+
+.container-fluid {
+  padding: 0 48px;
+}
+
+.navbar-brand {
+  padding-left: 32px;
+  padding-right: 32px;
+  font-size: 24px;
+  font-family: istock-web-bold;
+  background: linear-gradient(to right, #553929, #BD9479);
+  color: transparent;
+  background-clip: text;
+}
+
+.nav-link {
+  font-family: istock-web-regular;
+  font-weight: bold;
+  font-size: 16px;
+  color: #BD9479;
+}
+
+.material-symbols-outlined {
+  color: #BD9479;
+  transform: scale(0.9);
+}
+
+.navBtn:hover {
+  color: #5B4F47;
+}
+
+.navBtn:hover .Icon {
+  color: inherit;
+}
+
+.Icon {
+  margin-top: 2px;
+  margin-right: 4px;
+  color: inherit;
+}
+
+
+
+.dropdown-toggle {
+  font-family: istock-web-regular;
+  color: #BD9479;
+  background-color: #ffffff;
+  min-width: 200px;
+}
+
+.dropdown-toggle:hover,
+.dropdown-toggle:focus {
+  transform: scale(1.2);
+  color: #BD9479;
+  font-weight: bold;
+}
+
+.dropdown-menu {
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+}
+
+.dropdown-menu .dropdown-item {
+  font-family: istock-web-regular;
+  color: #BD9479;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.dropdown-item {
+  margin: auto;
+}
+
+.dropdown-item:hover {
+  background-color: #5B4F47;
+  font-family: istock-web-bold;
+  color: #ffffff;
+}
+
+
+
+
+.containerP {
+  position: relative;
+  margin-top: 120px;
+}
+
+.card-header {
+  background-color: transparent;
+  color: #BD9479;
+  font-family: lily-script-one;
+  font-size: xx-large;
+}
+
+.card-body {
+  max-width: 50%;
+  padding: 16px;
+  margin: auto;
+  margin-top: 30px;
+  background-color: #EEEBE9;
+  border-radius: 16px;
+  box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+
+.label {
+  color: #BD9479;
+  font-family: istock-web-regular;
+}
+
+.toggleTextss {
+  text-decoration: none;
+  color: #BD9479;
+}
+
+.pass-input {
+  background-color: #DDD8D4;
+  border: none;
+  outline: none;
+  width: 100%;
+  border-radius: 8px;
+}
+
+.inputpass {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: #553929;
+  width: 80%;
+  padding: 16px;
+  padding-left: 8px;
+  padding-right: 8px;
+  border-radius: 8px;
+}
+
+.check-box {
+  float: right;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  padding: 10px;
+  -webkit-appearance: none;
+  font-size: larger;
+  color: #553929;
+}
+
+.check-box:checked {
+  -webkit-appearance: none;
+  color: #BD9479;
+}
+
+.check-box:checked::before {
+  -webkit-appearance: none;
+  color: #BD9479;
+}
+
+.input-field {
+  color: #553929;
+  background-color: #DDD8D4;
+  border: none;
+  outline: none;
+  width: 100%;
+  padding: 16px;
+  padding-left: 8px;
+  padding-right: 8px;
+  border-radius: 8px;
+}
+
+.input-field::placeholder {
+  color: #BD9479;
+  font-family: istock-web-regular;
+}
+
+.btnSub {
+  font-family: lily-script-one;
+  font-size: large;
+  color: #ffffff;
+  border: none;
+  outline: none;
+  background-color: #553929;
+  min-width: 150px;
+  padding: 8px;
+  padding-left: 32px;
+  padding-right: 32px;
+  border-radius: 8px;
+}
+
+.btnDelete {
+  position: absolute;
+  bottom: 16px;
+  font-family: lily-script-one;
+  font-size: large;
+  color: #ffffff;
+  border: none;
+  outline: none;
+  background-color: #745E4D;
+  padding: 8px;
+  padding-left: 32px;
+  padding-right: 32px;
+  border-radius: 8px;
+}
+
+.btnCancel {
+  font-family: lily-script-one;
+  font-size: large;
+  color: #ffffff;
+  border: none;
+  outline: none;
+  background-color: #745E4D;
+  min-width: 150px;
+  padding: 8px;
+  padding-left: 32px;
+  padding-right: 32px;
+  border-radius: 8px;
+}
+
+.btnDelete:hover,
+.btnCancel:hover,
+.btnSub:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.3);
+}
+
+
+#modalLabel {
+  font-family: istock-web-bold;
+  font-size: large;
+  color: #BD9479;
+}
+
+#modalLabelD {
+  font-family: istock-web-bold;
+  font-size: large;
+  color: #ff3030;
+}

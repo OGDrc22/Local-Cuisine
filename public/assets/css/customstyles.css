@@ -1,0 +1,253 @@
+.search {
+    display: flex;
+    align-items: center;
+    padding: 11px;
+    border-radius: 12px;
+    background: #060C0F;
+}
+
+.search1 {
+    display: none;
+    align-items: center;
+    padding: 12px;
+    border-radius: 12px;
+    background: #060C0F;
+}
+
+.searchbox-input {
+    color: #D9D9D9;
+    border: none;
+    outline: none;
+    flex: 1;
+}
+
+.searchbox-input::placeholder {
+    color: rgba(255, 255, 255, 0.50);
+}
+
+.search-icon {
+    color: rgba(255, 255, 255, 0.50);
+}
+
+
+
+.container {
+    max-width: 600px;
+}
+
+
+
+.formLogin {
+    max-width: 50%;
+    border-radius: 5ps;
+}
+
+
+.labelEmail {
+    color: #D9D9D9;
+    padding-bottom: 8px;
+}
+
+.inputLGEmail {
+    border: none;
+    background-color: #1D3748;
+    padding: 12px;
+    width: 100%;
+    border-radius: 5px;
+    outline-color: #4169E1;
+    color: #D9D9D9;
+}
+
+
+.inputLGEmail::placeholder {
+    color: rgba(255, 255, 255, 0.50);
+}
+
+.inputLGEmail:focus {
+    background-color: #1D3748;
+}
+
+
+
+.labelPass {
+    color: #D9D9D9;
+    padding-top: 12px;
+    padding-bottom: 8px;
+}
+
+
+.inputLGPass {
+    border: none;
+    background-color: #1D3748;
+    padding: 12px;
+    width: 100%;
+    border-radius: 5px;
+    outline-color: #4169E1;
+    color: #D9D9D9;
+}
+
+.inputLGPass::placeholder {
+    color: rgba(255, 255, 255, 0.50);
+}
+
+
+
+.toggleTextss {
+    color: #D9D9D9;
+}
+
+/* Inpu Field */
+.inputGen {
+    border: none;
+    background-color: #1D3748;
+    padding: 12px;
+    width: 100%;
+    border-radius: 5px;
+    outline-color: #4169E1;
+    color: #D9D9D9;
+}
+
+.custom-dropdown {
+    background-color: transparent; /* Custom background color */
+    color: #D9D9D9; /* Custom text color */
+    border: none; /* Remove border */
+    padding: 8px 15px; /* Adjust padding if needed */
+    min-width: 150px;
+    border-radius: 4px; /* Optional rounded corners */
+    transition: background-color 0.3s ease; /* Add hover effect transition */
+}
+
+.custom-dropdown:hover,
+.custom-dropdown:focus {
+    background-color: transparent; /* Change background on hover/focus */
+    color: #ffffff; /* Optional: Change text color */
+}
+
+.dropdown-menu {
+    background-color: #030608; /* Dropdown menu background color */
+}
+
+.dropdown-menu .dropdown-item {
+    color: white; /* Dropdown item text color */
+}
+.rightBtn {
+    text-decoration: none;
+    color: white;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.dropdown-menu .dropdown-item:hover {
+    background-color: #1a1a1a;
+    color: royalblue;
+    font-weight: bold;
+}
+
+
+.uPass {
+    display: none;
+}
+
+
+
+/* User Profile */
+.containerP {
+    background-color: #091217;
+    border-radius: 16px;
+    margin: auto;
+    max-width: 1000px;
+}
+
+.containerP .card-header {
+    color: #D9D9D9;
+    padding: 16px;
+    font-size: large;
+    font-weight: bold;
+}
+
+.card-body {
+    padding: 16px;
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+}
+
+.card-body .label {
+    color: #D9D9D9;
+}
+
+.card-body .row-form {
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-bottom: 8px;
+}
+
+.card-body .form-text {
+    color: #D9D9D9;
+}
+
+.row .btn {
+    color: #D9D9D9;
+    padding: 12px;
+    background-color: #0C181F;
+    margin: 12px;
+    width: 100%;
+}
+
+.row .btn:hover {
+    background-color: #101E27;
+    color: royalblue;
+    font-weight: bold;
+}
+
+.rowAction {
+    padding-top: 16px;
+}
+
+.rowAction .actionBtn {
+    display: flex;
+    color: #D9D9D9;
+    background-color: #0C181F;
+    margin: 12px;
+    border-radius: 6px;
+}
+
+.rowAction .actionBtn .btn1 {
+    margin: auto;
+    background-color: transparent;
+    border: transparent;
+    color: #D9D9D9;
+    padding: 12px;
+    width: 100%;
+    border-radius: 6px;
+}
+
+.rowAction .actionBtn .btn1:hover {
+    background-color: #101E27;
+    color: royalblue;
+    font-weight: bold;
+}
+
+.rowAction .actionBtnD {
+    display: flex;
+    color: #D9D9D9;
+    background-color: #0C181F;
+    margin: 12px;
+    margin-top: 24px;
+    border-radius: 6px;
+}
+
+.rowAction .actionBtnD .btnDelete {
+    margin: auto;
+    background-color: transparent;
+    border: transparent;
+    color: red;
+    padding: 12px;
+    width: 100%;
+    border-radius: 6px;
+}
+
+.rowAction .actionBtnD .btnDelete:hover {
+    background-color: #101E27;
+    color: royalblue;
+    font-weight: bold;
+}
