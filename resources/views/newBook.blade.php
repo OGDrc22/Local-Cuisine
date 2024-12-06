@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LC Profile</title>
+    <title>LC New Book</title>
     <link href="{{asset('assets/css/bootstrap.css')}}" rel="stylesheet">
     <link href="{{asset('assets/css/newBook.css')}}" rel="stylesheet">
 
@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
 </head>
-<body>
+<body class="body">
     <nav class="navbar">
         <div class="container-fluid d-flex justify-content-between align-items-center">
             <span class="navbar-brand">
@@ -117,7 +117,7 @@
                     <h5 class="modal-title" id="modalLabel">Confirm Submission</h5>
                 </div>
                 <div class="modal-body">
-                    Are you sure you want to publish this form?
+                    Are you sure you want to publish this Recipe?
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btnCancel" data-bs-dismiss="modal">Cancel</button>

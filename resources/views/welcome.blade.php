@@ -53,21 +53,6 @@
                             <i id="star" class="fa-solid fa-star"></i>
                         </div>
                     </div>
-                    <div class="item book-item" data-id="{{ $book->id }}">
-                        <img class="coverImg" src="{{ asset('storage/' . $book->coverImage) }}" alt="Cover Image">
-                        <div class="info">
-                            <a class="title">{{ $book->recipeTitle }}</a>
-                            <a class="byText">By</a>
-                            <p class="author">{{ $userData['username'] }}</p>
-                        </div>
-                        <div class="rating">
-                            <i id="star" class="fa-solid fa-star"></i>
-                            <i id="star" class="fa-solid fa-star"></i>
-                            <i id="star" class="fa-solid fa-star"></i>
-                            <i id="star" class="fa-solid fa-star"></i>
-                            <i id="star" class="fa-solid fa-star"></i>
-                        </div>
-                    </div>
                 @endforeach
             @endforeach
         </div>

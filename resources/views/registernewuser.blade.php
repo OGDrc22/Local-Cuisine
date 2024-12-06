@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <!-- @if ($errors->any())
+    @if ($errors->any())
         <div class="alert alert-danger floating-alert">
             <ul>
                 @foreach ($errors->all() as $error)
@@ -19,16 +19,8 @@
                 @endforeach
             </ul>
         </div>
-    @endif -->
-    @if ($errors->any())
-        @foreach ($errors->all() as $error)
-            <div class="alert alert-danger floating-alert">
-                {{ $error }}
-            </div>
-        @endforeach
     @endif
-
-
+    
     <div class="centered-content">
 
         <div class="formcard" id="formcard">

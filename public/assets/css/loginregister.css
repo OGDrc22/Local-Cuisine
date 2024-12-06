@@ -23,7 +23,6 @@
 
 
 html, body {
-  height: 100%; 
   margin: 0;   
 }
 
@@ -38,7 +37,7 @@ html, body {
 
 body {  
   height: 100vh;                        
-  background: #ffffff;
+  background: hsl(60, 15%, 98%);
 }
 
 .floating-alert {

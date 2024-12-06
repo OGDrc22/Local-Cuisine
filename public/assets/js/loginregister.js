@@ -96,7 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   
   function registerPassMissmatch() {
-    f.style.height = "670px";
+    f.style.height = "630px";
   }
 
   function checkPass() {

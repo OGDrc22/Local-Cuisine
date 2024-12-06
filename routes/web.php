@@ -82,10 +82,6 @@ Route::delete('/deleteBook/{id}', [EditBookController::class, 'destroy'])->name(
 Route::get('/book/{id}', [BookController::class, 'show'])->name('book.details');
 Route::get('/welcome', [WelcomeController::class, 'getBooks']);
 
-// Route::get('/favorites', function () {
-//     return view('favorites');
-// });
-
 
 Route::post('/add_favorite', [BookController::class, 'addFavorite']);
 Route::post('/remove_favorite', [BookController::class, 'removeFavorite']);
