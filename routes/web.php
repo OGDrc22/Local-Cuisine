@@ -13,6 +13,7 @@ use App\Http\Controllers\NewBookController;
 use App\Http\Controllers\EditBookController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\FavoriteController;
+use App\Http\Middleware\PreventDirectAccess;
 
 Route::get('/', [WelcomeController::class, 'getBooks'])->name('welcome');
 
@@ -20,14 +21,6 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
-    Route::put('userprofile/{id}', [UserProfileController::class, 'updateProfile'])->name('userprofile.update');
-});
 
 Route::post('/loginuser', [App\Http\Controllers\Auth\AuthLoginController::class, 'loginuser'])->name('loginuser');
 
@@ -59,24 +52,28 @@ Route::get('/registernewuser', function () {
 Route::post('/registernewuser', [RegisterNewUserController::class, 'register'])->name('register.new');
 
 
-Route::post('/home', function () {
-    return view('home');
-})->name('home');
+Route::middleware( PreventDirectAccess::class)->group(function () {
+    Route::get('/home', [CustomHomeController::class, 'getUser'])->name('home.custom');
 
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::put('userprofile/{id}', [UserProfileController::class, 'updateProfile'])->name('userprofile.update');
+    
+    Route::get('/newBook', [NewBookController::class, 'getUserProfile'])->name('newBook');
 
-Route::get('/home', [CustomHomeController::class, 'getUser'])->middleware('auth')->name('home.custom');
-Route::post('/logout', [CustomHomeController::class, 'logout'])->name('logout.custom');
+    Route::get('newBook/{id}', [NewBookController::class, 'getUserId']);
+    Route::get('/newBook.profile', [NewBookController::class, 'getUserProfile'])->name('newBook.profile');
+    Route::post('/newBook/create', [NewBookController::class, 'create'])->name('newBook.create');
 
-Route::get('/newBook', [NewBookController::class, 'getUserProfile'])->name('newBook');
+    Route::get('/editBook', [EditBookController::class, 'getUserProfile'])->name('editBook');
+    Route::get('/editBook/{id}', [EditBookController::class, 'edit'])->name('editBook.edit');
+    Route::put('/editBook/{id}', [EditBookController::class, 'update'])->name('editBook.update');
+    Route::delete('/deleteBook/{id}', [EditBookController::class, 'destroy'])->name('deleteBook');
 
-Route::get('newBook/{id}', [NewBookController::class, 'getUserId']);
-Route::get('/newBook.profile', [NewBookController::class, 'getUserProfile'])->name('newBook.profile');
-Route::post('/newBook/create', [NewBookController::class, 'create'])->name('newBook.create');
+    Route::get('/favorites', [FavoriteController::class, 'getFavBooks'])->name('favBook');
+});
 
-Route::get('/editBook', [EditBookController::class, 'getUserProfile'])->name('editBook');
-Route::get('/editBook/{id}', [EditBookController::class, 'edit'])->name('editBook.edit');
-Route::put('/editBook/{id}', [EditBookController::class, 'update'])->name('editBook.update');
-Route::delete('/deleteBook/{id}', [EditBookController::class, 'destroy'])->name('deleteBook');
 
 
 Route::get('/book/{id}', [BookController::class, 'show'])->name('book.details');
@@ -85,8 +82,6 @@ Route::get('/welcome', [WelcomeController::class, 'getBooks']);
 
 Route::post('/add_favorite', [BookController::class, 'addFavorite']);
 Route::post('/remove_favorite', [BookController::class, 'removeFavorite']);
-
-Route::get('/favorites', [FavoriteController::class, 'getFavBooks'])->name('favBook');
 
 
 

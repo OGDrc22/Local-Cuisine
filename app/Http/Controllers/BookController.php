@@ -12,8 +12,13 @@ class BookController extends Controller
 {
     public function show($id) {
         $user = Auth::user();
-        $get_userId = $user->id;
-        $get_userName = $user->username;
+        if($user) {
+            $get_userId = $user->id;
+            $get_userName = $user->username;
+        } else {
+            $get_userId = 0;
+            $get_userName = null;
+        }
     
         $book = books::findOrFail($id);
         $bookUserId = $book->userId;

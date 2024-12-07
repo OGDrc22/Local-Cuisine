@@ -18,26 +18,40 @@
     <nav class="navbar  navbar-expand-lg">
         <div class="container-fluid">
 
-            <a class="navbar-brand" href="{{url('home')}}">Local Cuisine</a>
+            @if ($get_userName == 0)
+                <a class="navbar-brand" href="{{url('welcome')}}">Local Cuisine</a>
+            @else
+                <a class="navbar-brand" href="{{url('home')}}">Local Cuisine</a>
+            @endif
 
             <div class="collapse navbar-collapse d-flex">
-                <div class="navbar-nav d-flex">
-                    <a class="nav-link me-2" href="{{route('newBook')}}">+ Add Recipe</a>
-                    <a class="nav-link me-2 navBtn d-flex justify-content-center p-2" href="{{url('favorites')}}"><i class="fa-solid fa-heart navBtn Icon"></i>Favorites</a>
-                </div>
+                @if ($get_userId != 0)
+                    <div class="navbar-nav d-flex">
+                        <a class="nav-link me-2" href="{{route('newBook')}}">+ Add Recipe</a>
+                        <a class="nav-link me-2 navBtn d-flex justify-content-center p-2" href="{{url('favorites')}}"><i class="fa-solid fa-heart navBtn Icon"></i>Favorites</a>
+                    </div>
+                @endif
 
                 <div class="navbar-nav ms-auto">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle text-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            {{$get_userName}}
+                            @if ($get_userName == 0) 
+                                Guess User
+                            @else
+                                {{$get_userName}}                            
+                            @endif
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{{route('userprofile')}}">Profile</a></li>
-                            <li><form action="{{route('logout')}}" method="POST" style="display: inline;">
-                                    @csrf
-                                    <button type="submit" class="dropdown-item">Logout</button>
-                                </form>
-                            </li>
+                            @if ($get_userName == 0)
+                                <li><a class="dropdown-item" href="{{route('about')}}">About Us</a></li>
+                            @else
+                                <li><a class="dropdown-item" href="{{route('userprofile')}}">Profile</a></li>
+                                <li><form action="{{route('logout')}}" method="POST" style="display: inline;">
+                                        @csrf
+                                        <button type="submit" class="dropdown-item">Logout</button>
+                                    </form>
+                                </li>
+                            @endif
                         </ul>
                     </li>
                 </div>
@@ -87,17 +101,19 @@
                                 </button> 
                             </form>
                         @else
-                            <form id="addFavForm" action="/add_favorite" method="POST">
-                                @csrf
-                                <div class="container-form">
-                                    <input name="userId" class="d-none" value="{{$get_userId}}">
-                                    <input name="bookId" class="d-none" value="{{$book->id}}">
-                                </div>
-                                <button class="addBtn text-decoration-none text-center" type="submit">
-                                    <i class="fa-regular fa-heart Icon"></i>
-                                    Favorites
-                                </button> 
-                            </form>
+                            @if ($get_userName != 0)
+                                <form id="addFavForm" action="/add_favorite" method="POST">
+                                    @csrf
+                                    <div class="container-form">
+                                        <input name="userId" class="d-none" value="{{$get_userId}}">
+                                        <input name="bookId" class="d-none" value="{{$book->id}}">
+                                    </div>
+                                    <button class="addBtn text-decoration-none text-center" type="submit">
+                                        <i class="fa-regular fa-heart Icon"></i>
+                                        Favorites
+                                    </button> 
+                                </form>
+                            @endif
                         @endif
 
 
