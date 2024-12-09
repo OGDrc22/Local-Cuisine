@@ -11,68 +11,96 @@
   src: url(../fonts/Lily_Script_One/LilyScriptOne-Regular.ttf);
 }
 
-
 .body {
   background-color: hsl(60, 15%, 98%);
 }
-
 .navbar {
-  background-color: hsl(60, 15%, 98%);
-  box-shadow: 0 8px 12px 0 rgba(0,0,0,.2);
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 10;
+    background-color: hsl(60, 15%, 98%);
+    box-shadow: 0 8px 12px 0 rgba(0, 0, 0, .2);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 10;
+}
+
+.container-fluid {
+    padding: 0 48px;
 }
 
 .navbar-brand {
-  padding-left: 32px;
-  padding-right: 32px;
+    padding-left: 32px;
+    padding-right: 32px;
+    font-size: 24px;
+    font-family: istock-web-bold;
+    background: linear-gradient(to right, #553929, #BD9479);
+    color: transparent;
+    background-clip: text;
 }
 
-.navTitle {
-  font-size: 24px;
-  font-family: istock-web-bold;
-  background: linear-gradient(to right, #553929, #BD9479);
-  color: transparent;
-  background-clip: text;
+.nav-link {
+    font-family: istock-web-regular;
+    font-weight: bold;
+    font-size: 16px;
+    color: #BD9479;
 }
 
-.custom-dropdown {
-  background-color: transparent; /* Custom background color */
-  text-decoration: none;
-  font-family: istock-web-regular;
-  color: #BD9479;
-  min-width: 250px;
-  border: none; /* Remove border */
-  padding: 8px 42px; /* Adjust padding if needed */
-  border-radius: 4px; /* Optional rounded corners */
-  transition: background-color 0.3s ease; /* Add hover effect transition */
-  z-index: 11;
+.dropdown-toggle {
+    font-family: istock-web-regular;
+    color: #BD9479;
+    background-color: transparent;
+    min-width: 200px;
 }
 
-.custom-dropdown:hover,
-.custom-dropdown:focus {
+.dropdown-toggle:hover,
+.dropdown-toggle:focus {
   transform: scale(1.2);
+  color: #BD9479;
   font-weight: bold;
 }
 
 .dropdown-menu {
-  background-color: #ffffff;
-  box-shadow: 0 8px 12px 0 rgba(0,0,0,.2);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
 }
 
-.dropdown-menu .dropdown-item {  
-  font-family: istock-web-regular;
-  color: #BD9479;
-  padding-top: 8px;
-  padding-bottom: 8px;
+.dropdown-menu .dropdown-item {
+    font-family: istock-web-regular;
+    color: #BD9479;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+.dropdown-item {
+    margin: auto;
 }
 
 .dropdown-item:hover {
-  background-color: #5B4F47;
-  color: #ffffff;
+    background-color: #5B4F47;
+    font-family: istock-web-bold;
+    color: #ffffff;
+}
+
+
+.material-symbols-outlined {
+    color: #BD9479;
+    transform: scale(0.9);
+}
+
+.navBtn {
+  font-family: istock-web-regular;
   font-weight: bold;
+  font-size: 16px;
+  color: #BD9479;
+}
+
+.Icon {
+  margin-top: 2px;
+  margin-right: 4px;
+  color: inherit;
+}
+
+.navBtn:hover {
+  color: #5B4F47;
 }
 
 .main {

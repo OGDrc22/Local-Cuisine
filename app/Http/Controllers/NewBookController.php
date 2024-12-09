@@ -57,6 +57,6 @@ class NewBookController extends Controller
             'recipeDescription' => $validated['recipeDescription'],
             'coverImage' => $coverImagePath,
         ]);
-        return redirect(route('home'))->with('success', 'Created Successfully');
+        return redirect(route('home.custom'))->with('success', 'Created Successfully');
     }
 }

@@ -12,31 +12,42 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
 </head>
-<body>
-    <nav class="navbar">
-        <div class="container-fluid d-flex justify-content-between align-items-center">
-            <span class="navbar-brand">
-                <a class="navTitle">Local Cuisine</a>
-            </span>
-            <div class="search w-50 d-none">
-                <span class="search-icon material-symbols-outlined">search</span>
-                <input class="searchbox-input outline-0 border-0" style="background: #060C0F" type="search" placeholder="Search" aria-label="Search">
-            </div>
+<body class="body">    
+    <nav class="navbar  navbar-expand-lg">
+        <div class="container-fluid">
 
-            <div class="d-flex px-5">
-                <div class="dropdown show">
-                    <a class="custom-dropdown" href="#" role="link" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        {{$get_userName}}
-                        <i class="ms-2 bi bi-chevron-down"></i>
-                    </a>
+            @if ($get_userName == 0)
+                <a class="navbar-brand" href="{{url('welcome')}}">Local Cuisine</a>
+            @else
+                <a class="navbar-brand" href="{{url('home')}}">Local Cuisine</a>
+            @endif
 
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <a class="dropdown-item" href="{{route('userprofile')}}">Profile</a>
-                        <form action="{{ route('logout') }}" method="POST" style="display: inline;">
-                            @csrf
-                            <button type="submit" class="dropdown-item">Logout</button>
-                        </form>
-                    </div>
+            <div class="collapse navbar-collapse d-flex">
+
+                <div class="navbar-nav ms-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            @if ($get_userName == 0) 
+                                Guess User
+                            @else
+                                {{$get_userName}}                            
+                            @endif
+                        </a>
+                        <ul class="dropdown-menu">
+                            @if ($get_userName == 0)
+                                <li><a class="dropdown-item" href="{{url('registernewuser')}}">Login/Register</a></li>
+                                <li><a class="dropdown-item" href="{{route('about')}}">About Us</a></li>
+                            @else
+                                <li><a class="dropdown-item" href="{{route('userprofile')}}">Profile</a></li>
+                                <li><form action="{{route('logout')}}" method="POST" style="display: inline;">
+                                        @csrf
+                                        <button type="submit" class="dropdown-item">Logout</button>
+                                    </form>
+                                </li>
+                                <li class="border-top"><a class="dropdown-item" href="{{route('about')}}">About Us</a></li>
+                            @endif
+                        </ul>
+                    </li>
                 </div>
             </div>
         </div>
@@ -151,6 +162,6 @@
         </div>
 
     <script src="{{ asset('assets/js/newBook.js') }}"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>

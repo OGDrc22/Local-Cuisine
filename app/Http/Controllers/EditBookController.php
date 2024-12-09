@@ -52,7 +52,7 @@ class EditBookController extends Controller
 
         $book->save();
         
-        return redirect(route('home'))->with('success', 'Updated Successfully');
+        return redirect(route('home.custom'))->with('success', 'Updated Successfully');
     }
 
     public function destroy($id) { $book = books::findOrFail($id);
@@ -62,6 +62,6 @@ class EditBookController extends Controller
 
         $book->delete();
         
-        return redirect(route('home'))->with('success', 'Book Deleted Successfully'); 
+        return redirect(route('home.custom'))->with('success', 'Book Deleted Successfully'); 
     }
 }

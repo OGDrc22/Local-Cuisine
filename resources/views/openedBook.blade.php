@@ -43,6 +43,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             @if ($get_userName == 0)
+                                <li><a class="dropdown-item" href="{{url('registernewuser')}}">Login/Register</a></li>
                                 <li><a class="dropdown-item" href="{{route('about')}}">About Us</a></li>
                             @else
                                 <li><a class="dropdown-item" href="{{route('userprofile')}}">Profile</a></li>
@@ -51,6 +52,7 @@
                                         <button type="submit" class="dropdown-item">Logout</button>
                                     </form>
                                 </li>
+                                <li class="border-top"><a class="dropdown-item" href="{{route('about')}}">About Us</a></li>
                             @endif
                         </ul>
                     </li>
@@ -66,69 +68,78 @@
             A simple success alert—check it out!
         </div>
         <!-- Changed: Used Bootstrap grid system (row and columns) to structure layout -->
-        <div class="row">
-            <!-- Left column: Title of your Recipe -->
-            <div class="col me-3 mt-5">
-                <div class="viewTextTitle d-flex align-items-center ps-3">
-                    <p type="text" class="Title m-0">{{$book->recipeTitle}}</p>
+
+        <div class="row m-0 p-0">
+            <img class="coverImg" src="{{ asset('storage/' . $book->coverImage) }}" alt="Cover Image">
+        </div>
+
+        <div class="container-info">
+            <div class="row">
+                <!-- Left column: Title of your Recipe -->
+                <div class="col me-3">
+                    <div class="viewTextTitle d-flex align-items-center">
+                        <p type="text" class="Title m-0">{{$book->recipeTitle}}</p>
+                    </div>
+
+                    <!-- Ingredients -->
+                    <div class="form-floating mt-2">
+                        <p class="desc">Ingridients:</p>
+                        <p class="viewTextI viewText" placeholder="Ingredients" id="txtA1" readonly>{{$book->recipeIngridients}}</p>
+                    </div>
                 </div>
 
-                <!-- Ingredients -->
-                <div class="form-floating mt-5">
-                    <p class="viewText" placeholder="Ingredients" id="txtA1" readonly>Ingridients:<br><br>{{$book->recipeIngridients}}</p>
-                </div>
-            </div>
 
 
+                <div class="col ms-3">
 
-            <div class="col ms-3 mt-5">
+                    <div class="d-flex justify-content-between align-items-center editContainer">
 
-                <div class="d-flex justify-content-between align-items-center editContainer">
+                        <p class="ownerText align-self-center ps-0">By {{$ownerName}}</p>
 
-                    <p class="ownerText align-self-center">By {{$ownerName}}</p>
-
-                    <div class="d-flex justify-content-end align-items-center">
-                        @if ($bookFav)
-                            <form id="removeFavForm" action="/remove_favorite" method="POST">
-                                @csrf
-                                <div class="container-form">
-                                    <input name="userId" class="d-none" value="{{$get_userId}}">
-                                    <input name="bookId" class="d-none" value="{{$book->id}}">
-                                </div>
-                                <button class="addBtn2 text-decoration-none text-center" type="submit">
-                                    <i class="fa-solid fa-heart Icon"></i>
-                                    Favorites
-                                </button> 
-                            </form>
-                        @else
-                            @if ($get_userName != 0)
-                                <form id="addFavForm" action="/add_favorite" method="POST">
+                        <div class="d-flex justify-content-end align-items-center">
+                            @if ($bookFav)
+                                <form id="removeFavForm" action="/remove_favorite" method="POST">
                                     @csrf
                                     <div class="container-form">
                                         <input name="userId" class="d-none" value="{{$get_userId}}">
                                         <input name="bookId" class="d-none" value="{{$book->id}}">
                                     </div>
-                                    <button class="addBtn text-decoration-none text-center" type="submit">
-                                        <i class="fa-regular fa-heart Icon"></i>
+                                    <button class="addBtn2 text-decoration-none text-center" type="submit">
+                                        <i class="fa-solid fa-heart Icon"></i>
                                         Favorites
                                     </button> 
                                 </form>
+                            @else
+                                @if ($get_userName != 0)
+                                    <form id="addFavForm" action="/add_favorite" method="POST">
+                                        @csrf
+                                        <div class="container-form">
+                                            <input name="userId" class="d-none" value="{{$get_userId}}">
+                                            <input name="bookId" class="d-none" value="{{$book->id}}">
+                                        </div>
+                                        <button class="addBtn text-decoration-none text-center" type="submit">
+                                            <i class="fa-regular fa-heart Icon"></i>
+                                            Favorites
+                                        </button> 
+                                    </form>
+                                @endif
                             @endif
-                        @endif
 
 
-                        @if ($isOwner) 
-                            <a href="{{route('editBook.edit', $book->id)}}" class="btnEdit text-decoration-none text-center ms-3">Edit</a>    
-                        @endif
+                            @if ($isOwner) 
+                                <a href="{{route('editBook.edit', $book->id)}}" class="btnEdit text-decoration-none text-center ms-3">Edit</a>    
+                            @endif
+                        </div>
+
                     </div>
 
+                    <div class="form-floating mt-2 mb-5">
+                    <p class="desc">Description:</p>
+                        <p class="viewTextD viewText" placeholder="Description" id="txtA2" readonly>{{$book->recipeDescription}}</p>
+                    </div>
                 </div>
 
-                <div class="form-floating mt-5 mb-5">
-                    <p class="viewTextD" placeholder="Description" id="txtA2" readonly>Description:<br><br>{{$book->recipeDescription}}</p>
-                </div>
             </div>
-
         </div>
 
     </div>

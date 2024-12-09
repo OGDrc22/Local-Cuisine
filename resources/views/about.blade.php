@@ -5,36 +5,89 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LC About</title>
     <link href="{{asset('assets/css/bootstrap.css')}}" rel="stylesheet">
-    <link href="{{asset('assets/css/customstyles.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/css/about.css')}}" rel="stylesheet">
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=search" />
 
 </head>
-<body style="background: #060C0F">
-    <nav class="navbar" style="background: #030608">
-        <div class="container-fluid d-flex justify-content-between align-items-center">
-            <span class="navbar-brand px-5" style="background: #030608">
-                <a class="text-primary text-decoration-none " href="{{url('home')}}">Local Cuisine</a>
-            </span>
-            <div class="search w-50">
-                <span class="search-icon material-symbols-outlined">search</span>
-                <input class="searchbox-input outline-0 border-0" style="background: #060C0F" type="search" placeholder="Search" aria-label="Search">
-            </div>
-            <div class="d-flex px-5">
-                <a class="rightBtn" href="{{url()->previous()}}">Go Back</a>
+<body class="body">
+    <nav class="navbar  navbar-expand-lg">
+        <div class="container-fluid">
+
+            <a class="navbar-brand" href="{{url()->previous()}}">Local Cuisine</a>
+
+            <div class="collapse navbar-collapse d-flex">
+                <div class="navbar-nav ms-auto">
+                    <a class="nav-link mainNav text-center" href="{{url()->previous()}}">Go Back</a>
+                </div>
             </div>
         </div>
     </nav>
 
 
-    <div class="containerP mt-5">
-        <div class="card-header text-center">
-            About Us
-        </div>
-        <div class="card-body">
-                
-            <div class="rowAction">
-                <p>Secret</p>
+    <!-- Container 1 About us -->
+    <div class="position-relative" id="container1">
+        <h2 class="mb-4 fw-bold welcomeText position-absolute  top-50 start-50 translate-middle"> About Us</h2>
+        <img src="{{ asset('assets/Images/9170.jpg') }}" alt="Background Image" class="imageBg">
+    </div>
+    
+    <!-- Container 2 NavTabs -->
+    
+    <div class="container" id="container2">
+        <ul class="nav nav-tabs justify-content-center column-gap-3" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="Story-tab" data-bs-toggle="tab" data-bs-target="#Story-tab-pane" type="button" role="tab" aria-controls="Story-tab-pane" aria-selected="true">Our Story</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="Vision-tab" data-bs-toggle="tab" data-bs-target="#Vision-tab-pane" type="button" role="tab" aria-controls="Vision-tab-pane" aria-selected="false">Vision</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="HWorks-tab" data-bs-toggle="tab" data-bs-target="#HWorks-tab-pane" type="button" role="tab" aria-controls="HWorks-tab-pane" aria-selected="false">How it works</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="ExShare-tab" data-bs-toggle="tab" data-bs-target="#ExShare-tab-pane" type="button" role="tab" aria-controls="ExShare-tab-pane" aria-selected="false">Explore and Share</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="Contacts-tab" data-bs-toggle="tab" data-bs-target="#Contacts-tab-pane" type="button" role="tab" aria-controls="Contacts-tab-pane" aria-selected="false">Contacts</button>
+            </li>
+        </ul>
+
+        <div class="tab-content mt-5" id="myTabContent">
+            <div class="tab-pane fade show active text-center" id="Story-tab-pane" role="tabpanel" aria-labelledby="Story-tab" tabindex="0">
+                <p class="viewText">Welcome to Local Cuisine! We are third-year students from PCU-COI, and this website is our final project for our Software Engineering class.</p>
+                <p class="viewText">Our task was to create a recipe book website, and we are excited to share some of the best Filipino recipes we've collected.</p>
+            </div>
+            <div class="tab-pane fade" id="Vision-tab-pane" role="tabpanel" aria-labelledby="Vision-tab" tabindex="0">
+
+                <p class="viewText">Our goal is more than just creating this project. We want to share Filipino recipes with clear instructions to promote our local food. We noticed that Filipino dishes are not well-known in other countries.
+                <p class="viewText">It's time for the world to see, taste, and enjoy the unique flavors of Filipino cuisine..</p>
+            </div>
+
+            <div class="tab-pane fade" id="HWorks-tab-pane" role="tabpanel" aria-labelledby="HWorks-tab" tabindex="0">
+                <p class="viewText">Using our website is easy.</p>
+                <p class="viewText">Log In or Sign Up:</p>
+
+                <p class="viewText">If you already have an account, just log in.
+                New users need to sign up by giving their name and Gmail address.</p>
+
+                <p class="viewText">Set Up Your Account:</p>
+
+                <p class="viewText">After signing up, complete the setup process. Make sure to save your password!</p>
+                <!-- You'll also need to agree to our policies. -->
+            </div>
+
+            <div class="tab-pane fade" id="ExShare-tab-pane" role="tabpanel" aria-labelledby="ExShare-tab" tabindex="0">
+                <p class="viewText">Once logged in, you can search for recipes and save your favorites.You can also create your own recipes and share them with others!</p>
+                <p class="viewText"> Acknowledgements</p>
+                <p class="viewText">A big thank you to Sir Glen Paul Choco, our professor in Software Engineering, for guiding us and helping us create this website.</p>
+            </div>
+            <div class="tab-pane fade" id="Contacts-tab-pane" role="tabpanel" aria-labelledby="Contacts-tab" tabindex="0">
+                <p class="viewText">Having problem?<br>Contact our Developer.</p>
+                <a href="https://www.facebook.com/Eivan.Mart1738?mibextid=ZbWKwL">https://www.facebook.com/Eivan.Mart1738?mibextid=ZbWKwL</a><br>
+                <a href="https://www.facebook.com/dcxme09">https://www.facebook.com/dcxme09</a><br>
+                <a href="https://www.facebook.com/liahhellaene22">https://www.facebook.com/liahhellaene22</a><br>
+                <a href="https://www.facebook.com/profile.php?id=100085608210769&mibextid=ZbWKwL">https://www.facebook.com/profile.php?id=100085608210769&mibextid=ZbWKwL</a>
+            </div>
         </div>
     </div>
 

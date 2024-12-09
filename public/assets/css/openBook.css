@@ -213,10 +213,19 @@
     width: 100%;
     height: 100%;
     padding-top: 60px;
-    padding-left: 4%;
-    padding-right: 4%;
   }
 
+.container-info {
+  padding-left: 4%;
+  padding-right: 4%;
+}
+
+.coverImg {
+  /* background-color: blue; */
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+}
   .floating-alert {
     position: fixed; /* Makes the alert float on the page */
     top: 20px;
@@ -242,10 +251,10 @@
   }
 
   .ownerText {
-    font-family: istock-web-regular;
-    font-size: large;
+    font-family: istock-web-bold;
+    font-size: 22px;
     font-weight: bold;
-    color: #BD9479;
+    color: #745E4D;
     padding: 16px;
     margin-top: 14px;
   }
@@ -256,25 +265,21 @@
     border-radius: 8px;
     border: none;
     outline: none;
-    background-color: #EEEBE9;
-    color: #BD9479;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    /* background-color: #EEEBE9; */
+    color: #745E4D;
+    /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); */
   }
   
-  .viewText {
+  .viewTextI {
     width: 100%;
     height: 60vh;
     border-radius: 8px;
     border: none;
     outline: none;
     padding: 16px;
-    background-color: #EEEBE9;
-    font-size: large;
-    font-family: istock-web-regular;
-    font-weight: 600;
-    color: #BD9479;
+    /* background-color: #EEEBE9; */
     white-space: pre-wrap;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); */
   }
 
   .viewTextD {
@@ -284,13 +289,9 @@
     border: none;
     outline: none;
     padding: 16px;
-    background-color: #EEEBE9;
-    font-size: large;
-    font-family: istock-web-regular;
-    font-weight: 600;
-    color: #BD9479;
+    /* background-color: #EEEBE9; */
     white-space: pre-wrap;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); */
   }
 
   .Title {
@@ -298,7 +299,16 @@
     font-family: istock-web-bold;
   }
 
-  .viewText::placeholder {
-    background-color: #EEEBE9;
-    color: #BD9479;
+  .viewText {
+    font-family: istock-web-regular;
+    font-weight: bold;
+    font-size: 18px;
+    color: hsl(26 20.2% 47.8%);;
+  }
+
+  .desc {
+    font-family: istock-web-regular;
+    font-weight: bold;
+    font-size: 22px;
+    color: hsl(26 20.2% 37.8%);
   }

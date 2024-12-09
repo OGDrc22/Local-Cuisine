@@ -43,14 +43,19 @@
     text-decoration: none;
     font-family: istock-web-regular;
     color: #BD9479;
-}
-
-.LRPage:hover {
-    transform: scale(1.2);
     font-weight: bold;
 }
 
+.about {
+    text-decoration: none;
+    font-family: istock-web-regular;
+    color: #BD9479;
+}
 
+.about:hover,
+.LRPage:hover {
+    color: #553929;
+}
 
 .containerView {
     height: 100vh;

@@ -18,7 +18,7 @@
     <nav class="navbar  navbar-expand-lg">
         <div class="container-fluid">
 
-            <a class="navbar-brand" href="#">Local Cuisine</a>
+            <a class="navbar-brand" href="{{url('home')}}">Local Cuisine</a>
 
             <div class="collapse navbar-collapse d-flex">
                 <div class="navbar-nav d-flex">
@@ -38,6 +38,7 @@
                                     <button type="submit" class="dropdown-item">Logout</button>
                                 </form>
                             </li>
+                            <li class="border-top"><a class="dropdown-item" href="{{route('about')}}">About Us</a></li>
                         </ul>
                     </li>
                 </div>

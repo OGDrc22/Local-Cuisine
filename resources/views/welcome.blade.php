@@ -22,7 +22,8 @@
             </div>
 
             <div class="px-5">
-                <a class="LRPage" href="{{url('registernewuser')}}">Login/Register</a>
+                <a class="LRPage me-3" href="{{url('registernewuser')}}">Login/Register</a>
+                <a class="about d-inline" href="{{route('about')}}">About Us</a>
             </div>
         </div>
     </nav>

@@ -38,6 +38,7 @@
                                     <button type="submit" class="dropdown-item">Logout</button>
                                 </form>
                             </li>
+                            <li class="border-top"><a class="dropdown-item" href="{{route('about')}}">About Us</a></li>
                         </ul>
                     </li>
                 </div>
