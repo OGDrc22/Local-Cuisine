@@ -13,11 +13,16 @@
     src: url(../fonts/Lily_Script_One/LilyScriptOne-Regular.ttf);
 }
 
-body,
 html {
+    scroll-behavior: smooth;
+    display: flex;
+    flex-direction: column;
+}
+
+.body {
+    /* background-color: hsl(60, 24%, 57%); */
     background-color: hsl(60, 15%, 98%);
-    height: 100%;
-    margin: 0;
+    flex: 1;
 }
 
 
@@ -146,4 +151,38 @@ html {
     font-weight: bold;
     font-size: 18px;
     color: hsl(26 20.2% 47.8%);
+}
+
+footer {
+    margin-top: 12px;
+    padding: 20px;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;    
+}
+
+.footerLine {
+    background-color: #553929;
+    height: 2px;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.footerText {
+    font-family: istock-web-regular;
+    color: #553929;
+    font-size: large;
+    text-align: center;
+}
+
+.footerAcknowledgment {
+    font-family: istock-web-regular;
+    color: #553929;
+    font-size: large;
+    display: flex;
+}
+
+.footerAcknowledgment p {
+    margin-inline: 16px;
 }

@@ -7,6 +7,11 @@
     <link href="{{asset('assets/css/bootstrap.css')}}" rel="stylesheet">
     <link href="{{asset('assets/css/newBook.css')}}" rel="stylesheet">
 
+    <link rel="apple-touch-icon" sizes="180x180" href="{{asset('assets/favicon_io/chefshat.png')}}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{asset('assets/favicon_io/chefshat.png')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('assets/favicon_io/chefshat.png')}}">
+    <link rel="manifest" href="{{asset('assets/favicon_io/site.webmanifest')}}">
+
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=search" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -17,16 +22,22 @@
         <div class="container-fluid">
 
             @if ($get_userName == 0)
-                <a class="navbar-brand" href="{{url('welcome')}}">Local Cuisine</a>
+                <a class="navbar-brand" href="{{url()->previous()}}">
+                    <img src="{{asset('assets/favicon_io/chefshat.png')}}" alt="" srcset="" width="32" height="32">
+                    Local Cuisine
+                </a>
             @else
-                <a class="navbar-brand" href="{{url('home')}}">Local Cuisine</a>
+                <a class="navbar-brand" href="{{url('home')}}">
+                    <img src="{{asset('assets/favicon_io/chefshat.png')}}" alt="" srcset="" width="32" height="32">
+                    Local Cuisine
+                </a>
             @endif
 
             <div class="collapse navbar-collapse d-flex">
 
                 <div class="navbar-nav ms-auto">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle dropdown-toggleBtn text-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             @if ($get_userName == 0) 
                                 Guess User
                             @else
@@ -75,14 +86,54 @@
                     @csrf
                     <input name="userId" value="{{ $get_userId }}" class="d-none">
                     
-                    <input name="recipeTitle" type="text" class="input-field-title" id="sourceInput" placeholder="Title" value="{{old('recipeTitle')}}" required>
+                    <div class="required">
+                        <input name="recipeTitle" type="text" class="input-field-title" id="sourceInput" placeholder="Title" value="{{old('recipeTitle')}}" required>
+                    </div>
+
+                    <div class="form-group mt-2">
+                        <div class="row-form">
+                            <div class="form-group mt-3">
+                                <div class="nav-item dropdownCategory">
+                                    <a class="input-field form-control selected" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Select Category
+                                        <input type="checkbox" class="dropdown-toggle check-boxA">
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menuCategory">
+                                        <li class="dropdown-item" data-value="Appetizers">Appetizers</li> 
+                                        <li class="dropdown-item" data-value="Side Dishes">Side Dishes</li> 
+                                        <li class="dropdown-item" data-value="Main Courses">Main Courses</li> 
+                                        <li class="dropdown-item" data-value="Desserts">Desserts</li> 
+                                        <li class="dropdown-item" data-value="Beverages">Beverages</li> 
+                                        <li class="dropdown-item" data-value="Soups">Soups</li> 
+                                        <li class="dropdown-item" data-value="Salads">Salads</li> 
+                                        <li class="dropdown-item" data-value="Breakfasts">Breakfasts</li> 
+                                        <li class="dropdown-item" data-value="Snacks">Snacks</li> 
+                                        <li class="dropdown-item" data-value="Bread and Pastries">Bread and Pastries</li>
+                                    </ul>
+                                </div>
+                            
+                            </div>
+
+                        </div>
+                    </div>
                     
-                    <textarea name="recipeIngridients" class="input-field-big mt-3" placeholder="Ingredients..." required>{{old('recipeIngridients')}}</textarea>
                     
-                    <textarea name="recipeDescription" class="input-field-big mt-3" placeholder="Description/Instructions..." required>{{old('recipeDescription')}}</textarea>
                     
+                    <div class="mt-3">
+                        <textarea name="recipeIngridients" class="input-field-big" placeholder="Ingredients..." >{{old('recipeIngridients')}}</textarea>
+                    </div>
+                    
+                    <div class="mt-3">
+                        <textarea name="recipeDescription" class="input-field-big" placeholder="Description/Instructions..." >{{old('recipeDescription')}}</textarea>
+                    </div>
+
+                    <div class="">
+                        <label for="formFile" class="form-label mb-0">Recipe Origin</label>
+                        <input name="recipeOrigin" type="text" class="input-field-category" id="sourceInput" placeholder="Recipe Origin"  value="{{old('recipeOrigin')}}">
+                    </div>
+
                     <div class="mb-3 mt-1">
-                        <label for="formFile" class="form-label">Upload Cover Photo</label>
+                        <label for="formFile" class="form-label mb-0">Upload Cover Photo</label>
                         <input name="coverImage" class="input-field" type="file" id="formFile">
                     </div>
 
@@ -105,15 +156,19 @@
                     <div class="info">
                         <a class="title" id="targetInput">Title</a>
                         <a class="byText">By</a>
-                        <p class="author">{{$get_userName}}</p>
+                        <p class="author d-inline">{{$get_userName}}</p>
                         
                     </div>
-                    <div class="rating">
-                        <i id="star" class="fa-solid fa-star"></i>
-                        <i id="star" class="fa-solid fa-star"></i>
-                        <i id="star" class="fa-solid fa-star"></i>
-                        <i id="star" class="fa-solid fa-star"></i>
-                        <i id="star" class="fa-solid fa-star"></i>
+                    <div class="container-rating d-flex align-items-center px-2">
+                        <div class="rating">
+                            <i id="star" class="fa-solid fa-star starRated"></i>
+                            <i id="star" class="fa-solid fa-star starRated"></i>
+                            <i id="star" class="fa-solid fa-star starRated"></i>
+                            <i id="star" class="fa-solid fa-star starRated"></i>
+                            <i id="star" class="fa-solid fa-star starRated"></i>
+                        </div>
+                        <h1 class="rates ms-2 mb-0 mt-1 starsNum">(0)</h1>
+                        <h1 class="rates ms-2 mb-0 mt-1 d-inline"> 0 Ratings</h1>
                     </div>
                 </div>
             </div>
@@ -131,7 +186,7 @@
                     Are you sure you want to publish this Recipe?
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btnCancel" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btnCancel btnCancelModal" id="btnCancelModal" data-bs-dismiss="modal">Cancel</button>
                     <button type="button" class="btnSub" id="confirmSubmit">Publish it</button>
                 </div>
             </div>
@@ -140,6 +195,27 @@
 
 
     <script src="{{ asset('assets/js/newBook.js') }}"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
+
+
+<footer>
+    <hr class="footerLine">
+    <div class="footer">
+        <div class="container-fluid d-flex justify-content-center align-items-center">
+            <a class="col navbar-brand justify-content-center align-content-center text-center m-0" href="{{url('/')}}">
+                <img src="{{asset('assets/favicon_io/chefshat.png')}}" alt="" srcset="" class="Icon" width="32" height="32">
+                Local Cuisine
+            </a>
+        </div>
+    </div>
+    <div class="footerText">
+        <p>© 2025 Local Cuisine. All rights reserved.</p>
+        <div class="footerAcknowledgment">
+            <p>Designed by <a href="" target="">Team ACIM</a></p>
+            <p>Powered by <a href="https://laravel.com/" target="_blank">Laravel</a></p>
+            <p>Icons by <a href="https://fontawesome.com/" target="_blank">Font Awesome</a></p>
+        </div>
+    </div>
+</footer>
 </html>

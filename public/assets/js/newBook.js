@@ -1,3 +1,42 @@
+
+document.addEventListener('DOMContentLoaded', function () {
+    const dropdownItems = document.querySelectorAll(".dropdown-menuCategory .dropdown-item");
+    const selectedElement = document.querySelector(".dropdownCategory .selected");
+
+    dropdownItems.forEach(item => {
+        item.addEventListener("click", function (e) {
+            e.preventDefault();
+            const value = this.getAttribute("data-value");
+            const label = this.textContent;
+
+            // Update the selected label in the anchor tag
+            selectedElement.innerHTML = `
+                ${label}
+                <input type="checkbox" class="dropdown-toggle check-boxA">
+            `;
+
+            // Optional: Set the value into a hidden input for form submission
+            let hiddenInput = document.getElementById("selectedChefRole");
+            if (!hiddenInput) {
+                hiddenInput = document.createElement("input");
+                hiddenInput.type = "hidden";
+                hiddenInput.name = "recipeCategory"; // or any backend name expected
+                hiddenInput.id = "selectedChefRole";
+                selectedElement.parentElement.appendChild(hiddenInput);
+            }
+            hiddenInput.value = value;
+            console.log("Selected value:", value); // Log the selected value
+        });
+    });
+
+});
+
+// const dropdownItemsB = document.querySelector(".dropdown-menuCategory");
+// dropdownItemsB.addEventListener("click", function (e) {
+//     e.preventDefault();
+//     console.log("Dropdown item clicked:", e.target); // Log the clicked item
+// });
+
 document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => {
         const alerts = document.querySelectorAll(".floating-alert");
@@ -43,9 +82,29 @@ document.addEventListener("DOMContentLoaded", () => {
         modal.show();
     });
 
-    document.getElementById('confirmSubmit').addEventListener('click', function () {
-        // Submit the form after confirmation
-        document.getElementById('myForm').submit();
+    document.addEventListener('DOMContentLoaded', () => {
+        let isSubmitting = false;
+    
+        const form = document.getElementById('myForm');
+        const confirmSubmit = document.getElementById('confirmSubmit');
+        const btnCancelModal = document.getElementById('btnCancelModal');
+    
+        if (confirmSubmit && form) {
+            confirmSubmit.addEventListener('click', function () {
+                console.log("Confirm submit button clicked"); // Log the click event
+                if (!isSubmitting) {
+                    isSubmitting = true;
+                    // Disable the submit button and show a spinner
+                    btnCancelModal.setAttribute('disabled', true);
+                    
+                    confirmSubmit.setAttribute('disabled', true);
+                    confirmSubmit.innerHTML = `
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Saving...
+                    `;
+                    form.submit(); // Submit the form after setting the flag and UI
+                }
+            });
+        }
     });
     
     
@@ -55,7 +114,29 @@ document.addEventListener("DOMContentLoaded", () => {
         modal.show();
     });
 
-    document.getElementById('confirmDelete').addEventListener('click', function () {
-        // Submit the form after confirmation
-        document.getElementById('deleteBook').submit();
+    
+    document.addEventListener('DOMContentLoaded', () => {
+        let isSubmitting = false;
+    
+        const form = document.getElementById('deleteBook');
+        const confirmDelete = document.getElementById('confirmDelete');
+        const btnCancelModal = document.getElementById('btnCancelModal');
+    
+        if (confirmDelete && form) {
+            confirmDelete.addEventListener('click', function () {
+                if (!isSubmitting) {
+                    isSubmitting = true;
+                    // Disable the submit button and show a spinner
+                    btnCancelModal.setAttribute('disabled', 'disabled');
+
+                    confirmDelete.setAttribute('disabled', 'disabled');
+                    confirmDelete.innerHTML = `
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Deleting...
+                    `;
+                    form.submit(); // Submit the form after setting the flag and UI
+                }
+            });
+        }
     });
+
+    

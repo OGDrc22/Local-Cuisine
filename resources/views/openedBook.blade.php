@@ -8,55 +8,67 @@
     <link href="{{asset('assets/css/bootstrap.css')}}" rel="stylesheet">
     <link href="{{asset('assets/css/openBook.css')}}" rel="stylesheet">
 
+    <link rel="apple-touch-icon" sizes="180x180" href="{{asset('assets/favicon_io/chefshat.png')}}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{asset('assets/favicon_io/chefshat.png')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('assets/favicon_io/chefshat.png')}}">
+    <link rel="manifest" href="{{asset('assets/favicon_io/site.webmanifest')}}">
+
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=search" />
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=favorite" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=send" />
 
 <body class="body">
-    <nav class="navbar  navbar-expand-lg">
-        <div class="container-fluid">
+    <nav class="navbar navbar-expand-lg">
 
-            @if ($get_userName == 0)
-                <a class="navbar-brand" href="{{url('welcome')}}">Local Cuisine</a>
-            @else
-                <a class="navbar-brand" href="{{url('home')}}">Local Cuisine</a>
-            @endif
-
-            <div class="collapse navbar-collapse d-flex">
-                @if ($get_userId != 0)
-                    <div class="navbar-nav d-flex">
-                        <a class="nav-link me-2" href="{{route('newBook')}}">+ Add Recipe</a>
-                        <a class="nav-link me-2 navBtn d-flex justify-content-center p-2" href="{{url('favorites')}}"><i class="fa-solid fa-heart navBtn Icon"></i>Favorites</a>
+    <div class="container-top-nav container-fluid">
+            <div class="left-brand-container">
+                <a class="navbar-brand" href="{{ URL::previous() }}">
+                    <img src="{{asset('assets/favicon_io/chefshat.svg')}}" alt="" srcset="" class="Icon" width="32" height="32">
+                    <div class="webname">
+                        Local Cuisine
                     </div>
-                @endif
+                </a>
+            </div>
 
-                <div class="navbar-nav ms-auto">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            @if ($get_userName == 0) 
-                                Guess User
-                            @else
-                                {{$get_userName}}                            
-                            @endif
-                        </a>
-                        <ul class="dropdown-menu">
-                            @if ($get_userName == 0)
-                                <li><a class="dropdown-item" href="{{url('registernewuser')}}">Login/Register</a></li>
-                                <li><a class="dropdown-item" href="{{route('about')}}">About Us</a></li>
-                            @else
-                                <li><a class="dropdown-item" href="{{route('userprofile')}}">Profile</a></li>
-                                <li><form action="{{route('logout')}}" method="POST" style="display: inline;">
-                                        @csrf
-                                        <button type="submit" class="dropdown-item">Logout</button>
-                                    </form>
-                                </li>
-                                <li class="border-top"><a class="dropdown-item" href="{{route('about')}}">About Us</a></li>
-                            @endif
-                        </ul>
-                    </li>
+            <div class="center-actions-container">
+                <div class="left-center-action">
+                    <a class="nav-link" href="{{route('newBook')}}"><i class="fa-solid fa-circle-plus"></i> Add Recipe</a>
                 </div>
+
+                <div class="center-center-action">
+                    <form action="{{url('home')}}" class="form-search">
+                        <span class="search-icon fas fa-search"></span>
+                        <input class="searchbox-input" type="text" name="query" placeholder="Search..."
+                            aria-label="Search">
+                            <!-- <button type="submit">Search</button> -->
+                    </form>
+                </div>
+
+                <div class="right-center-action">
+                    <a class="nav-link" href="{{url('favorites')}}"><i class="fa-solid fa-bookmark Icon"></i>Favorites</a>
+                </div>
+            </div>
+
+            <div class="right-dropdown-container dropdown">
+                <button class="dropdown-toggle dropdown-toggle-button d-flex" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="user-nav-icon fa-solid fa-circle-user"></i>
+                    <div class="username_hidden">{{$get_userName}}</div>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a class="navBarActions_dropdown dropdown-item" href="{{route('newBook')}}">Add Recipe</a></li>
+                    <li><a class="navBarActions_dropdown dropdown-item" href="{{url('favorites')}}"></i>Favorites</a></li>
+                    <li><a class="dropdown-item" href="{{route('userprofile')}}">Profile</a></li>
+                    <li><form action="{{route('logout')}}" method="POST" style="display: inline;">
+                            @csrf
+                            <button type="submit" class="dropdown-item">Logout</button>
+                        </form>
+                    </li>
+                    <li class="border-top"><a class="dropdown-item" href="{{route('about')}}">About Us</a></li>
+                </ul>
             </div>
         </div>
     </nav>
@@ -64,94 +76,304 @@
 
     <!-- Main Container -->
     <div class="main">
+        @if (session('success'))
+            <div class="alert alert-success floating-alert" role="alert">
+                <h5 class="modal-title">{{ session('success') }}</h5>
+            </div>
+        @endif
+
+        @if (session('error'))
+            <div class="alert alert-success floating-alert" role="alert">
+                <h5 class="modal-title">{{ session('success') }}</h5>
+            </div>
+        @endif
+
+
         <div class="alert alert-success floating-alert d-none" role="alert">
-            A simple success alert—check it out!
+            <!-- For Favorites -->
         </div>
+
+        @if (session(key: 'message'))
+            <div class="alert alert-success floating-alert d-none" role="alert">
+                <h5 class="modal-title">{{ session('message') }}</h5>
+            </div>
+        @endif
         <!-- Changed: Used Bootstrap grid system (row and columns) to structure layout -->
 
         <div class="row m-0 p-0">
             <img class="coverImg" src="{{ asset('storage/' . $book->coverImage) }}" alt="Cover Image">
         </div>
 
-        <div class="container-info">
-            <div class="row">
-                <!-- Left column: Title of your Recipe -->
-                <div class="col me-3">
-                    <div class="viewTextTitle d-flex align-items-center">
-                        <p type="text" class="Title m-0">{{$book->recipeTitle}}</p>
-                    </div>
 
-                    <!-- Ingredients -->
-                    <div class="form-floating mt-2">
-                        <p class="desc">Ingridients:</p>
-                        <p class="viewTextI viewText" placeholder="Ingredients" id="txtA1" readonly>{{$book->recipeIngridients}}</p>
+        <div class="container-info grid-container">
+            <!-- Left column: Title of your Recipe -->
+            <div class="col">
+                <div class="viewTextTitle align-items-center">
+                    <h1 type="text" class="Title my-0">{{$book->recipeTitle}}</h1>
+                </div>
+                <a class="byText">By</a>
+                <p class="author d-inline"> {{ $ownerName }}</p>
+                <!-- <div class="d-flex"><h1 class="ownerText align-self-center p-0 my-0">By {{$ownerName}}</h1></div> -->
+                <div class="moreInfo">
+                    <a class="byText">Recipe Origin</a>
+                    <p class="author d-inline">{{ $book->recipeOrigin }}</p>
+                </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="align-items-center pb-2">
+
+                <div class="container-rating container-fluid align-items-center ps-0">
+
+                    @php
+                        $starsTotal = $book['starsCount'];
+                        $starsFull = floor($starsTotal);
+                        $starsHalf = ($starsTotal - $starsFull) > 0 ? true : false;
+                        $starsNum = number_format($book['starsCount'], 1);
+                    @endphp
+
+
+                    <h1 class="ratingText">Ratings: </h1>
+
+                    <div class="rating-owner">
+
+                        @for ($i = $starsTotal + 1; $i <= 5; $i++)
+                            <label for="Star" title="{{$starsNum}} stars" class="fa-solid fa-star starRatedEmpty"></label>
+                        @endfor
+
+                        @if ($starsHalf)
+                            <label for="Star" title="{{$starsNum}} stars"
+                                class="fa-solid fa-star-half-stroke starRated"></label>
+                        @endif
+
+                        @for ($i = 1; $i <= $starsTotal; $i++)
+                            <label for="Star" title="{{$starsNum}} stars" class="fa-solid fa-star starRated"></label>
+                        @endfor
+
                     </div>
+                    <div class="rateInfo">
+                        <h1 class="rates starsNum">{{$starsNum}}</h1>
+                        <h1 class="rates ratersSum"> {{$book['ratings']}} Ratings</h1>
+                    </div>
+                    <!-- <h1 class="rates ms-2 mb-0 mt-1">({{$starsCount}} Stars) {{$rates->count()}} Ratings</h1> -->
                 </div>
 
+                <div class="d-flex align-items-center buttonContainer justify-content-start">
+
+                    <button type="button" id="openModal" class="actionBtn">
+                        <i class="fa-solid fa-download Icon"></i>
+                        <div class="action_name">
+                            Download
+                        </div>
+                    </button>
+
+                    <div class="modal fade" id="downloadContentModal" tabindex="-1" aria-labelledby="modalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="modalLabel">Download {{ $book->recipeTitle }}</h5>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="dl">
+                                        Are you sure you want to download this Recipe?
+                                    </div>
+                                    <div class="dl mt-1">
+                                        <input type="checkbox" name="hide_comments" id="hide_comments" checked>
+                                        <label for="hide_comments">Hide Comments</label>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btnCancel" data-bs-dismiss="modal">Cancel</button>
+                                    <button type="button" class="btnSub" id="downloadBtn">Download</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
 
-                <div class="col ms-3">
 
-                    <div class="d-flex justify-content-between align-items-center editContainer">
+                    @if ($bookFav)
+                        <form id="removeFavForm" action="/remove_favorite" method="POST" title="Remove to Favorites">
+                            @csrf
+                            <div class="container-form">
+                                <input name="userId" class="d-none" value="{{$get_userId}}">
+                                <input name="bookId" class="d-none" value="{{$book->id}}">
+                            </div>
+                            <button class="actionBtn text-decoration-none text-center" type="submit">
+                                <i class="fa-solid fa-bookmark Icon"></i>
+                                <div class="action_name">
+                                    Favorites
+                                </div>
+                            </button>
+                        </form>
+                    @else
+                        @if ($get_userName != 0)
+                            <form id="addFavForm" action="/add_favorite" method="POST" title="Add to Favorites">
+                                @csrf
+                                <div class="container-form">
+                                    <input name="userId" class="d-none" value="{{$get_userId}}">
+                                    <input name="bookId" class="d-none" value="{{$book->id}}">
+                                </div>
+                                <button class="actionBtn text-decoration-none text-center" type="submit">
+                                    <i class="fa-regular fa-bookmark Icon"></i>
+                                    <div class="action_name">
+                                        Favorites
+                                    </div>
+                                </button>
+                            </form>
+                        @endif
+                    @endif
 
-                        <p class="ownerText align-self-center ps-0">By {{$ownerName}}</p>
 
-                        <div class="d-flex justify-content-end align-items-center">
-                            @if ($bookFav)
-                                <form id="removeFavForm" action="/remove_favorite" method="POST">
-                                    @csrf
-                                    <div class="container-form">
+                    @if ($isOwner)
+                        <a href="{{route('editBook.edit', $book->id)}}" class="actionBtn text-decoration-none text-center">
+                            <i class="fa-regular fa-pen-to-square Icon"></i>
+                            <div class="action_name">
+                                Edit
+                            </div>
+                        </a>
+                    @elseif ($get_userId != 0 || $get_userId != null)
+                        <button type="button" class="actionBtn" data-bs-toggle="modal" data-bs-target="#confirmationModal">
+                            <i class="fa-regular fa-star Icon"></i>
+                            <div class="action_name">
+                                Rate it
+                            </div>
+                        </button>
+                        <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="modalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <form action="{{url('/add-rating')}}" method="POST">
+                                        @csrf
                                         <input name="userId" class="d-none" value="{{$get_userId}}">
                                         <input name="bookId" class="d-none" value="{{$book->id}}">
-                                    </div>
-                                    <button class="addBtn2 text-decoration-none text-center" type="submit">
-                                        <i class="fa-solid fa-heart Icon"></i>
-                                        Favorites
-                                    </button> 
-                                </form>
-                            @else
-                                @if ($get_userName != 0)
-                                    <form id="addFavForm" action="/add_favorite" method="POST">
-                                        @csrf
-                                        <div class="container-form">
-                                            <input name="userId" class="d-none" value="{{$get_userId}}">
-                                            <input name="bookId" class="d-none" value="{{$book->id}}">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="modalLabel">Rate {{$book->recipeTitle}}</h5>
                                         </div>
-                                        <button class="addBtn text-decoration-none text-center" type="submit">
-                                            <i class="fa-regular fa-heart Icon"></i>
-                                            Favorites
-                                        </button> 
+                                        <div class="modal-body">
+                                            <div class="container-rating d-flex align-items-center p-2 ps-0">
+                                                <div class="rating d-flex d-inline ms-2">
+                                                    <input type="radio" id="BStar5" name="rating" class="star" value="5" />
+                                                    <label for="BStar5" title="5 stars" class="fa-solid fa-star"></label>
+                                                    <input type="radio" id="BStar4" name="rating" class="star" value="4" />
+                                                    <label for="BStar4" title="4 stars" class="fa-solid fa-star"></label>
+                                                    <input type="radio" id="BStar3" name="rating" class="star" value="3" />
+                                                    <label for="BStar3" title="3 stars" class="fa-solid fa-star"></label>
+                                                    <input type="radio" id="BStar2" name="rating" class="star" value="2" />
+                                                    <label for="BStar2" title="2 stars" class="fa-solid fa-star"></label>
+                                                    <input type="radio" id="BStar1" name="rating" class="star" value="1" />
+                                                    <label for="BStar1" title="1 star" class="fa-solid fa-star"></label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btnCancel" data-bs-dismiss="modal">Cancel</button>
+                                            <button type="submit" class="btnSub">Rate it</button>
+                                        </div>
                                     </form>
-                                @endif
-                            @endif
-
-
-                            @if ($isOwner) 
-                                <a href="{{route('editBook.edit', $book->id)}}" class="btnEdit text-decoration-none text-center ms-3">Edit</a>    
-                            @endif
+                                </div>
+                            </div>
                         </div>
-
-                    </div>
-
-                    <div class="form-floating mt-2 mb-5">
-                    <p class="desc">Description:</p>
-                        <p class="viewTextD viewText" placeholder="Description" id="txtA2" readonly>{{$book->recipeDescription}}</p>
-                    </div>
+                    @endif
                 </div>
+
+            </div>
+
+            <!-- Ingridients -->
+            <div class="form-info">
+                <div class="desc">Ingridients:</div>
+                <p class="viewTextBig viewText" placeholder="Ingredients" id="txtA1" readonly>{{$book->recipeIngridients}}
+                </p>
+            </div>
+
+            <!-- Description -->
+            <div class="form-info">
+                <div class="desc">Description:</div>
+                <p class="viewTextBig viewText" placeholder="Description" id="txtA2" readonly>{{$book->recipeDescription}}
+                </p>
+            </div>
+        </div>
+
+        <div class="commentSection container-fluid">
+            <hr class="line">
+
+            <div class="commentTitle_header">Comments ({{ $comments->count() }})</div>
+
+
+            <div class="comments container-fluid">
+
+                <div class="allComments">
+                    @if (isset($comments))
+                        @foreach ($comments as $comment)
+                            @include('components.comment', ['comment' => $comment])
+                        @endforeach
+                    @endif
+
+                </div>
+
+
+                @if ($get_userId != 0 || $get_userId != null)
+                    <div class="container-fluid d-flex justify-content-center addComment_container">
+                        <div class="commentContainer">
+                            <form action="{{url('/add-comment')}}" method="POST" class="commentForm">
+                                @csrf
+                                <input name="book_id" type="hidden" value="{{$book->id}}">
+                                <input type="hidden" name="parent_id" id="parent_id_input" value="">
+                                <textarea name="comment" id="replyToInput" class="commentTextArea"
+                                    placeholder="Write your comment here..."></textarea>
+                                <button type="submit" class="btnSend">
+                                    <span class="material-symbols-outlined sendIcon">
+                                        send
+                                    </span>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                @endif
+
+
 
             </div>
         </div>
 
     </div>
 
-</div>
-
-
-
-    <script src="{{ asset('assets/js/openBook.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
+
+    <!-- html2canvas for screenshot -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script> -->
+    <script src="https://unpkg.com/html-to-image"></script>
+
+    <!-- jsPDF for PDF generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+
+    <script type="module" src="{{asset('assets/js/openedBook.js')}}"></script>
+
+
 </body>
+<footer>
+    <hr class="footerLine">
+    <div class="footer">
+        <div class="container-fluid d-flex justify-content-center align-items-center">
+            <a class="col navbar-brand justify-content-center align-content-center text-center m-0" href="{{url('/')}}">
+                <img src="{{asset('assets/favicon_io/chefshat.png')}}" alt="" srcset="" class="Icon" width="32"
+                    height="32">
+                Local Cuisine
+            </a>
+        </div>
+    </div>
+    <div class="footerText">
+        <p>© 2025 Local Cuisine. All rights reserved.</p>
+        <div class="footerAcknowledgment">
+            <p>Designed by <a href="" target="_blank">Team ACIM</a></p>
+            <p>Powered by <a href="https://laravel.com/" target="_blank">Laravel</a></p>
+            <p>Icons by <a href="https://fontawesome.com/" target="_blank">Font Awesome</a></p>
+        </div>
+    </div>
+</footer>
 
 </html>

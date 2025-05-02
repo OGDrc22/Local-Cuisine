@@ -18,12 +18,14 @@ class EditBookController extends Controller
         return view('/editBook', compact('book', 'get_userId', 'get_userName'));
     }
 
-    function update(Request $request, $id) {
+    public function update(Request $request, $id) {
         $validated = $request->validate([
             'userId' => 'required', //|exists:bookusers,id
             'recipeTitle' => 'required|string|max:255',
             'recipeIngridients' => 'required|string',
             'recipeDescription' => 'required|string',
+            'recipeCategory' => 'required|string',
+            'recipeOrigin' => 'nullable|string|max:255',
             'coverImage' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
         
@@ -49,6 +51,8 @@ class EditBookController extends Controller
         $book->recipeTitle = $validated['recipeTitle'];
         $book->recipeIngridients = $validated['recipeIngridients'];
         $book->recipeDescription = $validated['recipeDescription'];
+        $book->recipeOrigin = $validated['recipeOrigin'];
+        $book->recipeCategory = $validated['recipeCategory'];
 
         $book->save();
         

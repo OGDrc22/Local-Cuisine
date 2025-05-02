@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('recipeTitle');
             $table->text('recipeIngridients');
             $table->text('recipeDescription');
+            $table->string('recipeCategory')->default('Unknown');
             $table->string('coverImage')->nullable();
             $table->timestamps();
         });

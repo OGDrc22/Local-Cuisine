@@ -73,7 +73,7 @@ function register() {
   x.style.left = "-100%";
   y.style.left = "0%";
   z.style.left = "50%";
-  f.style.height = "550px"
+  f.style.height = "570px"
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -91,13 +91,14 @@ document.addEventListener("DOMContentLoaded", () => {
     f.style.height = "400px";
   }
 
-  function registerErrorSpace() {
-    f.style.height = "700px";
-  }
   
-  function registerPassMissmatch() {
-    f.style.height = "630px";
-  }
+  // function registerErrorSpace() {
+  //   f.style.height = "620px";
+  // }
+  
+  // function registerPassMissmatch() {
+  //   f.style.height = "630px";
+  // }
 
   function checkPass() {
     var passA = document.getElementById("exPassword").value;
@@ -119,6 +120,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return false;
     }
     textEr.style.display = "none";
+    textEr1.style.display = "none";
     return true;
   }
 
@@ -134,14 +136,14 @@ document.addEventListener("DOMContentLoaded", () => {
           loginErrorSpace();
         }
         if (formId === 'register-form') {
-          registerErrorSpace();
+          // registerErrorSpace();
         }
       }
 
       if (formId === 'register-form') {
         const checkerP = checkPass();
         if (!checkerP) {
-          registerPassMissmatch();
+          // registerPassMissmatch();
           event.preventDefault();
           event.stopPropagation();
         }
@@ -157,3 +159,18 @@ document.addEventListener("DOMContentLoaded", () => {
     validateForm('register-form');     // For the registration form 
   });
 })();
+
+
+
+
+const container = document.querySelector('.container');
+const registerBtn = document.querySelector('.register-btn');
+const loginBtn = document.querySelector('.login-btn');
+
+registerBtn.addEventListener('click', () => {
+    container.classList.add('active');
+});
+
+loginBtn.addEventListener('click', () => {
+    container.classList.remove('active');
+});

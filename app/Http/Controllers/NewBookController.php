@@ -30,6 +30,8 @@ class NewBookController extends Controller
             'recipeTitle' => 'required|string|max:255',
             'recipeIngridients' => 'required|string',
             'recipeDescription' => 'required|string',
+            'recipeCategory' => 'required|string',
+            'recipeOrigin' => 'required|string|max:255',
             'coverImage' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
@@ -55,6 +57,8 @@ class NewBookController extends Controller
             'recipeTitle' => $validated['recipeTitle'],
             'recipeIngridients' => $validated['recipeIngridients'],
             'recipeDescription' => $validated['recipeDescription'],
+            'recipeCategory' => $validated['recipeCategory'],
+            'recipeOrigin' => $validated['recipeOrigin'],
             'coverImage' => $coverImagePath,
         ]);
         return redirect(route('home.custom'))->with('success', 'Created Successfully');

@@ -7,6 +7,11 @@
     <link href="{{asset('assets/css/bootstrap.css')}}" rel="stylesheet">
     <link href="{{asset('assets/css/about.css')}}" rel="stylesheet">
 
+    <link rel="apple-touch-icon" sizes="180x180" href="{{asset('assets/favicon_io/chefshat.png')}}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{asset('assets/favicon_io/chefshat.png')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('assets/favicon_io/chefshat.png')}}">
+    <link rel="manifest" href="{{asset('assets/favicon_io/site.webmanifest')}}">
+
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=search" />
 
 </head>
@@ -14,7 +19,10 @@
     <nav class="navbar  navbar-expand-lg">
         <div class="container-fluid">
 
-            <a class="navbar-brand" href="{{url()->previous()}}">Local Cuisine</a>
+            <a class="navbar-brand justify-content-center align-content-center text-center" href="{{url('home')}}">
+                <img src="{{asset('assets/favicon_io/chefshat.png')}}" alt="" srcset="" width="32" height="32">
+                Local Cuisine
+            </a>
 
             <div class="collapse navbar-collapse d-flex">
                 <div class="navbar-nav ms-auto">
@@ -95,4 +103,24 @@
     <script src="{{ asset('assets/js/projectjscript.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
+
+<footer>
+    <hr class="footerLine">
+    <div class="footer">
+        <div class="container-fluid d-flex justify-content-center align-items-center">
+            <a class="col navbar-brand justify-content-center align-content-center text-center m-0" href="{{url('/')}}">
+                <img src="{{asset('assets/favicon_io/chefshat.png')}}" alt="" srcset="" class="Icon" width="32" height="32">
+                Local Cuisine
+            </a>
+        </div>
+    </div>
+    <div class="footerText">
+        <p>© 2025 Local Cuisine. All rights reserved.</p>
+        <div class="footerAcknowledgment">
+            <p>Designed by <a href="" target="_blank">Team ACIM</a></p>
+            <p>Powered by <a href="https://laravel.com/" target="_blank">Laravel</a></p>
+            <p>Icons by <a href="https://fontawesome.com/" target="_blank">Font Awesome</a></p>
+        </div>
+    </div>
+</footer>
 </html>

@@ -13,9 +13,16 @@
   src: url(../fonts/Lily_Script_One/LilyScriptOne-Regular.ttf);
 }
 
+html {
+  scroll-behavior: smooth;
+  display: flex;
+  flex-direction: column;
+}
 
 .body {
+  /* background-color: hsl(60, 24%, 57%); */
   background-color: hsl(60, 15%, 98%);
+  flex: 1;
 }
 
 .navbar {
@@ -69,15 +76,20 @@
 
 
 
-.dropdown-toggle {
+.nav-item {
+  list-style: none;
+}
+
+
+.dropdown-toggleBtn {
   font-family: istock-web-regular;
   color: #BD9479;
   background-color: transparent;
   min-width: 200px;
 }
 
-.dropdown-toggle:hover,
-.dropdown-toggle:focus {
+.dropdown-toggleBtn:hover,
+.dropdown-toggleBtn:focus {
   transform: scale(1.2);
   color: #BD9479;
   font-weight: bold;
@@ -105,13 +117,61 @@
   color: #ffffff;
 }
 
+.dropdownChefCategory {
+  position: relative;
+  width: 100%;
+}
 
+.dropdown-menuChefCategory {
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+  width: 100%;
+  min-width: unset;
+  position: absolute;
+  box-sizing: border-box;
+}
+
+.dropdown-menuChefCategory .dropdown-item {
+  width: 100%;
+  font-family: istock-web-regular;
+  color: #BD9479;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.dropdown-item:hover {
+  background-color: #5B4F47;
+  font-family: istock-web-bold;
+  color: #ffffff;
+}
+
+.selected {
+  text-decoration: none;
+}
 
 
 .containerP {
   position: relative;
-  margin-top: 120px;
+  margin-top: 100px;
 }
+
+
+.floating-alert {
+  position: fixed;
+  /* Makes the alert float on the page */
+  top: 20px;
+  left: 50%;
+  transform: translatex(-50%);
+  z-index: 10;
+  /* Ensure it appears above other content */
+  width: auto;
+  /* Adjust width as needed */
+  max-width: 300px;
+  /* Optional: Limit the width */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  /* Optional: Add a shadow */
+}
+
 
 .card-header {
   background-color: transparent;
@@ -160,6 +220,17 @@
   padding-right: 8px;
   border-radius: 8px;
 }
+
+.check-boxA {
+  float: right;
+  margin-top: 2px;
+  margin-bottom: 14px;
+  -webkit-appearance: none;
+  font-size: larger;
+  color: #553929;
+}
+
+
 
 .check-box {
   float: right;
@@ -259,4 +330,46 @@
   font-family: istock-web-bold;
   font-size: large;
   color: #ff3030;
+}
+
+.required {
+  font-family: istock-web-regular;
+  color: red;
+  font-size: 14px;
+  display: inline;
+}
+
+
+footer {
+  margin-top: 12px;
+  padding: 20px;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;    
+}
+
+.footerLine {
+  background-color: #553929;
+  height: 2px;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.footerText {
+  font-family: istock-web-regular;
+  color: #553929;
+  font-size: large;
+  text-align: center;
+}
+
+.footerAcknowledgment {
+  font-family: istock-web-regular;
+  color: #553929;
+  font-size: large;
+  display: flex;
+}
+
+.footerAcknowledgment p {
+  margin-inline: 16px;
 }

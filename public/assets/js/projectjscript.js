@@ -1,48 +1,22 @@
-function Cpass() {
-    var conpass = document.getElementById("exPassword");
-    if (conpass.type === "password") {
-      conpass.type = "text";
-      toggleText.textContent = "Hide Password";
-    } else {
-      conpass.type = "password";
-      toggleText.textContent = "Show Password";
-    }
-  }
+document.addEventListener('DOMContentLoaded', function () {
+    const routeTemplate = document.querySelector('meta[name="route-tempate"]').content;
+    document.querySelectorAll('.book-item').forEach(item => {
+        console.log("Cilcked !!")
+        item.addEventListener('click', function () {
+            const bookId = this.getAttribute('data-id');
+            const finalUrl = routeTemplate.replace('__ID__', bookId);
+            window.location.href = finalUrl;
+        })
+    });
 
-  function CFpass() {
-    var conFpass = document.getElementById("conPassword");
-    if (conFpass.type === "password") {
-      conFpass.type = "text";
-      toggleTexts.textContent = "Hide Password";
+    const search_container_width = window.getComputedStyle(document.querySelector('.container-Search')).width;
+    const img = document.querySelector('.imageBg');
+    console.log(search_container_width);
+    if (search_container_width != null) {
+        img.classList.add = 'd-none';
+        img.style.display = 'none';
+        console.log(img, ' hide');
     } else {
-      conFpass.type = "password";
-      toggleTexts.textContent = "Show Password";
+        img.classList.remove = 'd-none';
     }
-  }
-
-  function LGpass() {
-    var LGpass = document.getElementById("LGPassword");
-    if (LGpass.type === "password") {
-      LGpass.type = "text";
-      toggleTextss.textContent = "Hide Password";
-    } else {
-      LGpass.type = "password";
-      toggleTextss.textContent = "Show Password";
-    }
-  }
-
-  var hsButton = document.getElementById('hsButton');
-  var inp = document.getElementById('uPass');
-  var currentDis = 1;
-
-  function hsPassInput() {
-    if (currentDis == 1) {
-      inp.style.display = 'block';
-      currentDis = 0;
-      hsButton.textContent = 'Cancel';
-    } else {
-      inp.style.display = 'none';
-      currentDis = 1;
-      hsButton.textContent = 'Update Password';
-    }
-  }
+});
