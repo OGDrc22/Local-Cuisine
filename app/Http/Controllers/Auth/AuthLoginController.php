@@ -44,7 +44,7 @@ class AuthLoginController extends Controller
         Auth::login($user);
 
         if (Auth::check()) {
-            return redirect()->intended('home')->with('success', 'Welcome '. $user->username);
+            return redirect()->intended('home')->with('welcome', 'Welcome '. $user->username);
         }
 
         return redirect()->back()->withErrors(['general'=> 'Something went wrong.']);

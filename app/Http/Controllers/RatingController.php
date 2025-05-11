@@ -26,6 +26,9 @@ class RatingController extends Controller
                 'stars_rated'=> $star_rated
             ]);
         }
-        return redirect()->back()->with('message', $star_rated . 'star(s) rated');
+        // return redirect()->back()->with('message', $star_rated . 'star(s) rated');
+        return response()->json(['message' => 'Rated Successfully', 'status' => 'success']);
+        // return redirect()->back()->with('rated_message', 'Rated Successfully');
+
     }
 }

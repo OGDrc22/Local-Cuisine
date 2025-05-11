@@ -13,21 +13,50 @@
     <link rel="manifest" href="{{asset('assets/favicon_io/site.webmanifest')}}">
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=search" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
 </head>
 <body class="body">
-    <nav class="navbar  navbar-expand-lg">
-        <div class="container-fluid">
+    <nav class="navbar navbar-expand-lg">
 
-            <a class="navbar-brand justify-content-center align-content-center text-center" href="{{url('home')}}">
-                <img src="{{asset('assets/favicon_io/chefshat.png')}}" alt="" srcset="" width="32" height="32">
-                Local Cuisine
-            </a>
+        <div class="container-top-nav container-fluid">
+            <div class="left-brand-container">
+                <a class="navbar-brand" href="{{url('home')}}">
+                    <img src="{{asset('assets/favicon_io/chefshat.svg')}}" alt="" srcset="" class="Icon" width="32" height="32">
+                    <div class="webname">
+                        Local Cuisine
+                    </div>
+                </a>
+            </div>
 
-            <div class="collapse navbar-collapse d-flex">
-                <div class="navbar-nav ms-auto">
-                    <a class="nav-link mainNav text-center" href="{{url()->previous()}}">Go Back</a>
+            <div class="center-actions-container">
+                <div class="left-center-action">
+                    <a class="nav-link" href="{{route('newBook')}}"><i class="fa-solid fa-circle-plus"></i> Add Recipe</a>
                 </div>
+
+                <div class="center-center-action">
+                </div>
+
+                <div class="right-center-action">
+                    <a class="nav-link" href="{{url('favorites')}}"><i class="fa-solid fa-bookmark navBtn Icon"></i> Favorites</a>
+                </div>
+            </div>
+
+            <div class="right-dropdown-container dropdown">
+                <button class="dropdown-toggle dropdown-toggle-button d-flex" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="user-nav-icon fa-solid fa-circle-user"></i>
+                    <div class="username_hidden">More</div>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a class="navBarActions_dropdown dropdown-item" href="{{route('newBook')}}">Add Recipe</a></li>
+                    <li><a class="navBarActions_dropdown dropdown-item" href="{{url('favorites')}}"></i>Favorites</a></li>
+                    <li><a class="dropdown-item" href="{{route('userprofile')}}">Profile</a></li>
+                    <li><form action="{{route('logout')}}" method="POST" style="display: inline;">
+                            @csrf
+                            <button type="submit" class="dropdown-item">Logout</button>
+                        </form>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>

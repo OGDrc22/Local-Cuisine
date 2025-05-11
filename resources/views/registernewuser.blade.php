@@ -7,15 +7,18 @@
     <link href="{{asset('assets/css/bootstrap.css')}}" rel="stylesheet">
     <link href="{{asset('assets/css/loginregister.css')}}" rel="stylesheet">
 
-    <link rel="apple-touch-icon" sizes="180x180" href="{{asset('assets/favicon_io/chefshat.png')}}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{asset('assets/favicon_io/chefshat.png')}}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('assets/favicon_io/chefshat.png')}}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{asset('assets/favicon_io/chefshat.svg')}}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{asset('assets/favicon_io/chefshat.svg')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('assets/favicon_io/chefshat.svg')}}">
     <link rel="manifest" href="{{asset('assets/favicon_io/site.webmanifest')}}">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
 </head>
 <body>
-    @if ($errors->any())
+    <!-- @if ($errors->any())
         <div class="alert alert-danger floating-alert">
             <ul>
                 @foreach ($errors->all() as $error)
@@ -23,7 +26,23 @@
                 @endforeach
             </ul>
         </div>
-    @endif
+    @endif -->
+
+    @if($errors->any())
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    showSwal({
+                        icon: 'error',
+                        title: 'Please fix the following:',
+                        // build an HTML list of all errors
+                        html: `{!! '<ul style="text-align:left;margin:0;padding-left:1.2em;">'
+            . implode('', $errors->all('<li>:message</li>'))
+            . '</ul>' !!}`,
+                        confirmButtonText: 'OK'
+                    });
+                });
+            </script>
+        @endif
     
     <div class="centered-content">
 
@@ -52,7 +71,7 @@
 
 
         
-                <div class="d-flex justify-content-center">
+                <div class="d-flex justify-content-center mt-3">
                     <button name="btnsubmit" type="submit" class="btnSub">Login</button>
                 </div>
             </form>
@@ -103,17 +122,19 @@
 
     <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
     <script src="{{asset('assets/js/loginregister.js')}}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO9gybT2ssH/t6eB4PmTcjMwTwxd3GhKK7Fpcu4q8fK/ujPaX/lH7" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO9gybT2ssH/t6eB4PmTcjMwTwxd3GhKK7Fpcu4q8fK/ujPaX/lH7" crossorigin="anonymous"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-tjMNZjMaRUEy1L4c+wb+nHgMKFvh5QboMD6a9aKKtYfRVW3/eEk7pQq7Z/96p4Ed" crossorigin="anonymous"></script>
+
 
 </body>
 
-<footer>
+<footer id="ft">
     <hr class="footerLine">
     <div class="footer">
         <div class="container-fluid d-flex justify-content-center align-items-center">
             <a class="col navbar-brand justify-content-center align-content-center text-center m-0" href="{{url('/')}}">
-                <img src="{{asset('assets/favicon_io/chefshat.png')}}" alt="" srcset="" class="Icon" width="32" height="32">
+                <img src="{{asset('assets/favicon_io/chefshat.svg')}}" alt="" srcset="" class="Icon" width="32" height="32">
                 Local Cuisine
             </a>
         </div>
@@ -121,9 +142,15 @@
     <div class="footerText">
         <p>© 2025 Local Cuisine. All rights reserved.</p>
         <div class="footerAcknowledgment">
-            <p>Designed by <a href="" target="_blank">Team ACIM</a></p>
-            <p>Powered by <a href="https://laravel.com/" target="_blank">Laravel</a></p>
-            <p>Icons by <a href="https://fontawesome.com/" target="_blank">Font Awesome</a></p>
+            <a href="" target="">
+                <img src="{{ asset('assets/Images/ACIM.svg') }}" height="48">
+            </a>
+            <a href="https://laravel.com/">
+                <img src="{{ asset('assets/Images/laravel.svg') }}" height="48">
+            </a>
+            <a href="https://fontawesome.com/" target="_blank">
+                <img src="{{ asset(('assets/Images/fontawesome.svg')) }}" height="48">
+            </a>
         </div>
     </div>
 </footer>

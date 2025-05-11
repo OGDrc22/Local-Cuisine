@@ -57,7 +57,7 @@ class BookController extends Controller
             'userId' => $request->userId,
             'bookId' => $request->bookId
         ]);
-        return redirect()->back()->with('success', 'Added Successfully!');
+        return redirect()->back()->with('added', 'Added Successfully!');
     }
 
     public function removeFavorite(Request $request) {
@@ -65,7 +65,7 @@ class BookController extends Controller
                 ->where('bookId', $request->bookId)
                 ->delete();
 
-        return redirect()->back()->with('success', 'Removed Successfully!');  
+        return redirect()->back()->with('removed', 'Removed Successfully!');  
     }
 
     public function checkFavorite($userId, $bookId) {

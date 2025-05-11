@@ -4,13 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <title>{{$book->recipeTitle}}</title>
     <link href="{{asset('assets/css/bootstrap.css')}}" rel="stylesheet">
     <link href="{{asset('assets/css/openBook.css')}}" rel="stylesheet">
 
-    <link rel="apple-touch-icon" sizes="180x180" href="{{asset('assets/favicon_io/chefshat.png')}}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{asset('assets/favicon_io/chefshat.png')}}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('assets/favicon_io/chefshat.png')}}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{asset('assets/favicon_io/chefshat.svg')}}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{asset('assets/favicon_io/chefshat.svg')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('assets/favicon_io/chefshat.svg')}}">
     <link rel="manifest" href="{{asset('assets/favicon_io/site.webmanifest')}}">
 
     <link rel="stylesheet"
@@ -20,6 +22,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=send" />
+
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 
 <body class="body">
     <nav class="navbar navbar-expand-lg">
@@ -36,55 +41,114 @@
 
             <div class="center-actions-container">
                 <div class="left-center-action">
-                    <a class="nav-link" href="{{route('newBook')}}"><i class="fa-solid fa-circle-plus"></i> Add Recipe</a>
+                    @if ($get_userName != 0)
+                        <a class="nav-link" href="{{route('newBook')}}"><i class="fa-solid fa-circle-plus"></i> Add Recipe</a>
+                    @endif
                 </div>
 
                 <div class="center-center-action">
-                    <form action="{{url('home')}}" class="form-search">
-                        <span class="search-icon fas fa-search"></span>
-                        <input class="searchbox-input" type="text" name="query" placeholder="Search..."
-                            aria-label="Search">
-                            <!-- <button type="submit">Search</button> -->
-                    </form>
+                    
                 </div>
 
                 <div class="right-center-action">
-                    <a class="nav-link" href="{{url('favorites')}}"><i class="fa-solid fa-bookmark Icon"></i>Favorites</a>
+                    @if ($get_userName != 0)
+                        <a class="nav-link" href="{{url('favorites')}}"><i class="fa-solid fa-bookmark Icon"></i>Favorites</a>
+                    @endif
                 </div>
             </div>
 
-            <div class="right-dropdown-container dropdown">
-                <button class="dropdown-toggle dropdown-toggle-button d-flex" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="user-nav-icon fa-solid fa-circle-user"></i>
-                    <div class="username_hidden">{{$get_userName}}</div>
-                </button>
-                <ul class="dropdown-menu dropdown-menu-end">
-                    <li><a class="navBarActions_dropdown dropdown-item" href="{{route('newBook')}}">Add Recipe</a></li>
-                    <li><a class="navBarActions_dropdown dropdown-item" href="{{url('favorites')}}"></i>Favorites</a></li>
-                    <li><a class="dropdown-item" href="{{route('userprofile')}}">Profile</a></li>
-                    <li><form action="{{route('logout')}}" method="POST" style="display: inline;">
-                            @csrf
-                            <button type="submit" class="dropdown-item">Logout</button>
-                        </form>
-                    </li>
-                    <li class="border-top"><a class="dropdown-item" href="{{route('about')}}">About Us</a></li>
-                </ul>
-            </div>
+            
+            @if ($get_userName != 0)
+                <div class="right-dropdown-container dropdown">
+                    <button class="dropdown-toggle dropdown-toggle-button d-flex" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="user-nav-icon fa-solid fa-circle-user"></i>
+                        <div class="username_hidden">{{$get_userName}}</div>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="hidden_at_large_screen dropdown-item" href="{{route('newBook')}}">Add Recipe</a></li>
+                        <li><a class="hidden_at_large_screen dropdown-item" href="{{url('favorites')}}"></i>Favorites</a></li>
+                        <li><a class="dropdown-item" href="{{route('userprofile')}}">Profile</a></li>
+                        <li><form action="{{route('logout')}}" method="POST" style="display: inline;">
+                                @csrf
+                                <button type="submit" class="dropdown-item">Logout</button>
+                            </form>
+                        </li>
+                        <li class="border-top"><a class="dropdown-item" href="{{route('about')}}">About Us</a></li>
+                    </ul>
+                </div>
+            @else
+                <div class="right-dropdown-container dropdown">
+                    <a class="hidden_at_small_screen LRPage" href="{{url('registernewuser')}}">Login/Register</a>
+                    <button class="hidden_at_large_screen dropdown-toggle dropdown-toggle-button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <i class="fa-solid fa-right-to-bracket Icon"></i>
+                        <div class="username_hidden">Login/Register</div>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item LRPage" href="{{url('registernewuser')}}">Login/Register</a></li>
+                        <li><a class="dropdown-item about" href="{{route('about')}}">About Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="right-dropdown-container dropdown hidden_at_small_screen">
+                    <div class="col">
+                        <a class="about mx-3 d-inline" href="{{route('about')}}">About Us</a>
+                    </div>
+                </div>
+            @endif
+            
         </div>
     </nav>
 
 
     <!-- Main Container -->
     <div class="main">
-        @if (session('success'))
-            <div class="alert alert-success floating-alert" role="alert">
-                <h5 class="modal-title">{{ session('success') }}</h5>
-            </div>
+        @if (session()->has('added'))
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    Swal.fire({
+                        title: '{{ session('added') }}',
+                        text: 'Go to Favorites tab to see!',
+                        icon: 'success',
+                        confirmButtonText: 'OK'
+                    });
+                });
+            </script>
         @endif
+
+        @if (session()->has('removed'))
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    Swal.fire({
+                        title: '{{ session('removed') }}',
+                        text: 'Book has beed removed!',
+                        icon: 'success',
+                        confirmButtonText: 'OK'
+                    });
+                });
+            </script>
+        @endif
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const message = sessionStorage.getItem("ratingMessage");
+                if (message) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success!',
+                        text: message,
+                        timer: 3000,
+                        showConfirmButton: false
+                    });
+                    sessionStorage.removeItem("ratingMessage"); // Clear it after showing
+                }
+            });
+        </script>
+
 
         @if (session('error'))
             <div class="alert alert-success floating-alert" role="alert">
-                <h5 class="modal-title">{{ session('success') }}</h5>
+                <h5 class="modal-title">{{ session('error') }}</h5>
             </div>
         @endif
 
@@ -160,36 +224,13 @@
 
                 <div class="d-flex align-items-center buttonContainer justify-content-start">
 
-                    <button type="button" id="openModal" class="actionBtn">
-                        <i class="fa-solid fa-download Icon"></i>
+                    <button type="button" id="openDownloadAlert" class="actionBtn">
+                        <i class="fa-solid fa-download Icon action-icon"></i>
                         <div class="action_name">
                             Download
                         </div>
                     </button>
-
-                    <div class="modal fade" id="downloadContentModal" tabindex="-1" aria-labelledby="modalLabel"
-                        aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="modalLabel">Download {{ $book->recipeTitle }}</h5>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="dl">
-                                        Are you sure you want to download this Recipe?
-                                    </div>
-                                    <div class="dl mt-1">
-                                        <input type="checkbox" name="hide_comments" id="hide_comments" checked>
-                                        <label for="hide_comments">Hide Comments</label>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btnCancel" data-bs-dismiss="modal">Cancel</button>
-                                    <button type="button" class="btnSub" id="downloadBtn">Download</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    
 
 
 
@@ -201,7 +242,7 @@
                                 <input name="bookId" class="d-none" value="{{$book->id}}">
                             </div>
                             <button class="actionBtn text-decoration-none text-center" type="submit">
-                                <i class="fa-solid fa-bookmark Icon"></i>
+                                <i class="fa-solid fa-bookmark Icon action-icon"></i>
                                 <div class="action_name">
                                     Favorites
                                 </div>
@@ -228,19 +269,19 @@
 
                     @if ($isOwner)
                         <a href="{{route('editBook.edit', $book->id)}}" class="actionBtn text-decoration-none text-center">
-                            <i class="fa-regular fa-pen-to-square Icon"></i>
+                            <i class="fa-regular fa-pen-to-square Icon action-icon"></i>
                             <div class="action_name">
                                 Edit
                             </div>
                         </a>
                     @elseif ($get_userId != 0 || $get_userId != null)
-                        <button type="button" class="actionBtn" data-bs-toggle="modal" data-bs-target="#confirmationModal">
-                            <i class="fa-regular fa-star Icon"></i>
+                        <button type="button" class="actionBtn" id="rateAction">
+                            <i class="fa-regular fa-star Icon action-icon"></i>
                             <div class="action_name">
                                 Rate it
                             </div>
                         </button>
-                        <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="modalLabel"
+                        <!-- <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="modalLabel"
                             aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -274,7 +315,7 @@
                                     </form>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     @endif
                 </div>
 
@@ -303,18 +344,18 @@
 
             <div class="comments container-fluid">
 
-                <div class="allComments">
-                    @if (isset($comments))
-                        @foreach ($comments as $comment)
-                            @include('components.comment', ['comment' => $comment])
-                        @endforeach
-                    @endif
+                <!-- <div class="allComments"> -->
+                @if (isset($comments))
+                    @foreach ($comments as $comment)
+                        @include('components.comment', ['comment' => $comment])
+                    @endforeach
+                @endif
 
-                </div>
+                <!-- </div> -->
 
 
                 @if ($get_userId != 0 || $get_userId != null)
-                    <div class="container-fluid d-flex justify-content-center addComment_container">
+                    <div class=" d-flex justify-content-center addComment_container">
                         <div class="commentContainer">
                             <form action="{{url('/add-comment')}}" method="POST" class="commentForm">
                                 @csrf
@@ -353,15 +394,24 @@
 
     <script type="module" src="{{asset('assets/js/openedBook.js')}}"></script>
 
+    <script>
+        const ADD_RATING_URL = "{{ url('/add-rating') }}";
+    </script>
+
+
+    <script type="module" src="{{asset('assets/js/openBook_sweetAlert2.js')}}"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
 
 </body>
+
+
 <footer>
     <hr class="footerLine">
     <div class="footer">
         <div class="container-fluid d-flex justify-content-center align-items-center">
             <a class="col navbar-brand justify-content-center align-content-center text-center m-0" href="{{url('/')}}">
-                <img src="{{asset('assets/favicon_io/chefshat.png')}}" alt="" srcset="" class="Icon" width="32"
-                    height="32">
+                <img src="{{asset('assets/favicon_io/chefshat.svg')}}" alt="" srcset="" class="Icon" width="32" height="32">
                 Local Cuisine
             </a>
         </div>
@@ -369,9 +419,15 @@
     <div class="footerText">
         <p>© 2025 Local Cuisine. All rights reserved.</p>
         <div class="footerAcknowledgment">
-            <p>Designed by <a href="" target="_blank">Team ACIM</a></p>
-            <p>Powered by <a href="https://laravel.com/" target="_blank">Laravel</a></p>
-            <p>Icons by <a href="https://fontawesome.com/" target="_blank">Font Awesome</a></p>
+            <a href="" target="">
+                <img src="{{ asset('assets/Images/ACIM.svg') }}" height="48">
+            </a>
+            <a href="https://laravel.com/">
+                <img src="{{ asset('assets/Images/laravel.svg') }}" height="48">
+            </a>
+            <a href="https://fontawesome.com/" target="_blank">
+                <img src="{{ asset(('assets/Images/fontawesome.svg')) }}" height="48">
+            </a>
         </div>
     </div>
 </footer>

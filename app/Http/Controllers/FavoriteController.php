@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\favorites;
 use App\Models\books;
 use App\Models\bookuser;
+use App\Models\rating;
 use Auth;
 
 class FavoriteController extends Controller
@@ -28,10 +29,19 @@ class FavoriteController extends Controller
     // Step 4: Prepare a manual data structure for the view
     $favoritedBooks = [];
     foreach ($books as $book) {
+        $bookId = $book->id;
+        $rates = rating::where('book_id', $bookId)->whereNotNull('book_id')->get();
+        $ratesSum = rating::where('book_id', $bookId)->whereNotNull('book_id')->sum('stars_rated');
+        $starsCount = $rates->count() > 0 ? $ratesSum / $rates->count() : 0;
+        $ratings = $rates->count();
+
         $favoritedBooks[] = [
             'username' => $user->username,
             'books' => $book,
+            'starsCount' => $starsCount,
+            'ratingsCount' => $ratings
         ];
+
     }
 
     return view('favorites', compact('get_userId', 'get_userName', 'favoritedBooks'));

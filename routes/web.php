@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\about;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Models\bookuser;
@@ -16,6 +17,8 @@ use App\Http\Controllers\FavoriteController;
 use App\Http\Middleware\PreventDirectAccess;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\RatingController;
+use App\Http\Controllers\aboutController;
+use Illuminate\Http\Request;
 
 Route::get('/', [WelcomeController::class, 'getBooks'])->name('welcome');
 
@@ -39,7 +42,7 @@ Route::get('/userprofile', [UserProfileController::class, 'getUserProfile']);
 Route::post('logout', [UserProfileController::class, 'logout'])->name('logout');
 
 Route::get('userprofile/{id}', [UserProfileController::class, 'getUserId']);
-Route::put('userprofile/{id}', [UserProfileController::class, 'updateProfile'])->name('userprofile.update');
+// Route::put('userprofile/{id}', [UserProfileController::class, 'updateProfile'])->name('userprofile.update');
 Route::put('userprofileDelete/{id}', [UserProfileController::class, 'deleteUser'])->name('userprofile.delete');
 
 Route::get('/about', function() {
@@ -60,7 +63,13 @@ Route::middleware( PreventDirectAccess::class)->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::put('userprofile/{id}', [UserProfileController::class, 'updateProfile'])->name('userprofile.update');
+
+    Route::put('userprofile/{id}/update', [UserProfileController::class, 'updateProfile'])->name('userprofile.update');
+    Route::put('userprofile/{id}/updatepic', [UserProfileController::class, 'updateProfilePicture'])->name('userprofile.updatepic');
+
+    // Route::any('userprofile/{id}', function (Request $request, $id) {
+    //     dd('Hit controller with method: ' . $request->method());
+    // });
     
     Route::get('/newBook', [NewBookController::class, 'getUserProfile'])->name('newBook');
 
@@ -112,6 +121,7 @@ Route::get('/welcome', function() {
 Route::post('/add_favorite', [BookController::class, 'addFavorite']);
 Route::post('/remove_favorite', [BookController::class, 'removeFavorite']);
 
+// Route::get('about', [aboutController::class, 'username']);
 // Route::get('/search', [SearchController::class, 'index'])->name('search');
 
 

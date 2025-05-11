@@ -1,5 +1,13 @@
 
 document.addEventListener('DOMContentLoaded', function () {
+
+    // Swal.fire({
+    //     title: 'Hello SweetAlert!',
+    //     text: 'This is a basic alert message.',
+    //     icon: 'success', // Optional: 'success', 'error', 'warning', 'info', 'question'
+    //   });
+
+
     const dropdownItems = document.querySelectorAll(".dropdown-menuCategory .dropdown-item");
     const selectedElement = document.querySelector(".dropdownCategory .selected");
 
@@ -73,70 +81,54 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
+    const imagePreviewRightSide = document.getElementById('imagePreviewRS');
+    
+    fileInput.addEventListener('change', function (event) {
+        const file = event.target.files[0];
+    
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                imagePreviewRightSide.src = e.target.result;
+            };
+    
+            reader.readAsDataURL(file);
+        } else {
+            imagePreviewRightSide.src = "{{ asset('assets/Images/default.jpg') }}";
+        }
+    });
+
 
 
 
     document.getElementById('openModal').addEventListener('click', function () {
-        // Open the modal
-        const modal = new bootstrap.Modal(document.getElementById('confirmationModal'));
-        modal.show();
+        console.log("Publish Clicked")
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Do you want to publish this book?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, submit!',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('myForm').submit();
+            }
+        });
     });
-
-    document.addEventListener('DOMContentLoaded', () => {
-        let isSubmitting = false;
-    
-        const form = document.getElementById('myForm');
-        const confirmSubmit = document.getElementById('confirmSubmit');
-        const btnCancelModal = document.getElementById('btnCancelModal');
-    
-        if (confirmSubmit && form) {
-            confirmSubmit.addEventListener('click', function () {
-                console.log("Confirm submit button clicked"); // Log the click event
-                if (!isSubmitting) {
-                    isSubmitting = true;
-                    // Disable the submit button and show a spinner
-                    btnCancelModal.setAttribute('disabled', true);
-                    
-                    confirmSubmit.setAttribute('disabled', true);
-                    confirmSubmit.innerHTML = `
-                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Saving...
-                    `;
-                    form.submit(); // Submit the form after setting the flag and UI
-                }
-            });
-        }
-    });
-    
     
     document.getElementById('openModalD').addEventListener('click', function () {
-        // Open the modal
-        const modal = new bootstrap.Modal(document.getElementById('confirmationModalD'));
-        modal.show();
-    });
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'Do you want to delete this book?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes',
+            reverseButtons: true
+        }),then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('deleteBook').submit();
+            }
+        })
+    })
 
-    
-    document.addEventListener('DOMContentLoaded', () => {
-        let isSubmitting = false;
-    
-        const form = document.getElementById('deleteBook');
-        const confirmDelete = document.getElementById('confirmDelete');
-        const btnCancelModal = document.getElementById('btnCancelModal');
-    
-        if (confirmDelete && form) {
-            confirmDelete.addEventListener('click', function () {
-                if (!isSubmitting) {
-                    isSubmitting = true;
-                    // Disable the submit button and show a spinner
-                    btnCancelModal.setAttribute('disabled', 'disabled');
-
-                    confirmDelete.setAttribute('disabled', 'disabled');
-                    confirmDelete.innerHTML = `
-                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Deleting...
-                    `;
-                    form.submit(); // Submit the form after setting the flag and UI
-                }
-            });
-        }
-    });
-
-    

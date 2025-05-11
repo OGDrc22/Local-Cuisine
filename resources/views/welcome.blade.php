@@ -9,12 +9,14 @@
     <link href="{{asset('assets/css/bootstrap.css')}}" rel="stylesheet">
     <link href="{{asset('assets/css/welcome.css')}}" rel="stylesheet">
 
-    <link rel="apple-touch-icon" sizes="180x180" href="{{asset('assets/favicon_io/chefshat.png')}}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{asset('assets/favicon_io/chefshat.png')}}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('assets/favicon_io/chefshat.png')}}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{asset('assets/favicon_io/chefshat.svg')}}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{asset('assets/favicon_io/chefshat.svg')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('assets/favicon_io/chefshat.svg')}}">
     <link rel="manifest" href="{{asset('assets/favicon_io/site.webmanifest')}}">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 </head>
 
 <body class="body">
@@ -55,8 +57,8 @@
                     <div class="username_hidden">Login/Register</div>
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end">
-                    <li><a class="dropdown-item LRPage" href="{{url('registernewuser')}}">Login/Register</a></li>
-                    <li><a class="dropdown-item about" href="{{route('about')}}">About Us</a></li>
+                    <li><a class="dropdown-item" href="{{url('registernewuser')}}">Login/Register</a></li>
+                    <li><a class="dropdown-item" href="{{route('about')}}">About Us</a></li>
                 </ul>
             </div>
             
@@ -67,47 +69,22 @@
             </div>
         </div>
     </nav>
-    <nav class="navbar d-none">
-        <div class="container-fluid d-flex justify-content-between align-items-center">
-
-            <a class="col navTitle justify-content-center align-content-center text-center m-0" href="{{url('/')}}">
-                <img src="{{asset('assets/favicon_io/chefshat.png')}}" alt="" srcset="" class="Icon" width="32"
-                    height="32">
-                Local Cuisine
-            </a>
-
-            <div class="col"></div>
-
-            <form action="{{route('welcome')}}" method="GET" class="col-5 search w-50">
-                <span class="search-icon fas fa-search"></span>
-                <input class="searchbox-input outline-0 border-0 ms-1" type="text" name="query" placeholder="Search..."
-                    value="{{request('query')}}" aria-label="Search">
-            </form>
-
-            <!-- <form action="{{ route('welcome') }}" method="GET">
-                <input type="text" name="query" placeholder="Search..." required>
-                <button type="submit">Search</button>
-            </form> -->
-
-            <div class="col px-5">
-                <a class="LRPage mx-3" href="{{url('registernewuser')}}">Login/Register</a>
-            </div>
-
-            <div class="col">
-                <a class="about mx-3 d-inline" href="{{route('about')}}">About Us</a>
-            </div>
-        </div>
-    </nav>
-
-    @if (session('success'))
-        <div class="alert alert-success floating-alert" role="alert">
-            <h5 class="modal-title">{{ session('success') }}</h5>
-        </div>
-    @endif
-
 
     <div class="main">
-        <img src="{{ asset('assets/Images/imageBg.png') }}" alt="Background Image" class="imageBg">
+
+        @if (session()->has('deleted'))
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    Swal.fire({
+                        title: '{{ session('welcome') }}',
+                        icon: 'success',
+                        confirmButtonText: 'OK'
+                    });
+                });
+            </script>
+        @endif
+
+        <img src="{{ asset('assets/Images/lc.png') }}" alt="Background Image" class="imageBg">
 
 
 
@@ -118,8 +95,7 @@
                 <div class="container-Search">
                     <h1 class="searchResultText">Search Results for "{{ $query }}":</h1>
                     <!-- <div class="line"></div> -->
-                    <button class="clearBorderedBtn" data-bs-toggle="collapse" data-bs-target="#searchCon" type="button"
-                        aria-expanded="false" aria-controls="user_books">
+                    <button class="clearBorderedBtn" data-bs-toggle="collapse" data-bs-target="#searchCon" type="button" aria-expanded="false" aria-controls="user_books">
                         <i class="fa-solid fa-xmark Icon"></i>
                         Clear
                     </button>
@@ -248,11 +224,11 @@
 
             @if ($category != null && $check == false)
                 <div class="NoResult mb-3">No results for {{$category}}</div>
-                <a class="btnClearFilter" href="{{url('/')}}"><i class="fa-solid fa-xmark"></i> Clear Filter</a>
+                <a class="clearBorderedBtn" href="{{url('/')}}"><i class="fa-solid fa-xmark"></i> Clear Filter</a>
             @endif
 
             <!-- Categorized Books -->
-            <div class="container-User flex">
+            <div class="container-User">
 
                 @foreach($categorizedBooks as $book)
                     <div class="item book-item" data-id="{{ $book->id }}">
@@ -302,7 +278,7 @@
 
             <!-- General Items -->
             @if ($category == null)
-                <div class="container-User flex">
+                <div class="container-User">
 
                     <!-- Content container for cards -->
 
@@ -404,21 +380,25 @@
 
     </script>
 
-    <script src="{{ asset('assets/js/projectjscript.js') }}"></script>
+    <script src="{{ asset('assets/js/welcome.js') }}"></script>
+    <script src="{{ asset('assets/js/bookSelection.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
 
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+
 
 
 </body>
+
 <footer>
     <hr class="footerLine">
     <div class="footer">
         <div class="container-fluid d-flex justify-content-center align-items-center">
             <a class="col navbar-brand justify-content-center align-content-center text-center m-0" href="{{url('/')}}">
-                <img src="{{asset('assets/favicon_io/chefshat.png')}}" alt="" srcset="" class="Icon" width="32"
-                    height="32">
+                <img src="{{asset('assets/favicon_io/chefshat.svg')}}" alt="" srcset="" class="Icon" width="32" height="32">
                 Local Cuisine
             </a>
         </div>
@@ -426,9 +406,15 @@
     <div class="footerText">
         <p>© 2025 Local Cuisine. All rights reserved.</p>
         <div class="footerAcknowledgment">
-            <p>Designed by <a href="" target="_blank">Team ACIM</a></p>
-            <p>Powered by <a href="https://laravel.com/" target="_blank">Laravel</a></p>
-            <p>Icons by <a href="https://fontawesome.com/" target="_blank">Font Awesome</a></p>
+            <a href="" target="">
+                <img src="{{ asset('assets/Images/ACIM.svg') }}" height="48">
+            </a>
+            <a href="https://laravel.com/">
+                <img src="{{ asset('assets/Images/laravel.svg') }}" height="48">
+            </a>
+            <a href="https://fontawesome.com/" target="_blank">
+                <img src="{{ asset(('assets/Images/fontawesome.svg')) }}" height="48">
+            </a>
         </div>
     </div>
 </footer>

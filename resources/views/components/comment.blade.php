@@ -18,7 +18,7 @@
 
 
         @if ($get_userId != 0 || $get_userId != null)
-            <div class="container-fluid d-flex justify-content-center addComment_container d-none">
+            <div class="d-flex justify-content-center addComment_container d-none">
                 <div class="commentContainer">
                     <form action="{{url('/add-comment')}}" method="POST" class="commentForm">
                         @csrf

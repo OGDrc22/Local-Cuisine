@@ -16,56 +16,52 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+
 </head>
-<body class="body">    
-    <nav class="navbar  navbar-expand-lg">
-        <div class="container-fluid">
+<body class="body">
+    <nav class="navbar navbar-expand-lg">
 
-            @if ($get_userName == 0)
-                <a class="navbar-brand" href="{{url()->previous()}}">
-                    <img src="{{asset('assets/favicon_io/chefshat.png')}}" alt="" srcset="" width="32" height="32">
-                    Local Cuisine
-                </a>
-            @else
+        <div class="container-top-nav container-fluid">
+            <div class="left-brand-container">
                 <a class="navbar-brand" href="{{url('home')}}">
-                    <img src="{{asset('assets/favicon_io/chefshat.png')}}" alt="" srcset="" width="32" height="32">
-                    Local Cuisine
+                    <img src="{{asset('assets/favicon_io/chefshat.svg')}}" alt="" srcset="" class="Icon-web" width="32" height="32">
+                    <div class="webname hide-at-small-screen">
+                        Local Cuisine
+                    </div>
+                    <div class="webname navBarActions_dropdown">
+                        New Book
+                    </div>
                 </a>
-            @endif
+            </div>
 
-            <div class="collapse navbar-collapse d-flex">
-
-                <div class="navbar-nav ms-auto">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle dropdown-toggleBtn text-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            @if ($get_userName == 0) 
-                                Guess User
-                            @else
-                                {{$get_userName}}                            
-                            @endif
-                        </a>
-                        <ul class="dropdown-menu">
-                            @if ($get_userName == 0)
-                                <li><a class="dropdown-item" href="{{url('registernewuser')}}">Login/Register</a></li>
-                                <li><a class="dropdown-item" href="{{route('about')}}">About Us</a></li>
-                            @else
-                                <li><a class="dropdown-item" href="{{route('userprofile')}}">Profile</a></li>
-                                <li><form action="{{route('logout')}}" method="POST" style="display: inline;">
-                                        @csrf
-                                        <button type="submit" class="dropdown-item">Logout</button>
-                                    </form>
-                                </li>
-                                <li class="border-top"><a class="dropdown-item" href="{{route('about')}}">About Us</a></li>
-                            @endif
-                        </ul>
-                    </li>
+            <div class="center-actions-container">
+                <div class="left-center-action">
                 </div>
+
+                <div class="center-center-action">
+                </div>
+
+                <div class="right-center-action">
+                </div>
+            </div>
+
+            <div class="right-dropdown-container dropdown">
+                <button class="dropdown-toggle dropdown-toggle-button d-flex" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="user-nav-icon fa-solid fa-circle-user"></i>
+                    <div class="username_hidden">{{$get_userName}}</div>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <li><form action="{{route('logout')}}" method="POST" style="display: inline;">
+                            @csrf
+                            <button type="submit" class="dropdown-item">Logout</button>
+                        </form>
+                    </li>
+                    <li class="border-top"><a class="dropdown-item" href="{{route('about')}}">About Us</a></li>
+                </ul>
             </div>
         </div>
     </nav>
-
-
-
 
     <div class="main">
         <div class="column left">
@@ -80,8 +76,8 @@
                 </div>
             @endif
 
-            <h1 class="welcomeText">Create</h1>
-            <div class="containerP">
+            <h1 class="welcomeText hide-at-small-screen">Create</h1>
+            <div class="container-form">
                 <form action="{{ route('newBook.create') }}" method="POST" enctype="multipart/form-data" id="myForm">
                     @csrf
                     <input name="userId" value="{{ $get_userId }}" class="d-none">
@@ -128,13 +124,38 @@
                     </div>
 
                     <div class="">
-                        <label for="formFile" class="form-label mb-0">Recipe Origin</label>
+                        <label for="sourceInput" class="form-label mb-0">Recipe Origin</label>
                         <input name="recipeOrigin" type="text" class="input-field-category" id="sourceInput" placeholder="Recipe Origin"  value="{{old('recipeOrigin')}}">
                     </div>
 
                     <div class="mb-3 mt-1">
                         <label for="formFile" class="form-label mb-0">Upload Cover Photo</label>
                         <input name="coverImage" class="input-field" type="file" id="formFile">
+                    </div>
+
+
+                    <div class="container-User justify-content-center align-items-center navBarActions_dropdown">
+                        <div class="item book-item">
+                            <img class="coverImg" id="imagePreview" src="{{ asset('assets/Images/default.jpg') }}" alt="Cover Image">
+
+                            <div class="info">
+                                <a class="title" id="targetInput">Title</a>
+                                <a class="byText">By</a>
+                                <p class="author d-inline">{{$get_userName}}</p>
+                            </div>
+
+                            <div class="container-rating d-flex align-items-center px-2">
+                                <div class="rating">
+                                    <i id="star" class="fa-solid fa-star starRated"></i>
+                                    <i id="star" class="fa-solid fa-star starRated"></i>
+                                    <i id="star" class="fa-solid fa-star starRated"></i>
+                                    <i id="star" class="fa-solid fa-star starRated"></i>
+                                    <i id="star" class="fa-solid fa-star starRated"></i>
+                                </div>
+                                <h1 class="rates ms-2 mb-0 mt-1 starsNum">(0)</h1>
+                                <h1 class="rates ms-2 mb-0 mt-1 d-inline"> 0 Ratings</h1>
+                            </div>
+                        </div>
                     </div>
 
                     
@@ -146,13 +167,13 @@
             </div>
         </div>
 
-        <div class="column right">
+        <div class="column right hide-at-small-screen">
             
             <h1 class="welcomeText">Preview</h1>
             
             <div class="container-User d-flex justify-content-center align-items-center">
                 <div class="item book-item">
-                    <img class="coverImg" id="imagePreview" src="{{ asset('assets/Images/default.jpg') }}" alt="Cover Image">
+                    <img class="coverImg" id="imagePreviewRS" src="{{ asset('assets/Images/default.jpg') }}" alt="Cover Image">
                     <div class="info">
                         <a class="title" id="targetInput">Title</a>
                         <a class="byText">By</a>
@@ -176,26 +197,10 @@
         </div>
     </div>
 
-    <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalLabel">Confirm Submission</h5>
-                </div>
-                <div class="modal-body">
-                    Are you sure you want to publish this Recipe?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btnCancel btnCancelModal" id="btnCancelModal" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btnSub" id="confirmSubmit">Publish it</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
 
     <script src="{{ asset('assets/js/newBook.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
 </body>
 
 
@@ -204,7 +209,7 @@
     <div class="footer">
         <div class="container-fluid d-flex justify-content-center align-items-center">
             <a class="col navbar-brand justify-content-center align-content-center text-center m-0" href="{{url('/')}}">
-                <img src="{{asset('assets/favicon_io/chefshat.png')}}" alt="" srcset="" class="Icon" width="32" height="32">
+                <img src="{{asset('assets/favicon_io/chefshat.svg')}}" alt="" srcset="" class="Icon" width="32" height="32">
                 Local Cuisine
             </a>
         </div>
@@ -212,9 +217,15 @@
     <div class="footerText">
         <p>© 2025 Local Cuisine. All rights reserved.</p>
         <div class="footerAcknowledgment">
-            <p>Designed by <a href="" target="">Team ACIM</a></p>
-            <p>Powered by <a href="https://laravel.com/" target="_blank">Laravel</a></p>
-            <p>Icons by <a href="https://fontawesome.com/" target="_blank">Font Awesome</a></p>
+            <a href="" target="">
+                <img src="{{ asset('assets/Images/ACIM.svg') }}" height="48">
+            </a>
+            <a href="https://laravel.com/">
+                <img src="{{ asset('assets/Images/laravel.svg') }}" height="48">
+            </a>
+            <a href="https://fontawesome.com/" target="_blank">
+                <img src="{{ asset(('assets/Images/fontawesome.svg')) }}" height="48">
+            </a>
         </div>
     </div>
 </footer>

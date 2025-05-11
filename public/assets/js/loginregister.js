@@ -83,6 +83,24 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 5000);
 });
 
+
+function showSwal(options, onConfirm) {
+    const ft = document.getElementById('ft');
+    ft.classList.add('d-none'); // hide footer
+
+    Swal.fire({
+        ...options,
+        didClose: () => {
+            ft.classList.remove('d-none'); // show footer when modal closes
+        }
+    }).then((result) => {
+        if (result.isConfirmed && typeof onConfirm === 'function') {
+            onConfirm();
+        }
+    });
+}
+
+
 //Validation
 (function () {
   'use strict';
@@ -100,29 +118,66 @@ document.addEventListener("DOMContentLoaded", () => {
   //   f.style.height = "630px";
   // }
 
-  function checkPass() {
+ function checkPass() {
     var passA = document.getElementById("exPassword").value;
     var passB = document.getElementById("conPassword").value;
     var textEr = document.getElementById("invalid-feedback");
     var textEr1 = document.getElementById("invalid-feedback1");
-    if (passA.length < 8 || passB.length < 8) {
-      textEr.innerText = "Passwords must be 8-20 characters long.";
-      textEr1.innerText = "Passwords must be 8-20 characters long.";
-      textEr.style.display = "block";
-      textEr1.style.display = "block";
-      return false;
+    if ((passA.length < 8 && passA.length > 0) || (passB.length < 8 && passB.length > 0)) {
+        textEr.innerText = "Passwords must be 8-20 characters long.";
+        textEr1.innerText = "Passwords must be 8-20 characters long.";
+        textEr.style.display = "block";
+        textEr1.style.display = "block";
+        return false;
     }
     if (passA !== passB) {
-      textEr.innerText = "Passwords didn't match";
-      textEr1.innerText = "Passwords didn't match";
-      textEr.style.display = "block";
-      textEr1.style.display = "block";
-      return false;
+        textEr.innerText = "Passwords didn't match";
+        textEr1.innerText = "Passwords didn't match";
+        textEr.style.display = "block";
+        textEr1.style.display = "block";
+        return false;
     }
+
+    var pattern = /[A-Z]/g;
+    if (!passA.match(pattern) || !passB.match(pattern)) {
+        textEr.innerText = "Passwords must contain at least one uppercase letter.";
+        textEr1.innerText = "Passwords must contain at least one uppercase letter.";
+        textEr.style.display = "block";
+        textEr1.style.display = "block";
+        return false;
+    }
+    
+    var pattern = /[a-z]/g;
+    if (!passA.match(pattern) || !passB.match(pattern)) {
+        textEr.innerText = "Passwords must contain at least one lowercase letter.";
+        textEr1.innerText = "Passwords must contain at least one lowercase letter.";
+        textEr.style.display = "block";
+        textEr1.style.display = "block";
+        return false;
+    }
+
+    var pattern = /[0-9]/g;
+    if (!passA.match(pattern) || !passB.match(pattern)) {
+        textEr.innerText = "Passwords must contain at least one number.";
+        textEr1.innerText = "Passwords must contain at least one number.";
+        textEr.style.display = "block";
+        textEr1.style.display = "block";
+        return false;
+    }
+
+    var pattern = /[!@#$%^&*()_+\-=\[\]{}':"\\|,.<>\/?]+/g;
+    if (!passA.match(pattern) || !passB.match(pattern)) {
+        textEr.innerText = "Passwords must contain at least one special charater.";
+        textEr1.innerText = "Passwords must contain at least one special charater.";
+        textEr.style.display = "block";
+        textEr1.style.display = "block";
+        return false;
+    }
+        
     textEr.style.display = "none";
     textEr1.style.display = "none";
     return true;
-  }
+}
 
   // Function to validate forms
   function validateForm(formId) {
