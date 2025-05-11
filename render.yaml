@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: local-cuisine
+    env: php
+    runtime: php
+    buildCommand: composer install
+    startCommand: php artisan serve --host=0.0.0.0 --port=10000
+    plan: free
+    region: oregon
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_KEY
+        sync: false
+      - key: DB_CONNECTION
+        value: mysql
+      - key: DB_HOST
+        value: postgresql://locacuisine_user:T74ueqYZ3VNrOLTadwFd3BKHFYLGgE8q@dpg-d0g5vcidbo4c73b258ag-a/locacuisine
+      - key: DB_PORT
+        value: 3306
+      - key: DB_DATABASE
+        value: recipeBook
+      - key: DB_USERNAME
+        value: root
+      - key: DB_PASSWORD
+        sync: false
