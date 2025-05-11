@@ -28,7 +28,7 @@
                     <img src="{{asset('assets/favicon_io/chefshat.svg')}}" alt="" srcset="" class="Icon" width="32"
                         height="32">
                     <div class="webname">
-                        Local Cuisine
+                        Local Cuisiness
                     </div>
                 </a>
             </div>
