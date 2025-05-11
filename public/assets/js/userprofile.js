@@ -323,10 +323,10 @@ document.getElementById('edit-pic').addEventListener('click', function (e) {
             .then(() => {
                 // Preview the cropped image immediately
                 const reader = new FileReader();
-                    reader.onload = () => {
-                        document.getElementById('current-profile-pic').src = reader.result;
-                    };
-                    reader.readAsDataURL(result.value);
+                reader.onload = () => {
+                    document.getElementById('current-profile-pic').src = reader.result;
+                };
+                reader.readAsDataURL(result.value);
                 // const fileInput = document.getElementById('inputImage');
                 // if (!fileInput.files.length) {
                 //     console.error('No file selected');

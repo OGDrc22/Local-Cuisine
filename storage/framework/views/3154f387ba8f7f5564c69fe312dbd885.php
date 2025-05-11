@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $book->recipeTitle }}</title>
-    <link href="{{asset('assets/css/bootstrap.css')}}" rel="stylesheet">
-    <link href="{{asset('assets/css/newBook.css')}}" rel="stylesheet">
+    <title><?php echo e($book->recipeTitle); ?></title>
+    <link href="<?php echo e(asset('assets/css/bootstrap.css')); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('assets/css/newBook.css')); ?>" rel="stylesheet">
 
-    <link rel="apple-touch-icon" sizes="180x180" href="{{asset('assets/favicon_io/chefshat.png')}}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{asset('assets/favicon_io/chefshat.png')}}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('assets/favicon_io/chefshat.png')}}">
-    <link rel="manifest" href="{{asset('assets/favicon_io/site.webmanifest')}}">
+    <link rel="apple-touch-icon" sizes="180x180" href="<?php echo e(asset('assets/favicon_io/chefshat.png')); ?>">
+    <link rel="icon" type="image/png" sizes="32x32" href="<?php echo e(asset('assets/favicon_io/chefshat.png')); ?>">
+    <link rel="icon" type="image/png" sizes="16x16" href="<?php echo e(asset('assets/favicon_io/chefshat.png')); ?>">
+    <link rel="manifest" href="<?php echo e(asset('assets/favicon_io/site.webmanifest')); ?>">
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=search" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
@@ -24,8 +24,8 @@
 
         <div class="container-top-nav container-fluid">
             <div class="left-brand-container">
-                <a class="navbar-brand" href="{{url('home')}}">
-                    <img src="{{asset('assets/favicon_io/chefshat.svg')}}" alt="" srcset="" class="Icon" width="32" height="32">
+                <a class="navbar-brand" href="<?php echo e(url('home')); ?>">
+                    <img src="<?php echo e(asset('assets/favicon_io/chefshat.svg')); ?>" alt="" srcset="" class="Icon" width="32" height="32">
                     <div class="webname hide-at-small-screen">
                         Local Cuisine
                     </div>
@@ -48,20 +48,20 @@
 
             <div class="right-dropdown-container dropdown">
                 <button class="dropdown-toggle dropdown-toggle-button d-flex" data-bs-toggle="dropdown" aria-expanded="false">
-                    @if ($get_profilepic == null)
+                    <?php if($get_profilepic == null): ?>
                         <i class="user-nav-icon fa-solid fa-circle-user"></i>
-                    @else
-                        <img src="{{ asset('storage/profilepics/' . ($get_profilepic)) }}" class="user-nav-icon-img" id="current-profile-pic" alt="Profile Picture">                
-                    @endif
-                    <div class="username_hidden">{{$get_userName}}</div>
+                    <?php else: ?>
+                        <img src="<?php echo e(asset('storage/profilepics/' . ($get_profilepic))); ?>" class="user-nav-icon-img" id="current-profile-pic" alt="Profile Picture">                
+                    <?php endif; ?>
+                    <div class="username_hidden"><?php echo e($get_userName); ?></div>
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end">
-                    <li><form action="{{route('logout')}}" method="POST" style="display: inline;">
-                            @csrf
+                    <li><form action="<?php echo e(route('logout')); ?>" method="POST" style="display: inline;">
+                            <?php echo csrf_field(); ?>
                             <button type="submit" class="dropdown-item">Logout</button>
                         </form>
                     </li>
-                    <li class="border-top"><a class="dropdown-item" href="{{route('about')}}">About Us</a></li>
+                    <li class="border-top"><a class="dropdown-item" href="<?php echo e(route('about')); ?>">About Us</a></li>
                 </ul>
             </div>
         </div>
@@ -71,25 +71,25 @@
     <div class="main">
         <div class="column left">
 
-            @if ($errors->any())
+            <?php if($errors->any()): ?>
                 <div class="alert alert-danger floating-alert">
                     <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
+                        <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <li><?php echo e($error); ?></li>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </ul>
                 </div>
-            @endif
+            <?php endif; ?>
 
             <h1 class="welcomeText hide-at-small-screen">Create</h1>
             <div class="container-form">
-                <form action="{{ route('editBook.update', $book->id) }}" method="POST" enctype="multipart/form-data" id="myForm">
-                    @csrf
-                    @method('PUT')
-                    <input name="userId" value="{{ $get_userId }}" class="d-none">
+                <form action="<?php echo e(route('editBook.update', $book->id)); ?>" method="POST" enctype="multipart/form-data" id="myForm">
+                    <?php echo csrf_field(); ?>
+                    <?php echo method_field('PUT'); ?>
+                    <input name="userId" value="<?php echo e($get_userId); ?>" class="d-none">
                     
                     <div class="required">
-                        <input name="recipeTitle" type="text" class="input-field-title" id="sourceInput" placeholder="Title" value="{{$book->recipeTitle}}" required>
+                        <input name="recipeTitle" type="text" class="input-field-title" id="sourceInput" placeholder="Title" value="<?php echo e($book->recipeTitle); ?>" required>
                     </div>
 
                     <div class="form-group mt-2">
@@ -97,7 +97,8 @@
                             <div class="form-group mt-3">
                                 <div class="nav-item dropdownCategory">
                                     <a class="input-field form-control selected" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        {{ $book->recipeCategory ?? 'Select Category' }}
+                                        <?php echo e($book->recipeCategory ?? 'Select Category'); ?>
+
                                         <input type="checkbox" class="dropdown-toggle check-boxA">
                                     </a>
                                     <ul class="dropdown-menu dropdown-menuCategory">
@@ -122,30 +123,30 @@
                     <div class="mt-3">
                         <select name="recipeCategory" class="form-control input-field-category d-none">
                             <option value="" disabled>Category</option>
-                            <option value="Appetizers" {{ $book->recipeCategory == 'Appetizers' ? 'selected' : '' }}>Appetizers</option>
-                            <option value="Side Dishes" {{ $book->recipeCategory == 'Side Dishes' ? 'selected' : '' }}>Side Dishes</option>
-                            <option value="Main Courses" {{ $book->recipeCategory == 'Main Courses' ? 'selected' : '' }}>Main Courses</option>
-                            <option value="Desserts" {{ $book->recipeCategory == 'Desserts' ? 'selected' : '' }}>Desserts</option>
-                            <option value="Beverages" {{ $book->recipeCategory == 'Beverages' ? 'selected' : '' }}>Beverages</option>
-                            <option value="Soups" {{ $book->recipeCategory == 'Soups' ? 'selected' : '' }}>Soups</option>
-                            <option value="Salads" {{ $book->recipeCategory == 'Salads' ? 'selected' : '' }}>Salads</option>
-                            <option value="Breakfasts" {{ $book->recipeCategory == 'Breakfasts' ? 'selected' : '' }}>Breakfasts</option>
-                            <option value="Snacks" {{ $book->recipeCategory == 'Snacks' ? 'selected' : '' }}>Snacks</option>
-                            <option value="Bread and Pastries" {{ $book->recipeCategory == 'Bread and Pastries' ? 'selected' : '' }}>Bread and Pastries</option>
+                            <option value="Appetizers" <?php echo e($book->recipeCategory == 'Appetizers' ? 'selected' : ''); ?>>Appetizers</option>
+                            <option value="Side Dishes" <?php echo e($book->recipeCategory == 'Side Dishes' ? 'selected' : ''); ?>>Side Dishes</option>
+                            <option value="Main Courses" <?php echo e($book->recipeCategory == 'Main Courses' ? 'selected' : ''); ?>>Main Courses</option>
+                            <option value="Desserts" <?php echo e($book->recipeCategory == 'Desserts' ? 'selected' : ''); ?>>Desserts</option>
+                            <option value="Beverages" <?php echo e($book->recipeCategory == 'Beverages' ? 'selected' : ''); ?>>Beverages</option>
+                            <option value="Soups" <?php echo e($book->recipeCategory == 'Soups' ? 'selected' : ''); ?>>Soups</option>
+                            <option value="Salads" <?php echo e($book->recipeCategory == 'Salads' ? 'selected' : ''); ?>>Salads</option>
+                            <option value="Breakfasts" <?php echo e($book->recipeCategory == 'Breakfasts' ? 'selected' : ''); ?>>Breakfasts</option>
+                            <option value="Snacks" <?php echo e($book->recipeCategory == 'Snacks' ? 'selected' : ''); ?>>Snacks</option>
+                            <option value="Bread and Pastries" <?php echo e($book->recipeCategory == 'Bread and Pastries' ? 'selected' : ''); ?>>Bread and Pastries</option>
                         </select>
                     </div>
                     
                     <div class="mt-3">
-                        <textarea name="recipeIngridients" class="input-field-big" placeholder="Ingredients..." required>{{$book->recipeIngridients}}</textarea>
+                        <textarea name="recipeIngridients" class="input-field-big" placeholder="Ingredients..." required><?php echo e($book->recipeIngridients); ?></textarea>
                     </div>
 
                     <div class="mt-3">
-                        <textarea name="recipeDescription" class="input-field-big" placeholder="Description/Instructions..." required>{{$book->recipeDescription}}</textarea>
+                        <textarea name="recipeDescription" class="input-field-big" placeholder="Description/Instructions..." required><?php echo e($book->recipeDescription); ?></textarea>
                     </div>
                     
                     <div class="mt-1">
                         <label for="formFile" class="form-label mb-0">Recipe Origin</label>
-                        <input name="recipeOrigin" type="text" class="input-field-category" id="sourceInput" placeholder="Recipe Origin" value="{{$book->recipeOrigin}}" required>
+                        <input name="recipeOrigin" type="text" class="input-field-category" id="sourceInput" placeholder="Recipe Origin" value="<?php echo e($book->recipeOrigin); ?>" required>
                     </div>
 
                     <div class="mb-3 mt-1">
@@ -156,11 +157,11 @@
 
                     <div class="container-User justify-content-center align-items-center navBarActions_dropdown">
                         <div class="item book-item">
-                            <img class="coverImg" id="imagePreview" src="{{ asset('storage/' . $book->coverImage) }}" alt="Cover Image">
+                            <img class="coverImg" id="imagePreview" src="<?php echo e(asset('storage/' . $book->coverImage)); ?>" alt="Cover Image">
                             <div class="info">
-                                <a class="title" id="targetInput">{{ $book->recipeTitle }}</a>
+                                <a class="title" id="targetInput"><?php echo e($book->recipeTitle); ?></a>
                                 <a class="byText">By</a>
-                                <p class="author d-inline">{{$get_userName}}</p>
+                                <p class="author d-inline"><?php echo e($get_userName); ?></p>
                                 
                             </div>
                             <div class="container-rating d-flex align-items-center px-2">
@@ -179,13 +180,13 @@
 
                     
                     <div class="d-flex justify-content-end mt-3">
-                            <a type="cancel"" class="btnCancel me-3 text-decoration-none text-center" href="{{url()->previous()}}">Cancel</a>
+                            <a type="cancel"" class="btnCancel me-3 text-decoration-none text-center" href="<?php echo e(url()->previous()); ?>">Cancel</a>
                             <button type="button" id="openModal" class="btnSub float-right">Save</button>
                     </div>
                 </form>
-                <form action="{{ route('deleteBook', $book->id) }}" method="POST" id="deleteBook">
-                    @csrf
-                    @method('DELETE')
+                <form action="<?php echo e(route('deleteBook', $book->id)); ?>" method="POST" id="deleteBook">
+                    <?php echo csrf_field(); ?>
+                    <?php echo method_field('DELETE'); ?>
                     <button type="button" id="openModalD" class="btnDelete">Delete</button>
                 </form>
             </div>
@@ -197,11 +198,11 @@
             
             <div class="container-User d-flex justify-content-center align-items-center">
                 <div class="item book-item">
-                    <img class="coverImg" id="imagePreview" src="{{ asset('storage/' . $book->coverImage) }}" alt="Cover Image">
+                    <img class="coverImg" id="imagePreview" src="<?php echo e(asset('storage/' . $book->coverImage)); ?>" alt="Cover Image">
                     <div class="info">
-                        <a class="title" id="targetInput">{{$book->recipeTitle}}</a>
+                        <a class="title" id="targetInput"><?php echo e($book->recipeTitle); ?></a>
                         <a class="byText">By</a>
-                        <p class="author d-inline">{{$get_userName}}</p>
+                        <p class="author d-inline"><?php echo e($get_userName); ?></p>
                         
                     </div>
                     <div class="container-rating d-flex align-items-center px-2">
@@ -222,7 +223,7 @@
     </div>
 
 
-    <script src="{{ asset('assets/js/newBook.js') }}"></script>
+    <script src="<?php echo e(asset('assets/js/newBook.js')); ?>"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
 </body>
@@ -231,8 +232,8 @@
     <hr class="footerLine">
     <div class="footer">
         <div class="container-fluid d-flex justify-content-center align-items-center">
-            <a class="col navbar-brand justify-content-center align-content-center text-center m-0" href="{{url('/')}}">
-                <img src="{{asset('assets/favicon_io/chefshat.svg')}}" alt="" srcset="" class="Icon" width="32" height="32">
+            <a class="col navbar-brand justify-content-center align-content-center text-center m-0" href="<?php echo e(url('/')); ?>">
+                <img src="<?php echo e(asset('assets/favicon_io/chefshat.svg')); ?>" alt="" srcset="" class="Icon" width="32" height="32">
                 Local Cuisine
             </a>
         </div>
@@ -241,15 +242,15 @@
         <p>© 2025 Local Cuisine. All rights reserved.</p>
         <div class="footerAcknowledgment">
             <a href="" target="">
-                <img src="{{ asset('assets/Images/ACIM.svg') }}" height="48">
+                <img src="<?php echo e(asset('assets/Images/ACIM.svg')); ?>" height="48">
             </a>
             <a href="https://laravel.com/">
-                <img src="{{ asset('assets/Images/laravel.svg') }}" height="48">
+                <img src="<?php echo e(asset('assets/Images/laravel.svg')); ?>" height="48">
             </a>
             <a href="https://fontawesome.com/" target="_blank">
-                <img src="{{ asset(('assets/Images/fontawesome.svg')) }}" height="48">
+                <img src="<?php echo e(asset(('assets/Images/fontawesome.svg'))); ?>" height="48">
             </a>
         </div>
     </div>
 </footer>
-</html>
+</html><?php /**PATH C:\xampp\htdocs\main_finalproject\resources\views//editBook.blade.php ENDPATH**/ ?>

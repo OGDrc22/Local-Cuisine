@@ -15,6 +15,20 @@ document.addEventListener("DOMContentLoaded", () => {
     })
 
 
-
-
 });
+
+function showSwal(options, onConfirm) {
+    const ft = document.getElementById('ft');
+    ft.classList.add('d-none'); // hide footer
+
+    Swal.fire({
+        ...options,
+        didClose: () => {
+            ft.classList.remove('d-none'); // show footer when modal closes
+        }
+    }).then((result) => {
+        if (result.isConfirmed && typeof onConfirm === 'function') {
+            onConfirm(result);
+        }
+    });
+}

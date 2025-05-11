@@ -24,6 +24,7 @@
     <nav class="navbar navbar-expand-lg">
 
         <div class="container-top-nav container-fluid">
+            
             <div class="left-brand-container">
                 <a class="navbar-brand" href="{{url('home')}}">
                     <img src="{{asset('assets/favicon_io/chefshat.svg')}}" alt="" srcset="" class="Icon" width="32" height="32">
@@ -49,7 +50,11 @@
 
             <div class="right-dropdown-container dropdown">
                 <button class="dropdown-toggle dropdown-toggle-button d-flex" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="user-nav-icon fa-solid fa-circle-user"></i>
+                    @if ($get_profilepic == null)
+                        <i class="user-nav-icon fa-solid fa-circle-user"></i>
+                    @else
+                        <img src="{{ asset('storage/profilepics/' . ($get_profilepic)) }}" class="user-nav-icon-img" id="current-profile-pic" alt="Profile Picture">                
+                    @endif
                     <div class="username_hidden">{{$get_userName}}</div>
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end">

@@ -184,7 +184,11 @@ html {
     color: var(--accent-500);
 }
 
-
+.user-nav-icon-img {
+    width: 42px;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+}
 
 .dropdown-toggle-button {
     display: flex;

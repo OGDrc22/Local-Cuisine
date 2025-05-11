@@ -16,6 +16,7 @@ class FavoriteController extends Controller
     $user = Auth::user();
     $get_userId = $user->id;
     $get_userName = $user->username;
+        $get_profilepic = Auth::user()->profilepic;
 
     // Step 1: Fetch all favorites for the user
     $favorites = Favorites::where('userId', $get_userId)->get();
@@ -44,7 +45,7 @@ class FavoriteController extends Controller
 
     }
 
-    return view('favorites', compact('get_userId', 'get_userName', 'favoritedBooks'));
+    return view('favorites', compact('get_userId', 'get_userName', 'favoritedBooks', 'get_profilepic'));
 }
 
 }

@@ -10,3 +10,4 @@ document.addEventListener('DOMContentLoaded', function () {
         img.classList.remove = 'd-none';
     }
 });
+

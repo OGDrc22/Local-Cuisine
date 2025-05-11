@@ -52,7 +52,11 @@
 
             <div class="right-dropdown-container dropdown">
                 <button class="dropdown-toggle dropdown-toggle-button d-flex" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="user-nav-icon fa-solid fa-circle-user"></i>
+                    @if ($get_profilepic == null)
+                        <i class="user-nav-icon fa-solid fa-circle-user"></i>
+                    @else
+                        <img src="{{ asset('storage/profilepics/' . ($get_profilepic)) }}" class="user-nav-icon-img" id="current-profile-pic" alt="Profile Picture">                
+                    @endif
                     <div class="username_hidden">{{$get_userName}}</div>
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end">
@@ -90,7 +94,7 @@
         @if (session()->has('welcome'))
             <script>
                 document.addEventListener('DOMContentLoaded', function() {
-                    Swal.fire({
+                    showSwal({
                         title: '{{ session('welcome') }}',
                         icon: 'success',
                         confirmButtonText: 'OK'

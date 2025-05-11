@@ -16,6 +16,7 @@ class HomeController extends Controller
         $get_userId = $user->id;
 
         $get_userName = Auth::user()->username;
+        $get_profilepic = Auth::user()->profilepic;
 
         $books = books::where('userId', $user->id)->get();
 
@@ -226,9 +227,9 @@ class HomeController extends Controller
 
         $userType = Auth::user()->user_type;
         if ($userType == 'admin') {
-            return view('admin_dashboard', compact('userType', 'get_userName', 'books', 'userWithBooks', 'results', 'query', 'category', 'categorizedBooks', 'check', 'recommendedBooks'));
+            return view('admin_dashboard', compact('userType', 'get_userName', 'get_profilepic' , 'books', 'userWithBooks', 'results', 'query', 'category', 'categorizedBooks', 'check', 'recommendedBooks'));
         } else {
-            return view('home', compact('get_userName', 'books', 'userWithBooks', 'results', 'query', 'category', 'categorizedBooks', 'check', 'recommendedBooks'));
+            return view('home', compact('get_userName', 'get_profilepic' , 'books', 'userWithBooks', 'results', 'query', 'category', 'categorizedBooks', 'check', 'recommendedBooks'));
         }
     }
 

@@ -187,6 +187,11 @@ html {
     /* color: #ff3030; */
 }
 
+.user-nav-icon-img {
+    width: 42px;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+}
 
 .nav-link {
     font-family: istock-web-regular;

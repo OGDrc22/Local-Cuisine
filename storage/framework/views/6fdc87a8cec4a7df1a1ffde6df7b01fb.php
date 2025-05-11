@@ -4,16 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
 
-    <title>{{$book->recipeTitle}}</title>
-    <link href="{{asset('assets/css/bootstrap.css')}}" rel="stylesheet">
-    <link href="{{asset('assets/css/openBook.css')}}" rel="stylesheet">
+    <title><?php echo e($book->recipeTitle); ?></title>
+    <link href="<?php echo e(asset('assets/css/bootstrap.css')); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('assets/css/openBook.css')); ?>" rel="stylesheet">
 
-    <link rel="apple-touch-icon" sizes="180x180" href="{{asset('assets/favicon_io/chefshat.svg')}}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{asset('assets/favicon_io/chefshat.svg')}}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('assets/favicon_io/chefshat.svg')}}">
-    <link rel="manifest" href="{{asset('assets/favicon_io/site.webmanifest')}}">
+    <link rel="apple-touch-icon" sizes="180x180" href="<?php echo e(asset('assets/favicon_io/chefshat.svg')); ?>">
+    <link rel="icon" type="image/png" sizes="32x32" href="<?php echo e(asset('assets/favicon_io/chefshat.svg')); ?>">
+    <link rel="icon" type="image/png" sizes="16x16" href="<?php echo e(asset('assets/favicon_io/chefshat.svg')); ?>">
+    <link rel="manifest" href="<?php echo e(asset('assets/favicon_io/site.webmanifest')); ?>">
 
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=search" />
@@ -31,8 +31,8 @@
 
     <div class="container-top-nav container-fluid">
             <div class="left-brand-container">
-                <a class="navbar-brand" href="{{ route('home.custom')}}">
-                    <img src="{{asset('assets/favicon_io/chefshat.svg')}}" alt="" srcset="" class="Icon" width="32" height="32">
+                <a class="navbar-brand" href="<?php echo e(route('home.custom')); ?>">
+                    <img src="<?php echo e(asset('assets/favicon_io/chefshat.svg')); ?>" alt="" srcset="" class="Icon" width="32" height="32">
                     <div class="webname">
                         Local Cuisine
                     </div>
@@ -41,9 +41,9 @@
 
             <div class="center-actions-container">
                 <div class="left-center-action">
-                    @if ($get_userName != 0)
-                        <a class="nav-link" href="{{route('newBook')}}"><i class="fa-solid fa-circle-plus"></i> Add Recipe</a>
-                    @endif
+                    <?php if($get_userName != 0): ?>
+                        <a class="nav-link" href="<?php echo e(route('newBook')); ?>"><i class="fa-solid fa-circle-plus"></i> Add Recipe</a>
+                    <?php endif; ?>
                 </div>
 
                 <div class="center-center-action">
@@ -51,55 +51,55 @@
                 </div>
 
                 <div class="right-center-action">
-                    @if ($get_userName != 0)
-                        <a class="nav-link" href="{{url('favorites')}}"><i class="fa-solid fa-bookmark Icon"></i>Favorites</a>
-                    @endif
+                    <?php if($get_userName != 0): ?>
+                        <a class="nav-link" href="<?php echo e(url('favorites')); ?>"><i class="fa-solid fa-bookmark Icon"></i>Favorites</a>
+                    <?php endif; ?>
                 </div>
             </div>
 
             
-            @if ($get_userName != 0)
+            <?php if($get_userName != 0): ?>
                 <div class="right-dropdown-container dropdown">
                     <button class="dropdown-toggle dropdown-toggle-button d-flex" data-bs-toggle="dropdown" aria-expanded="false">
-                        @if ($get_profilepic == null)
+                        <?php if($get_profilepic == null): ?>
                             <i class="user-nav-icon fa-solid fa-circle-user"></i>
-                        @else
-                            <img src="{{ asset('storage/profilepics/' . ($get_profilepic)) }}" class="user-nav-icon-img" id="current-profile-pic" alt="Profile Picture">                
-                        @endif
-                        <div class="username_hidden">{{$get_userName}}</div>
+                        <?php else: ?>
+                            <img src="<?php echo e(asset('storage/profilepics/' . ($get_profilepic))); ?>" class="user-nav-icon-img" id="current-profile-pic" alt="Profile Picture">                
+                        <?php endif; ?>
+                        <div class="username_hidden"><?php echo e($get_userName); ?></div>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="hidden_at_large_screen dropdown-item" href="{{route('newBook')}}">Add Recipe</a></li>
-                        <li><a class="hidden_at_large_screen dropdown-item" href="{{url('favorites')}}"></i>Favorites</a></li>
-                        <li><a class="dropdown-item" href="{{route('userprofile')}}">Profile</a></li>
-                        <li><form action="{{route('logout')}}" method="POST" style="display: inline;">
-                                @csrf
+                        <li><a class="hidden_at_large_screen dropdown-item" href="<?php echo e(route('newBook')); ?>">Add Recipe</a></li>
+                        <li><a class="hidden_at_large_screen dropdown-item" href="<?php echo e(url('favorites')); ?>"></i>Favorites</a></li>
+                        <li><a class="dropdown-item" href="<?php echo e(route('userprofile')); ?>">Profile</a></li>
+                        <li><form action="<?php echo e(route('logout')); ?>" method="POST" style="display: inline;">
+                                <?php echo csrf_field(); ?>
                                 <button type="submit" class="dropdown-item">Logout</button>
                             </form>
                         </li>
-                        <li class="border-top"><a class="dropdown-item" href="{{route('about')}}">About Us</a></li>
+                        <li class="border-top"><a class="dropdown-item" href="<?php echo e(route('about')); ?>">About Us</a></li>
                     </ul>
                 </div>
-            @else
+            <?php else: ?>
                 <div class="right-dropdown-container dropdown">
-                    <a class="hidden_at_small_screen LRPage" href="{{url('registernewuser')}}">Login/Register</a>
+                    <a class="hidden_at_small_screen LRPage" href="<?php echo e(url('registernewuser')); ?>">Login/Register</a>
                     <button class="hidden_at_large_screen dropdown-toggle dropdown-toggle-button" data-bs-toggle="dropdown"
                         aria-expanded="false">
                         <i class="fa-solid fa-right-to-bracket Icon"></i>
                         <div class="username_hidden">Login/Register</div>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item LRPage" href="{{url('registernewuser')}}">Login/Register</a></li>
-                        <li><a class="dropdown-item about" href="{{route('about')}}">About Us</a></li>
+                        <li><a class="dropdown-item LRPage" href="<?php echo e(url('registernewuser')); ?>">Login/Register</a></li>
+                        <li><a class="dropdown-item about" href="<?php echo e(route('about')); ?>">About Us</a></li>
                     </ul>
                 </div>
                 
                 <div class="right-dropdown-container dropdown hidden_at_small_screen">
                     <div class="col">
-                        <a class="about mx-3 d-inline" href="{{route('about')}}">About Us</a>
+                        <a class="about mx-3 d-inline" href="<?php echo e(route('about')); ?>">About Us</a>
                     </div>
                 </div>
-            @endif
+            <?php endif; ?>
             
         </div>
     </nav>
@@ -107,31 +107,31 @@
 
     <!-- Main Container -->
     <div class="main">
-        @if (session()->has('added'))
+        <?php if(session()->has('added')): ?>
             <script>
                 document.addEventListener('DOMContentLoaded', function() {
                     Swal.fire({
-                        title: '{{ session('added') }}',
+                        title: '<?php echo e(session('added')); ?>',
                         text: 'Go to Favorites tab to see!',
                         icon: 'success',
                         confirmButtonText: 'OK'
                     });
                 });
             </script>
-        @endif
+        <?php endif; ?>
 
-        @if (session()->has('removed'))
+        <?php if(session()->has('removed')): ?>
             <script>
                 document.addEventListener('DOMContentLoaded', function() {
                     Swal.fire({
-                        title: '{{ session('removed') }}',
+                        title: '<?php echo e(session('removed')); ?>',
                         text: 'Book has beed removed!',
                         icon: 'success',
                         confirmButtonText: 'OK'
                     });
                 });
             </script>
-        @endif
+        <?php endif; ?>
 
         <script>
             document.addEventListener("DOMContentLoaded", function () {
@@ -150,26 +150,26 @@
         </script>
 
 
-        @if (session('error'))
+        <?php if(session('error')): ?>
             <div class="alert alert-success floating-alert" role="alert">
-                <h5 class="modal-title">{{ session('error') }}</h5>
+                <h5 class="modal-title"><?php echo e(session('error')); ?></h5>
             </div>
-        @endif
+        <?php endif; ?>
 
 
         <div class="alert alert-success floating-alert d-none" role="alert">
             <!-- For Favorites -->
         </div>
 
-        @if (session(key: 'message'))
+        <?php if(session(key: 'message')): ?>
             <div class="alert alert-success floating-alert d-none" role="alert">
-                <h5 class="modal-title">{{ session('message') }}</h5>
+                <h5 class="modal-title"><?php echo e(session('message')); ?></h5>
             </div>
-        @endif
+        <?php endif; ?>
         <!-- Changed: Used Bootstrap grid system (row and columns) to structure layout -->
 
         <div class="row m-0 p-0">
-            <img class="coverImg" src="{{ asset('storage/' . $book->coverImage) }}" alt="Cover Image">
+            <img class="coverImg" src="<?php echo e(asset('storage/' . $book->coverImage)); ?>" alt="Cover Image">
         </div>
 
 
@@ -177,14 +177,14 @@
             <!-- Left column: Title of your Recipe -->
             <div class="col">
                 <div class="viewTextTitle align-items-center">
-                    <h1 type="text" class="Title my-0">{{$book->recipeTitle}}</h1>
+                    <h1 type="text" class="Title my-0"><?php echo e($book->recipeTitle); ?></h1>
                 </div>
                 <a class="byText">By</a>
-                <p class="author d-inline"> {{ $ownerName }}</p>
-                <!-- <div class="d-flex"><h1 class="ownerText align-self-center p-0 my-0">By {{$ownerName}}</h1></div> -->
+                <p class="author d-inline"> <?php echo e($ownerName); ?></p>
+                <!-- <div class="d-flex"><h1 class="ownerText align-self-center p-0 my-0">By <?php echo e($ownerName); ?></h1></div> -->
                 <div class="moreInfo">
                     <a class="byText">Recipe Origin</a>
-                    <p class="author d-inline">{{ $book->recipeOrigin }}</p>
+                    <p class="author d-inline"><?php echo e($book->recipeOrigin); ?></p>
                 </div>
             </div>
 
@@ -193,37 +193,37 @@
 
                 <div class="container-rating container-fluid align-items-center ps-0">
 
-                    @php
+                    <?php
                         $starsTotal = $book['starsCount'];
                         $starsFull = floor($starsTotal);
                         $starsHalf = ($starsTotal - $starsFull) > 0 ? true : false;
                         $starsNum = number_format($book['starsCount'], 1);
-                    @endphp
+                    ?>
 
 
                     <h1 class="ratingText">Ratings: </h1>
 
                     <div class="rating-owner">
 
-                        @for ($i = $starsTotal + 1; $i <= 5; $i++)
-                            <label for="Star" title="{{$starsNum}} stars" class="fa-solid fa-star starRatedEmpty"></label>
-                        @endfor
+                        <?php for($i = $starsTotal + 1; $i <= 5; $i++): ?>
+                            <label for="Star" title="<?php echo e($starsNum); ?> stars" class="fa-solid fa-star starRatedEmpty"></label>
+                        <?php endfor; ?>
 
-                        @if ($starsHalf)
-                            <label for="Star" title="{{$starsNum}} stars"
+                        <?php if($starsHalf): ?>
+                            <label for="Star" title="<?php echo e($starsNum); ?> stars"
                                 class="fa-solid fa-star-half-stroke starRated"></label>
-                        @endif
+                        <?php endif; ?>
 
-                        @for ($i = 1; $i <= $starsTotal; $i++)
-                            <label for="Star" title="{{$starsNum}} stars" class="fa-solid fa-star starRated"></label>
-                        @endfor
+                        <?php for($i = 1; $i <= $starsTotal; $i++): ?>
+                            <label for="Star" title="<?php echo e($starsNum); ?> stars" class="fa-solid fa-star starRated"></label>
+                        <?php endfor; ?>
 
                     </div>
                     <div class="rateInfo">
-                        <h1 class="rates starsNum">{{$starsNum}}</h1>
-                        <h1 class="rates ratersSum"> {{$book['ratings']}} Ratings</h1>
+                        <h1 class="rates starsNum"><?php echo e($starsNum); ?></h1>
+                        <h1 class="rates ratersSum"> <?php echo e($book['ratings']); ?> Ratings</h1>
                     </div>
-                    <!-- <h1 class="rates ms-2 mb-0 mt-1">({{$starsCount}} Stars) {{$rates->count()}} Ratings</h1> -->
+                    <!-- <h1 class="rates ms-2 mb-0 mt-1">(<?php echo e($starsCount); ?> Stars) <?php echo e($rates->count()); ?> Ratings</h1> -->
                 </div>
 
                 <div class="d-flex align-items-center buttonContainer justify-content-start">
@@ -238,12 +238,12 @@
 
 
 
-                    @if ($bookFav)
+                    <?php if($bookFav): ?>
                         <form id="removeFavForm" action="/remove_favorite" method="POST" title="Remove to Favorites">
-                            @csrf
+                            <?php echo csrf_field(); ?>
                             <div class="container-form">
-                                <input name="userId" class="d-none" value="{{$get_userId}}">
-                                <input name="bookId" class="d-none" value="{{$book->id}}">
+                                <input name="userId" class="d-none" value="<?php echo e($get_userId); ?>">
+                                <input name="bookId" class="d-none" value="<?php echo e($book->id); ?>">
                             </div>
                             <button class="actionBtn text-decoration-none text-center" type="submit">
                                 <i class="fa-solid fa-bookmark Icon action-icon"></i>
@@ -252,13 +252,13 @@
                                 </div>
                             </button>
                         </form>
-                    @else
-                        @if ($get_userName != 0)
+                    <?php else: ?>
+                        <?php if($get_userName != 0): ?>
                             <form id="addFavForm" action="/add_favorite" method="POST" title="Add to Favorites">
-                                @csrf
+                                <?php echo csrf_field(); ?>
                                 <div class="container-form">
-                                    <input name="userId" class="d-none" value="{{$get_userId}}">
-                                    <input name="bookId" class="d-none" value="{{$book->id}}">
+                                    <input name="userId" class="d-none" value="<?php echo e($get_userId); ?>">
+                                    <input name="bookId" class="d-none" value="<?php echo e($book->id); ?>">
                                 </div>
                                 <button class="actionBtn text-decoration-none text-center" type="submit">
                                     <i class="fa-regular fa-bookmark Icon"></i>
@@ -267,18 +267,18 @@
                                     </div>
                                 </button>
                             </form>
-                        @endif
-                    @endif
+                        <?php endif; ?>
+                    <?php endif; ?>
 
 
-                    @if ($isOwner)
-                        <a href="{{route('editBook.edit', $book->id)}}" class="actionBtn text-decoration-none text-center">
+                    <?php if($isOwner): ?>
+                        <a href="<?php echo e(route('editBook.edit', $book->id)); ?>" class="actionBtn text-decoration-none text-center">
                             <i class="fa-regular fa-pen-to-square Icon action-icon"></i>
                             <div class="action_name">
                                 Edit
                             </div>
                         </a>
-                    @elseif ($get_userId != 0 || $get_userId != null)
+                    <?php elseif($get_userId != 0 || $get_userId != null): ?>
                         <button type="button" class="actionBtn" id="rateAction">
                             <i class="fa-regular fa-star Icon action-icon"></i>
                             <div class="action_name">
@@ -289,12 +289,12 @@
                             aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
-                                    <form action="{{url('/add-rating')}}" method="POST">
-                                        @csrf
-                                        <input name="userId" class="d-none" value="{{$get_userId}}">
-                                        <input name="bookId" class="d-none" value="{{$book->id}}">
+                                    <form action="<?php echo e(url('/add-rating')); ?>" method="POST">
+                                        <?php echo csrf_field(); ?>
+                                        <input name="userId" class="d-none" value="<?php echo e($get_userId); ?>">
+                                        <input name="bookId" class="d-none" value="<?php echo e($book->id); ?>">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="modalLabel">Rate {{$book->recipeTitle}}</h5>
+                                            <h5 class="modal-title" id="modalLabel">Rate <?php echo e($book->recipeTitle); ?></h5>
                                         </div>
                                         <div class="modal-body">
                                             <div class="container-rating d-flex align-items-center p-2 ps-0">
@@ -320,7 +320,7 @@
                                 </div>
                             </div>
                         </div> -->
-                    @endif
+                    <?php endif; ?>
                 </div>
 
             </div>
@@ -328,14 +328,16 @@
             <!-- Ingridients -->
             <div class="form-info">
                 <div class="desc">Ingridients:</div>
-                <p class="viewTextBig viewText" placeholder="Ingredients" id="txtA1" readonly>{{$book->recipeIngridients}}
+                <p class="viewTextBig viewText" placeholder="Ingredients" id="txtA1" readonly><?php echo e($book->recipeIngridients); ?>
+
                 </p>
             </div>
 
             <!-- Description -->
             <div class="form-info">
                 <div class="desc">Description:</div>
-                <p class="viewTextBig viewText" placeholder="Description" id="txtA2" readonly>{{$book->recipeDescription}}
+                <p class="viewTextBig viewText" placeholder="Description" id="txtA2" readonly><?php echo e($book->recipeDescription); ?>
+
                 </p>
             </div>
         </div>
@@ -343,27 +345,27 @@
         <div class="commentSection container-fluid">
             <hr class="line">
 
-            <div class="commentTitle_header">Comments ({{ $comments->count() }})</div>
+            <div class="commentTitle_header">Comments (<?php echo e($comments->count()); ?>)</div>
 
 
             <div class="comments container-fluid">
 
                 <!-- <div class="allComments"> -->
-                @if (isset($comments))
-                    @foreach ($comments as $comment)
-                        @include('components.comment', ['comment' => $comment])
-                    @endforeach
-                @endif
+                <?php if(isset($comments)): ?>
+                    <?php $__currentLoopData = $comments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $comment): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <?php echo $__env->make('components.comment', ['comment' => $comment], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                <?php endif; ?>
 
                 <!-- </div> -->
 
 
-                @if ($get_userId != 0 || $get_userId != null)
+                <?php if($get_userId != 0 || $get_userId != null): ?>
                     <div class=" d-flex justify-content-center addComment_container">
                         <div class="commentContainer">
-                            <form action="{{url('/add-comment')}}" method="POST" class="commentForm">
-                                @csrf
-                                <input name="book_id" type="hidden" value="{{$book->id}}">
+                            <form action="<?php echo e(url('/add-comment')); ?>" method="POST" class="commentForm">
+                                <?php echo csrf_field(); ?>
+                                <input name="book_id" type="hidden" value="<?php echo e($book->id); ?>">
                                 <input type="hidden" name="parent_id" id="parent_id_input" value="">
                                 <textarea name="comment" id="replyToInput" class="commentTextArea"
                                     placeholder="Write your comment here..."></textarea>
@@ -375,7 +377,7 @@
                             </form>
                         </div>
                     </div>
-                @endif
+                <?php endif; ?>
 
 
 
@@ -396,14 +398,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 
-    <script type="module" src="{{asset('assets/js/openedBook.js')}}"></script>
+    <script type="module" src="<?php echo e(asset('assets/js/openedBook.js')); ?>"></script>
 
     <script>
-        const ADD_RATING_URL = "{{ url('/add-rating') }}";
+        const ADD_RATING_URL = "<?php echo e(url('/add-rating')); ?>";
     </script>
 
 
-    <script type="module" src="{{asset('assets/js/openBook_sweetAlert2.js')}}"></script>
+    <script type="module" src="<?php echo e(asset('assets/js/openBook_sweetAlert2.js')); ?>"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
 
@@ -414,8 +416,8 @@
     <hr class="footerLine">
     <div class="footer">
         <div class="container-fluid d-flex justify-content-center align-items-center">
-            <a class="col navbar-brand justify-content-center align-content-center text-center m-0" href="{{url('/')}}">
-                <img src="{{asset('assets/favicon_io/chefshat.svg')}}" alt="" srcset="" class="Icon" width="32" height="32">
+            <a class="col navbar-brand justify-content-center align-content-center text-center m-0" href="<?php echo e(url('/')); ?>">
+                <img src="<?php echo e(asset('assets/favicon_io/chefshat.svg')); ?>" alt="" srcset="" class="Icon" width="32" height="32">
                 Local Cuisine
             </a>
         </div>
@@ -424,16 +426,16 @@
         <p>© 2025 Local Cuisine. All rights reserved.</p>
         <div class="footerAcknowledgment">
             <a href="" target="">
-                <img src="{{ asset('assets/Images/ACIM.svg') }}" height="48">
+                <img src="<?php echo e(asset('assets/Images/ACIM.svg')); ?>" height="48">
             </a>
             <a href="https://laravel.com/">
-                <img src="{{ asset('assets/Images/laravel.svg') }}" height="48">
+                <img src="<?php echo e(asset('assets/Images/laravel.svg')); ?>" height="48">
             </a>
             <a href="https://fontawesome.com/" target="_blank">
-                <img src="{{ asset(('assets/Images/fontawesome.svg')) }}" height="48">
+                <img src="<?php echo e(asset(('assets/Images/fontawesome.svg'))); ?>" height="48">
             </a>
         </div>
     </div>
 </footer>
 
-</html>
+</html><?php /**PATH C:\xampp\htdocs\main_finalproject\resources\views/openedBook.blade.php ENDPATH**/ ?>

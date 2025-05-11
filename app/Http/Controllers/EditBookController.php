@@ -15,7 +15,8 @@ class EditBookController extends Controller
         $user = Auth::user();
         $get_userId = $user->id;
         $get_userName = Auth::user()->username;
-        return view('/editBook', compact('book', 'get_userId', 'get_userName'));
+        $get_profilepic = Auth::user()->profilepic;
+        return view('/editBook', compact('book', 'get_userId', 'get_userName', 'get_profilepic'));
     }
 
     public function update(Request $request, $id) {

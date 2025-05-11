@@ -15,8 +15,9 @@ class NewBookController extends Controller
         $get_userId = $user->id;  
         $get_userName = Auth::user()->username;
         $get_userEmail = Auth::User()->email;
+        $get_profilepic = Auth::user()->profilepic;
 
-        return view('/newBook', compact('get_userId', 'get_userName', 'get_userEmail'));
+        return view('/newBook', compact('get_userId', 'get_userName', 'get_userEmail', 'get_profilepic'));
     }
 
     public function getUserId($get_userId) {

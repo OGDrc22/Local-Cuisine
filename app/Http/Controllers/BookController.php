@@ -17,6 +17,7 @@ class BookController extends Controller
         if($user) {
             $get_userId = $user->id;
             $get_userName = $user->username;
+            $get_profilepic = Auth::user()->profilepic;
         } else {
             $get_userId = 0;
             $get_userName = null;
@@ -48,7 +49,7 @@ class BookController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
-        return view('openedBook', compact('get_userId', 'get_userName', 'book', 'isOwner', 'ownerName', 'bookFav', 'rates' , 'starsCount', 'comments'));
+        return view('openedBook', compact('get_userId', 'get_userName', 'get_profilepic' , 'book', 'isOwner', 'ownerName', 'bookFav', 'rates' , 'starsCount', 'comments'));
     }
     
 

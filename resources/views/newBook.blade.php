@@ -7,9 +7,9 @@
     <link href="{{asset('assets/css/bootstrap.css')}}" rel="stylesheet">
     <link href="{{asset('assets/css/newBook.css')}}" rel="stylesheet">
 
-    <link rel="apple-touch-icon" sizes="180x180" href="{{asset('assets/favicon_io/chefshat.png')}}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{asset('assets/favicon_io/chefshat.png')}}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('assets/favicon_io/chefshat.png')}}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{asset('assets/favicon_io/chefshat.svg')}}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{asset('assets/favicon_io/chefshat.svg')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('assets/favicon_io/chefshat.svg')}}">
     <link rel="manifest" href="{{asset('assets/favicon_io/site.webmanifest')}}">
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=search" />
@@ -48,7 +48,11 @@
 
             <div class="right-dropdown-container dropdown">
                 <button class="dropdown-toggle dropdown-toggle-button d-flex" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="user-nav-icon fa-solid fa-circle-user"></i>
+                    @if ($get_profilepic == null)
+                        <i class="user-nav-icon fa-solid fa-circle-user"></i>
+                    @else
+                        <img src="{{ asset('storage/profilepics/' . ($get_profilepic)) }}" class="user-nav-icon-img" id="current-profile-pic" alt="Profile Picture">                
+                    @endif
                     <div class="username_hidden">{{$get_userName}}</div>
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end">
