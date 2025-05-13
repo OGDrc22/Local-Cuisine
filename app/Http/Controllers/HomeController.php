@@ -18,6 +18,7 @@ class HomeController extends Controller
         $get_userName = Auth::user()->username;
         $get_profilepic = Auth::user()->profilepic;
 
+        // Users books
         $books = books::where('userId', $user->id)->get();
 
         foreach ($books as $book) {
@@ -30,6 +31,8 @@ class HomeController extends Controller
 
             $book -> username = bookuser::where('id', $book->userId)->first()->username;
         }
+
+        // **Users Book
 
         $results = books::all();
         $query = $request -> input('query') ?? '';

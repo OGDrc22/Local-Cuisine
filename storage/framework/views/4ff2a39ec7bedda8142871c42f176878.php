@@ -158,7 +158,7 @@
                 <i class="fa-solid fa-pen-to-square"></i>
             </button>
 
-            <div class="container-form accordion-collapse collapse show" id="info_user">
+            <div class="container-form accordion-collapse collapse" id="info_user">
                 <form action="<?php echo e(route('userprofile.update', $get_userId )); ?>" method="POST" id="update-form">
 
                     <?php echo csrf_field(); ?>
@@ -280,6 +280,59 @@
 
             </div>
 
+
+            <div class="users-books">
+
+                <div class="user_books d-flex align-items-center">
+                    <div class="welcomeText me-2">My Books</div><div class="bookNumText d-inline">(<?php echo e($books->count()); ?>)</div>
+                    <div class="line"></div>
+                    <button class="nav-link dropdown-toggle dropdown-toggle-light-color dropdown-toggle-button px-2" id="show_hide_btn" data-bs-toggle="collapse" data-bs-target="#user_books" type="button" aria-expanded="false" aria-controls="user_books">Show</button>
+                </div>
+                <div class="container-User collapse show" id="user_books">
+                    <!-- 1st Scroll-->
+                    <?php $__currentLoopData = $books; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $book): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <div class="item book-item" data-id="<?php echo e($book->id); ?>">
+                            <img class="coverImg" src="<?php echo e(asset('storage/' . $book->coverImage)); ?>" alt="Cover Image">
+                            <div class="info">
+                                <a class="title"><?php echo e($book->recipeTitle); ?></a>
+                                <a class="byText">By</a>
+                                <p class="author d-inline"> <?php echo e($book->username); ?></p>
+
+                            </div>
+                            <div class="container-rating d-flex align-items-center px-2">
+
+                                <?php
+                                    $starsTotal = $book['starsCount'];
+                                    $starsFull = floor($starsTotal);
+                                    $starsHalf = ($starsTotal - $starsFull) > 0 ? true : false;
+                                    $starsNum = number_format($book['starsCount'], decimals: 1);
+                                ?>
+
+                                <!-- <h1 class="ratingText mb-0">Ratings: </h1> -->
+                                <div class="rating-owner d-flex d-inline">
+                                    
+                                    <?php for($i = $starsTotal+1; $i <= 5; $i++): ?>
+                                        <label for="Star" title="<?php echo e($starsNum); ?> stars" class="fa-solid fa-star starRatedEmpty"></label>                     
+                                    <?php endfor; ?>
+
+                                    <?php if($starsHalf): ?>
+                                        <label for="Star" title="<?php echo e($starsNum); ?> stars" class="fa-solid fa-star-half-stroke starRated"></label>
+                                    <?php endif; ?>
+
+                                    <?php for($i = 1; $i <= $starsTotal; $i++): ?>
+                                        <label for="Star" title="<?php echo e($starsNum); ?> stars" class="fa-solid fa-star starRated"></label>
+                                    <?php endfor; ?>
+                                    
+                                    
+                                </div>
+                                <h1 class="rates ms-2 mb-0 mt-1 starsNum">(<?php echo e($starsNum); ?>)</h1>
+                                <h1 class="rates ms-2 mb-0 mt-1 d-inline"> <?php echo e($book['ratings']); ?> Ratings</h1>
+                            </div>
+                        </div>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                </div>
+                
+            </div>
 
         </div>
 

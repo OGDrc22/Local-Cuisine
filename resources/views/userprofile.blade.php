@@ -158,7 +158,7 @@
                 <i class="fa-solid fa-pen-to-square"></i>
             </button>
 
-            <div class="container-form accordion-collapse collapse show" id="info_user">
+            <div class="container-form accordion-collapse collapse" id="info_user">
                 <form action="{{ route('userprofile.update', $get_userId )}}" method="POST" id="update-form">
 
                     @csrf
@@ -280,6 +280,59 @@
 
             </div>
 
+
+            <div class="users-books">
+
+                <div class="user_books d-flex align-items-center">
+                    <div class="welcomeText me-2">My Books</div><div class="bookNumText d-inline">({{ $books->count() }})</div>
+                    <div class="line"></div>
+                    <button class="nav-link dropdown-toggle dropdown-toggle-light-color dropdown-toggle-button px-2" id="show_hide_btn" data-bs-toggle="collapse" data-bs-target="#user_books" type="button" aria-expanded="false" aria-controls="user_books">Show</button>
+                </div>
+                <div class="container-User collapse show" id="user_books">
+                    <!-- 1st Scroll-->
+                    @foreach($books as $book)
+                        <div class="item book-item" data-id="{{ $book->id }}">
+                            <img class="coverImg" src="{{ asset('storage/' . $book->coverImage) }}" alt="Cover Image">
+                            <div class="info">
+                                <a class="title">{{ $book->recipeTitle }}</a>
+                                <a class="byText">By</a>
+                                <p class="author d-inline"> {{$book->username}}</p>
+
+                            </div>
+                            <div class="container-rating d-flex align-items-center px-2">
+
+                                @php
+                                    $starsTotal = $book['starsCount'];
+                                    $starsFull = floor($starsTotal);
+                                    $starsHalf = ($starsTotal - $starsFull) > 0 ? true : false;
+                                    $starsNum = number_format($book['starsCount'], decimals: 1);
+                                @endphp
+
+                                <!-- <h1 class="ratingText mb-0">Ratings: </h1> -->
+                                <div class="rating-owner d-flex d-inline">
+                                    
+                                    @for ($i = $starsTotal+1; $i <= 5; $i++)
+                                        <label for="Star" title="{{$starsNum}} stars" class="fa-solid fa-star starRatedEmpty"></label>                     
+                                    @endfor
+
+                                    @if ($starsHalf)
+                                        <label for="Star" title="{{$starsNum}} stars" class="fa-solid fa-star-half-stroke starRated"></label>
+                                    @endif
+
+                                    @for ($i = 1; $i <= $starsTotal; $i++)
+                                        <label for="Star" title="{{$starsNum}} stars" class="fa-solid fa-star starRated"></label>
+                                    @endfor
+                                    
+                                    
+                                </div>
+                                <h1 class="rates ms-2 mb-0 mt-1 starsNum">({{$starsNum}})</h1>
+                                <h1 class="rates ms-2 mb-0 mt-1 d-inline"> {{$book['ratings']}} Ratings</h1>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+                
+            </div>
 
         </div>
 

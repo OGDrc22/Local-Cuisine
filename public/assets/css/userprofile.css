@@ -346,28 +346,13 @@ html {
     box-shadow: 4px 0 0 rgba(0, 0, 0, 0.2);
 }
 
-.floating-alert {
-    position: fixed;
-    /* Makes the alert float on the page */
-    top: 60px;
-    left: 50%;
-    transform: translatex(-50%);
-    z-index: 10;
-    /* Ensure it appears above other content */
-    width: auto;
-    /* Adjust width as needed */
-    max-width: 300px;
-    /* Optional: Limit the width */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    /* Optional: Add a shadow */
-}
 
 .welcomeText {
-    display: block;
-    font-size: 1.8em;
+    font-size: 1.7em;
     font-family: lily-script-one;
     color: var(--text-700);
-    margin-top: 80px;
+    white-space: nowrap;
+    margin-right: 32px;
 }
 
 
@@ -454,7 +439,7 @@ html {
 
 .toggleTextss {
     text-decoration: none;
-    color: #BD9479;
+    color: var(--secondary-500);
 }
 
 .pass-input {
@@ -658,6 +643,7 @@ html {
     border: none;
     border-radius: 20%;
     color: var(--text-950);
+    box-shadow: 4px 4px 4px 0 rgba(0, 0, 0, .2);
 }
 
 .edit-info {
@@ -685,6 +671,103 @@ html {
 .swal-wide {
     width: 80%;
 }
+
+
+
+
+
+.users-books {
+    grid-column: span 10;
+    padding: 16px;
+    margin-top: 32px;
+}
+
+.container-User {
+    display: grid;
+    /* grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); */
+    grid-template-columns: repeat(auto-fit, 220px);
+    width: 100%;
+    justify-content: center;
+    /* background-color: #171717; */
+    margin-top: 20px;
+    gap: 24px;
+    padding: 10px;
+}
+
+.bookNumText {
+    font-size: 1.7em;
+    font-weight: bold;
+    color: var(--text-700);
+    white-space: nowrap;
+    margin-right: 32px;
+}
+
+.line {
+    background-color: var(--secondary-600);
+    height: 2px;
+    width: 100%;
+}
+
+.item {
+    position: relative;
+    background-color: var(--card-background);
+    aspect-ratio: 1 / 1.5;
+    border-radius: 16px;
+    flex-shrink: 0;
+    /* Prevent items from shrinking */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s cubic-bezier(0.63, 0.0, 0.33, 1.0), box-shadow 0.3s cubic-bezier(0.63, 0.0, 0.33, 1.0);
+}
+
+.item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.3);
+    z-index: 2;
+    /* transition: cubic-bezier(0.63, 0.0, 0.33, 1.0); */
+}
+
+.coverImg {
+    width: 100%;
+    height: 65%;
+    background-color: #D9D9D9;
+    clip-path: inset(0 0 0 0 round 5% 5% 5% 5%);
+    object-fit: cover;
+}
+
+
+.info {
+    padding: 8px;
+}
+
+.title {
+    text-decoration: none;
+    font-family: istock-web-bold;
+    display: flex;
+    color: var(--text-800);
+    font-size: large;
+}
+
+.byText {
+    font-size: medium;
+    font-family: istock-web-regular;
+    /* font-family: AP-R; */
+    font-weight: 600;
+    color: var(--secondary-600);
+    text-decoration: none;
+}
+
+.author {
+    font-size: medium;
+    font-family: istock-web-bold;
+    /* font-family: AP-R; */
+    color: var(--secondary-600);
+    text-decoration: none;
+    text-transform: capitalize
+}
+
+
+
+
 
 
 footer {
@@ -1050,5 +1133,24 @@ footer {
     .swal-wide {
         width: 100%;
     }
+    
+
+
+
+    .container-User {
+        display: grid;
+        grid-template-columns: 1fr;
+        width: 100%;
+        justify-content: center;
+        margin-top: 20px;
+        gap: 24px;        /* Enable horizontal scrolling */
+        padding: 32px;
+    }
+
+    .welcomeText {
+        font-size: 1.3em;
+        margin-right: 16px;
+    }
+
 
 }

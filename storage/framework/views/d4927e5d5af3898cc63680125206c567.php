@@ -24,27 +24,26 @@
     <nav class="navbar navbar-expand-lg">
 
         <div class="container-top-nav container-fluid">
-            
             <div class="left-brand-container">
                 <a class="navbar-brand" href="<?php echo e(url('home')); ?>">
                     <img src="<?php echo e(asset('assets/favicon_io/chefshat.svg')); ?>" alt="" srcset="" class="Icon" width="32" height="32">
-                    <div class="webname hide-at-small-screen">
+                    <div class="webname">
                         Local Cuisine
-                    </div>
-                    <div class="webname navBarActions_dropdown">
-                        Favorites
                     </div>
                 </a>
             </div>
 
             <div class="center-actions-container">
                 <div class="left-center-action">
+                    <a class="nav-link" href="<?php echo e(route('newBook')); ?>"><i class="fa-solid fa-circle-plus"></i> Add Recipe</a>
                 </div>
 
                 <div class="center-center-action">
+                    
                 </div>
 
                 <div class="right-center-action">
+                    <a class="nav-link" href="<?php echo e(url('favorites')); ?>"><i class="fa-solid fa-bookmark navBtn Icon"></i>Favorites</a>
                 </div>
             </div>
 
@@ -58,6 +57,9 @@
                     <div class="username_hidden"><?php echo e($get_userName); ?></div>
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a class="navBarActions_dropdown dropdown-item" href="<?php echo e(route('newBook')); ?>">Add Recipe</a></li>
+                    <li><a class="navBarActions_dropdown dropdown-item" href="<?php echo e(url('favorites')); ?>"></i>Favorites</a></li>
+                    <li><a class="dropdown-item" href="<?php echo e(route('userprofile')); ?>">Profile</a></li>
                     <li><form action="<?php echo e(route('logout')); ?>" method="POST" style="display: inline;">
                             <?php echo csrf_field(); ?>
                             <button type="submit" class="dropdown-item">Logout</button>

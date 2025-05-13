@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\books;
+use App\Models\bookuser;
+use App\Models\rating;
 use Auth;
 
 class UserProfileController extends Controller
@@ -22,7 +24,25 @@ class UserProfileController extends Controller
 
         // dd($get_userLevel);
 
-        return view('/userprofile', compact('get_userId', 'get_userName', 'get_userEmail', 'get_userLevel', 'get_profilepic'));
+        // Users books
+        $books = books::where('userId', $user->id)->get();
+
+        foreach ($books as $book) {
+            $bookId = $book->id;
+            $rates = rating::where('book_id', $bookId)->whereNotNull('book_id')->get();
+            $ratesSum = rating::where('book_id', $bookId)->whereNotNull('book_id')->sum('stars_rated');
+            $starsCount = $rates->count() > 0 ? $ratesSum / $rates->count() : 0;
+            $book->starsCount = $starsCount;
+            $book->ratings = $rates->count();
+
+            $book -> username = bookuser::where('id', $book->userId)->first()->username;
+        }
+
+        // dd($books);
+
+        // **Users Book
+
+        return view('/userprofile', compact('get_userId', 'get_userName', 'get_userEmail', 'get_userLevel', 'get_profilepic', 'books'));
     }
 
     public function getUserId($get_userId) {
