@@ -56,9 +56,11 @@ document.addEventListener("DOMContentLoaded", () => {
     //Title
     const sourceInput = document.getElementById('sourceInput');
     const targetInput = document.getElementById('targetInput');
+    const targetInputRS = document.getElementById('targetInputRS');
 
     sourceInput.addEventListener('input', function () {
         targetInput.innerText = sourceInput.value;
+        targetInputrS.innerText = sourceInput.value;
     });
 
 

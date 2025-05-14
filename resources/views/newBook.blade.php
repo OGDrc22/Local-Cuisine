@@ -179,7 +179,7 @@
                 <div class="item book-item">
                     <img class="coverImg" id="imagePreviewRS" src="{{ asset('assets/Images/default.jpg') }}" alt="Cover Image">
                     <div class="info">
-                        <a class="title" id="targetInput">Title</a>
+                        <a class="title" id="targetInputRS">Title</a>
                         <a class="byText">By</a>
                         <p class="author d-inline">{{$get_userName}}</p>
                         
