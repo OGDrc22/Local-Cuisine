@@ -348,14 +348,14 @@
 
             <div class="comments container-fluid">
 
-                <!-- <div class="allComments"> -->
+                <div class="allComments">
                 @if (isset($comments))
                     @foreach ($comments as $comment)
                         @include('components.comment', ['comment' => $comment])
                     @endforeach
                 @endif
 
-                <!-- </div> -->
+                </div>
 
 
                 @if ($get_userId != 0 || $get_userId != null)

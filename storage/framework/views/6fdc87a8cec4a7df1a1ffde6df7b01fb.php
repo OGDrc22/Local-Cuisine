@@ -350,14 +350,14 @@
 
             <div class="comments container-fluid">
 
-                <!-- <div class="allComments"> -->
+                <div class="allComments">
                 <?php if(isset($comments)): ?>
                     <?php $__currentLoopData = $comments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $comment): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <?php echo $__env->make('components.comment', ['comment' => $comment], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 <?php endif; ?>
 
-                <!-- </div> -->
+                </div>
 
 
                 <?php if($get_userId != 0 || $get_userId != null): ?>

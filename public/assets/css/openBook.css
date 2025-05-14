@@ -754,6 +754,7 @@ footer {
 }
 
 .commentForm {
+    grid-column: span 1;
     width: 100%;
     height: min-content;
     resize: none;

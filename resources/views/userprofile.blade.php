@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="route-tempate" content="{{ route('book.details', ['id' => '__ID__']) }}">
     
     <title>LC Profile</title>
     <link href="{{asset('assets/css/bootstrap.css')}}" rel="stylesheet">
@@ -125,17 +126,17 @@
 
             <div class="user-in">
                 <div class="pic-container">
+                    <div class="profile-pic-container" id="edit-pic">
                         @if ($get_profilepic == null)
-                            <div class="profile-pic">
                                 <i class="user-nav-icon fa-solid fa-circle-user dp"></i>
-                            </div>
+                            
                         @else
                             <img src="{{ asset('storage/profilepics/' . ($get_profilepic)) }}" class="profile-pic" id="current-profile-pic" alt="Profile Picture">
                         @endif
-                   
-                    <button class="edit-pic" id="edit-pic">
-                        <i class="fa-solid fa-user-pen"></i>
-                    </button>
+                    </div>
+                       
+                    <i class="fa-solid fa-pen-to-square edit-pic" id="edit-pic"></i>
+
                     <img src="{{ asset('assets/Images/chefshat.svg') }}" alt="" class="hat">
                 </div>
                 <div class="user-info">
@@ -340,6 +341,7 @@
 
 
     <script src="{{ asset('assets/js/userprofile.js') }}"></script>
+    <script src="{{ asset('assets/js/bookSelection.js') }}"></script>
     <!-- Bootstrap 5 JS bundle (includes Popper.js) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 

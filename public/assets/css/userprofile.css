@@ -88,6 +88,7 @@
 
     --card-background: #EEEBE9;
     --inputs: #e0e2e4;
+    --trolley: #808080;
 
 }
 
@@ -595,7 +596,7 @@ html {
     position: relative;
 }
 
-.profile-pic {
+.profile-pic-container {
     background-color: var(--card-background);
     width: 200px;
     aspect-ratio: 1 / 1;
@@ -604,6 +605,15 @@ html {
     margin-right: 16px;
     overflow: hidden;
     position: relative;
+}
+
+
+.profile-pic {
+    background-color: var(--card-background);
+    width: 200px;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    position: absolute;
 }
 
 .pic-container {
@@ -636,14 +646,13 @@ html {
 
 .edit-pic {
     position: absolute;
-    bottom: 16px;
-    right: 16px;
+    bottom: 32px;
+    right: 32px;
     font-size: 1.5em;
-    background-color: var(--secondary-100);
+    background-color: var(--secondary-500);
     border: none;
     border-radius: 20%;
-    color: var(--text-950);
-    box-shadow: 4px 4px 4px 0 rgba(0, 0, 0, .2);
+    color: var(--text-50);
 }
 
 .edit-info {
@@ -763,6 +772,84 @@ html {
     color: var(--secondary-600);
     text-decoration: none;
     text-transform: capitalize
+}
+
+
+.recommended {
+    display: flex;
+    flex-direction: column;
+    /* background-color: #ff3030; */
+}
+
+.recommendedText {
+    font-family: istock-web-regular;
+    font-size: small;
+    color: #5B4F47;
+    padding-inline: 8px;
+    padding-top: 12px;
+}
+
+.container-rating {
+    position: absolute;
+    bottom: 16px;
+    /* background-color: blue; */
+    width: 100%;
+}
+
+.ratingText {
+    font-family: istock-web-regular;
+    font-weight: bold;
+    font-size: large;
+    color:  var(--text-800);
+}
+
+.rates {
+    font-family: istock-web-regular;
+    color:  var(--text-800);
+    font-size: 14px;
+}
+
+.starsNum {
+    font-family: istock-web-bold;
+    color:  var(--text-800);
+    font-size: 14px;
+}
+
+
+.rating-owner {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    gap: 2px;
+    /* background-color: chartreuse; */
+}
+
+.Rates {
+    /* display: none; */
+}
+
+.starRatedEmpty {
+    font-size: 0.8em;
+    color: transparent;
+    font-family: "Font Awesome 5 Free";
+    content: "\f005";
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: hsla(0 0% 0% / 0.5);
+    cursor: pointer;
+    transition: color 0.3s, -webkit-text-stroke-width 0.3s, -webkit-text-stroke-color 0.3s;
+    margin-top: 1px;
+}
+
+
+.starRated {
+    font-size: 0.9em;
+    font-family: "Font Awesome 5 Free";
+    content: "\f005";
+    color: gold;
+    -webkit-text-stroke-width: 0;
+    -webkit-text-stroke-color: gold;
+    cursor: pointer;
+    /* text-shadow: 0px 2px 0px rgba(0, 0, 0, 0.2); */
 }
 
 
