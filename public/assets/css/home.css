@@ -103,21 +103,6 @@
 
 
 
-html {
-    scroll-behavior: smooth;
-    display: flex;
-    flex-direction: column;
-    box-sizing: border-box;
-    height: 100%;
-}
-
-.body {
-    background-color:  var(--background-50);
-    flex: 1;
-    position: relative;
-    box-sizing: inherit;
-    padding-bottom: 200px;
-}
 
 .navbar {
     background-color: var(--background-50);

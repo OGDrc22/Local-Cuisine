@@ -702,3 +702,9 @@
 [stacktrace]
 #0 {main}
 "} 
+[2025-05-14 14:30:39] local.INFO: Redirecting unauthenticated user {"path":"home"} 
+[2025-05-14 14:32:07] local.ERROR: Maximum execution time of 30 seconds exceeded {"userId":3,"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Maximum execution time of 30 seconds exceeded at C:\\xampp\\htdocs\\main_finalproject\\app\\Http\\Controllers\\HomeController.php:186)
+[stacktrace]
+#0 {main}
+"} 
+[2025-05-15 05:11:09] local.INFO: Redirecting unauthenticated user {"path":"newBook"} 

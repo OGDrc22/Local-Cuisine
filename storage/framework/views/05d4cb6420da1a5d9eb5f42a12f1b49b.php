@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LC About</title>
-    <link href="{{asset('assets/css/bootstrap.css')}}" rel="stylesheet">
-    <link href="{{asset('assets/css/about.css')}}" rel="stylesheet">
+    <link href="<?php echo e(asset('assets/css/bootstrap.css')); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('assets/css/about.css')); ?>" rel="stylesheet">
 
-    <link rel="apple-touch-icon" sizes="180x180" href="{{asset('assets/favicon_io/chefshat.svg')}}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{asset('assets/favicon_io/chefshat.svg')}}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('assets/favicon_io/chefshat.svg')}}">
-    <link rel="manifest" href="{{asset('assets/favicon_io/site.webmanifest')}}">
+    <link rel="apple-touch-icon" sizes="180x180" href="<?php echo e(asset('assets/favicon_io/chefshat.svg')); ?>">
+    <link rel="icon" type="image/png" sizes="32x32" href="<?php echo e(asset('assets/favicon_io/chefshat.svg')); ?>">
+    <link rel="icon" type="image/png" sizes="16x16" href="<?php echo e(asset('assets/favicon_io/chefshat.svg')); ?>">
+    <link rel="manifest" href="<?php echo e(asset('assets/favicon_io/site.webmanifest')); ?>">
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=search" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -21,8 +21,8 @@
 
         <div class="container-top-nav container-fluid">
             <div class="left-brand-container">
-                <a class="navbar-brand" href="{{url('home')}}">
-                    <img src="{{asset('assets/favicon_io/chefshat.svg')}}" alt="" srcset="" class="Icon" width="32" height="32">
+                <a class="navbar-brand" href="<?php echo e(url('home')); ?>">
+                    <img src="<?php echo e(asset('assets/favicon_io/chefshat.svg')); ?>" alt="" srcset="" class="Icon" width="32" height="32">
                     <div class="webname">
                         Local Cuisine
                     </div>
@@ -45,9 +45,9 @@
                     <div class="username_hidden">More</div>
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end">
-                    <li><a class="dropdown-item" href="{{route('userprofile')}}">Profile</a></li>
-                    <li><form action="{{route('logout')}}" method="POST" style="display: inline;">
-                            @csrf
+                    <li><a class="dropdown-item" href="<?php echo e(route('userprofile')); ?>">Profile</a></li>
+                    <li><form action="<?php echo e(route('logout')); ?>" method="POST" style="display: inline;">
+                            <?php echo csrf_field(); ?>
                             <button type="submit" class="dropdown-item">Logout</button>
                         </form>
                     </li>
@@ -61,7 +61,7 @@
         <!-- Container 1 About us -->
         <div class="position-relative" id="container1">
             <h2 class="mb-4 fw-bold welcomeText position-absolute  top-50 start-50 translate-middle"> About Us</h2>
-            <img src="{{ asset('assets/Images/9170.jpg') }}" alt="Background Image" class="imageBg">
+            <img src="<?php echo e(asset('assets/Images/9170.jpg')); ?>" alt="Background Image" class="imageBg">
         </div>
         
         <!-- Container 2 NavTabs -->
@@ -126,7 +126,7 @@
     </div>
 
 
-    <script src="{{ asset('assets/js/projectjscript.js') }}"></script>
+    <script src="<?php echo e(asset('assets/js/projectjscript.js')); ?>"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 
@@ -134,8 +134,8 @@
     <hr class="footerLine">
     <div class="footer">
         <div class="container-fluid d-flex justify-content-center align-items-center">
-            <a class="col navbar-brand justify-content-center align-content-center text-center m-0" href="{{url('/')}}">
-                <img src="{{asset('assets/favicon_io/chefshat.svg')}}" alt="" srcset="" class="Icon" width="32"
+            <a class="col navbar-brand justify-content-center align-content-center text-center m-0" href="<?php echo e(url('/')); ?>">
+                <img src="<?php echo e(asset('assets/favicon_io/chefshat.svg')); ?>" alt="" srcset="" class="Icon" width="32"
                     height="32">
                 Local Cuisine
             </a>
@@ -145,16 +145,16 @@
         <p>© 2025 Local Cuisine. All rights reserved.</p>
         <div class="footerAcknowledgment">
             <a href="" target="">
-                <img src="{{ asset('assets/Images/ACIM.svg') }}" height="48">
+                <img src="<?php echo e(asset('assets/Images/ACIM.svg')); ?>" height="48">
             </a>
             <a href="https://laravel.com/">
-                <img src="{{ asset('assets/Images/laravel.svg') }}" height="48">
+                <img src="<?php echo e(asset('assets/Images/laravel.svg')); ?>" height="48">
             </a>
             <a href="https://fontawesome.com/" target="_blank">
-                <img src="{{ asset(('assets/Images/fontawesome.svg')) }}" height="48">
+                <img src="<?php echo e(asset(('assets/Images/fontawesome.svg'))); ?>" height="48">
             </a>
         </div>
     </div>
 </footer>
 
-</html>
+</html><?php /**PATH C:\xampp\htdocs\main_finalproject\resources\views/about.blade.php ENDPATH**/ ?>
