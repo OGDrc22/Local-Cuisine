@@ -41,7 +41,7 @@
 
             <div class="center-actions-container">
                 <div class="left-center-action">
-                    @if ($get_userName != 0)
+                    @if ($get_userName != null)
                         <a class="nav-link" href="{{route('newBook')}}"><i class="fa-solid fa-circle-plus"></i> Add Recipe</a>
                     @endif
                 </div>
@@ -51,14 +51,14 @@
                 </div>
 
                 <div class="right-center-action">
-                    @if ($get_userName != 0)
+                    @if ($get_userName != null)
                         <a class="nav-link" href="{{url('favorites')}}"><i class="fa-solid fa-bookmark Icon"></i>Favorites</a>
                     @endif
                 </div>
             </div>
 
             
-            @if ($get_userName != 0)
+            @if ($get_userName != null)
                 <div class="right-dropdown-container dropdown">
                     <button class="dropdown-toggle dropdown-toggle-button d-flex" data-bs-toggle="dropdown" aria-expanded="false">
                         @if ($get_profilepic == null)

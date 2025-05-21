@@ -78,57 +78,58 @@
 
         <!-- 2nd Container Vertical Scroll -->
         <div class="welcomeText hide-at-small-screen">Favorites</div>
-        <div class="container-User" id="container2">
+        
 
             <!-- Content container for cards -->
             <?php if(empty($favoritedBooks)): ?>
-                <h1 class="message d-flex w-100">You have no favorite books.<br>Open a book and add one!.</h1>
+                <h1 class="message d-flex">You have no favorite books.<br>Open a book and add one!.</h1>
             <?php else: ?>
-                <?php $__currentLoopData = $favoritedBooks; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $userData): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                    <div class="item book-item" data-id="<?php echo e($userData['books']->id); ?>">
-                        <img class="coverImg" src="<?php echo e(asset('storage/' . $userData['books']->coverImage)); ?>" alt="Cover Image">
-                        <div class="info">
-                            <a class="title"><?php echo e($userData['books']->recipeTitle); ?></a>
-                            <a class="byText">By</a>
-                            <p class="author"><?php echo e($userData['username']); ?></p>
-                            
-                        </div>
-                        <div class="recommended">
-                            <div class="container-rating d-flex align-items-center px-2">
+                <div class="container-User" id="container2"></div>
+                    <?php $__currentLoopData = $favoritedBooks; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $userData): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <div class="item book-item" data-id="<?php echo e($userData['books']->id); ?>">
+                            <img class="coverImg" src="<?php echo e(asset('storage/' . $userData['books']->coverImage)); ?>" alt="Cover Image">
+                            <div class="info">
+                                <a class="title"><?php echo e($userData['books']->recipeTitle); ?></a>
+                                <a class="byText">By</a>
+                                <p class="author"><?php echo e($userData['username']); ?></p>
+                                
+                            </div>
+                            <div class="recommended">
+                                <div class="container-rating d-flex align-items-center px-2">
 
-                                <?php
-                                    $starsTotal = $userData['starsCount'];
-                                    $starsFull = floor($starsTotal);
-                                    $starsHalf = ($starsTotal - $starsFull) > 0 ? true : false;
-                                    $starsNum = number_format($userData['starsCount'], 1);
-                                ?>
+                                    <?php
+                                        $starsTotal = $userData['starsCount'];
+                                        $starsFull = floor($starsTotal);
+                                        $starsHalf = ($starsTotal - $starsFull) > 0 ? true : false;
+                                        $starsNum = number_format($userData['starsCount'], 1);
+                                    ?>
 
-                                <!-- <h1 class="ratingText mb-0">Ratings: </h1> -->
-                                <div class="rating-owner d-flex d-inline">
-                                    
-                                    <?php for($i = $starsTotal+1; $i <= 5; $i++): ?>
-                                        <label for="Star" title="<?php echo e($starsNum); ?> stars" class="fa-solid fa-star starRatedEmpty"></label>                     
-                                    <?php endfor; ?>
+                                    <!-- <h1 class="ratingText mb-0">Ratings: </h1> -->
+                                    <div class="rating-owner d-flex d-inline">
+                                        
+                                        <?php for($i = $starsTotal+1; $i <= 5; $i++): ?>
+                                            <label for="Star" title="<?php echo e($starsNum); ?> stars" class="fa-solid fa-star starRatedEmpty"></label>                     
+                                        <?php endfor; ?>
 
-                                    <?php if($starsHalf): ?>
-                                        <label for="Star" title="<?php echo e($starsNum); ?> stars" class="fa-solid fa-star-half-stroke starRated"></label>
-                                    <?php endif; ?>
+                                        <?php if($starsHalf): ?>
+                                            <label for="Star" title="<?php echo e($starsNum); ?> stars" class="fa-solid fa-star-half-stroke starRated"></label>
+                                        <?php endif; ?>
 
-                                    <?php for($i = 1; $i <= $starsTotal; $i++): ?>
-                                        <label for="Star" title="<?php echo e($starsNum); ?> stars" class="fa-solid fa-star starRated"></label>
-                                    <?php endfor; ?>
-                                    
-                                    
+                                        <?php for($i = 1; $i <= $starsTotal; $i++): ?>
+                                            <label for="Star" title="<?php echo e($starsNum); ?> stars" class="fa-solid fa-star starRated"></label>
+                                        <?php endfor; ?>
+                                        
+                                        
+                                    </div>
+                                        <h1 class="rates ms-2 mb-0 mt-1 starsNum">(<?php echo e($starsNum); ?>)</h1>
+                                        <h1 class="rates ms-2 mb-0 mt-1 d-inline"> <?php echo e($userData['ratingsCount']); ?> Ratings</h1>
                                 </div>
-                                    <h1 class="rates ms-2 mb-0 mt-1 starsNum">(<?php echo e($starsNum); ?>)</h1>
-                                    <h1 class="rates ms-2 mb-0 mt-1 d-inline"> <?php echo e($userData['ratingsCount']); ?> Ratings</h1>
                             </div>
                         </div>
-                    </div>
-                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                </div>
             <?php endif; ?>
 
-        </div>
     </div>
 
 

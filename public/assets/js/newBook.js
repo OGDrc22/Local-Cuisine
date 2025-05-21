@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     sourceInput.addEventListener('input', function () {
         targetInput.innerText = sourceInput.value;
-        targetInputrS.innerText = sourceInput.value;
+        targetInputRS.innerText = sourceInput.value;
     });
 
 

@@ -41,7 +41,7 @@
 
             <div class="center-actions-container">
                 <div class="left-center-action">
-                    <?php if($get_userName != 0): ?>
+                    <?php if($get_userName != null): ?>
                         <a class="nav-link" href="<?php echo e(route('newBook')); ?>"><i class="fa-solid fa-circle-plus"></i> Add Recipe</a>
                     <?php endif; ?>
                 </div>
@@ -51,14 +51,14 @@
                 </div>
 
                 <div class="right-center-action">
-                    <?php if($get_userName != 0): ?>
+                    <?php if($get_userName != null): ?>
                         <a class="nav-link" href="<?php echo e(url('favorites')); ?>"><i class="fa-solid fa-bookmark Icon"></i>Favorites</a>
                     <?php endif; ?>
                 </div>
             </div>
 
             
-            <?php if($get_userName != 0): ?>
+            <?php if($get_userName != null): ?>
                 <div class="right-dropdown-container dropdown">
                     <button class="dropdown-toggle dropdown-toggle-button d-flex" data-bs-toggle="dropdown" aria-expanded="false">
                         <?php if($get_profilepic == null): ?>

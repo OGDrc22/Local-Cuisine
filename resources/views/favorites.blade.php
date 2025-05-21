@@ -78,57 +78,58 @@
 
         <!-- 2nd Container Vertical Scroll -->
         <div class="welcomeText hide-at-small-screen">Favorites</div>
-        <div class="container-User" id="container2">
+        
 
             <!-- Content container for cards -->
             @if (empty($favoritedBooks))
-                <h1 class="message d-flex w-100">You have no favorite books.<br>Open a book and add one!.</h1>
+                <h1 class="message d-flex">You have no favorite books.<br>Open a book and add one!.</h1>
             @else
-                @foreach($favoritedBooks as $userData)
-                    <div class="item book-item" data-id="{{$userData['books']->id}}">
-                        <img class="coverImg" src="{{ asset('storage/' . $userData['books']->coverImage) }}" alt="Cover Image">
-                        <div class="info">
-                            <a class="title">{{ $userData['books']->recipeTitle }}</a>
-                            <a class="byText">By</a>
-                            <p class="author">{{ $userData['username'] }}</p>
-                            
-                        </div>
-                        <div class="recommended">
-                            <div class="container-rating d-flex align-items-center px-2">
+                <div class="container-User" id="container2"></div>
+                    @foreach($favoritedBooks as $userData)
+                        <div class="item book-item" data-id="{{$userData['books']->id}}">
+                            <img class="coverImg" src="{{ asset('storage/' . $userData['books']->coverImage) }}" alt="Cover Image">
+                            <div class="info">
+                                <a class="title">{{ $userData['books']->recipeTitle }}</a>
+                                <a class="byText">By</a>
+                                <p class="author">{{ $userData['username'] }}</p>
+                                
+                            </div>
+                            <div class="recommended">
+                                <div class="container-rating d-flex align-items-center px-2">
 
-                                @php
-                                    $starsTotal = $userData['starsCount'];
-                                    $starsFull = floor($starsTotal);
-                                    $starsHalf = ($starsTotal - $starsFull) > 0 ? true : false;
-                                    $starsNum = number_format($userData['starsCount'], 1);
-                                @endphp
+                                    @php
+                                        $starsTotal = $userData['starsCount'];
+                                        $starsFull = floor($starsTotal);
+                                        $starsHalf = ($starsTotal - $starsFull) > 0 ? true : false;
+                                        $starsNum = number_format($userData['starsCount'], 1);
+                                    @endphp
 
-                                <!-- <h1 class="ratingText mb-0">Ratings: </h1> -->
-                                <div class="rating-owner d-flex d-inline">
-                                    
-                                    @for ($i = $starsTotal+1; $i <= 5; $i++)
-                                        <label for="Star" title="{{$starsNum}} stars" class="fa-solid fa-star starRatedEmpty"></label>                     
-                                    @endfor
+                                    <!-- <h1 class="ratingText mb-0">Ratings: </h1> -->
+                                    <div class="rating-owner d-flex d-inline">
+                                        
+                                        @for ($i = $starsTotal+1; $i <= 5; $i++)
+                                            <label for="Star" title="{{$starsNum}} stars" class="fa-solid fa-star starRatedEmpty"></label>                     
+                                        @endfor
 
-                                    @if ($starsHalf)
-                                        <label for="Star" title="{{$starsNum}} stars" class="fa-solid fa-star-half-stroke starRated"></label>
-                                    @endif
+                                        @if ($starsHalf)
+                                            <label for="Star" title="{{$starsNum}} stars" class="fa-solid fa-star-half-stroke starRated"></label>
+                                        @endif
 
-                                    @for ($i = 1; $i <= $starsTotal; $i++)
-                                        <label for="Star" title="{{$starsNum}} stars" class="fa-solid fa-star starRated"></label>
-                                    @endfor
-                                    
-                                    
+                                        @for ($i = 1; $i <= $starsTotal; $i++)
+                                            <label for="Star" title="{{$starsNum}} stars" class="fa-solid fa-star starRated"></label>
+                                        @endfor
+                                        
+                                        
+                                    </div>
+                                        <h1 class="rates ms-2 mb-0 mt-1 starsNum">({{$starsNum}})</h1>
+                                        <h1 class="rates ms-2 mb-0 mt-1 d-inline"> {{$userData['ratingsCount']}} Ratings</h1>
                                 </div>
-                                    <h1 class="rates ms-2 mb-0 mt-1 starsNum">({{$starsNum}})</h1>
-                                    <h1 class="rates ms-2 mb-0 mt-1 d-inline"> {{$userData['ratingsCount']}} Ratings</h1>
                             </div>
                         </div>
-                    </div>
-                @endforeach
+                    @endforeach
+                </div>
             @endif
 
-        </div>
     </div>
 
 

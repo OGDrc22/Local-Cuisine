@@ -21,6 +21,7 @@ class BookController extends Controller
         } else {
             $get_userId = 0;
             $get_userName = null;
+            $get_profilepic = null;
         }
     
         $book = books::findOrFail($id);
