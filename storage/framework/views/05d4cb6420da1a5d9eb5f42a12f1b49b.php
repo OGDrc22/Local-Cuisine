@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LC About</title>
+    <title>Local Cuisine About</title>
     <link href="<?php echo e(asset('assets/css/bootstrap.css')); ?>" rel="stylesheet">
     <link href="<?php echo e(asset('assets/css/about.css')); ?>" rel="stylesheet">
 
@@ -45,7 +45,7 @@
                     <div class="username_hidden">More</div>
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end">
-                    <li><a class="dropdown-item" href="<?php echo e(route('userprofile')); ?>">Profile</a></li>
+                    <li><a class="dropdown-item" href="<?php echo e(route('userprofile')); ?>">Login</a></li>
                     <li><form action="<?php echo e(route('logout')); ?>" method="POST" style="display: inline;">
                             <?php echo csrf_field(); ?>
                             <button type="submit" class="dropdown-item">Logout</button>

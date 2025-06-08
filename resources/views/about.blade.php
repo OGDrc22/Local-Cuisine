@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LC About</title>
+    <title>Local Cuisine About</title>
     <link href="{{asset('assets/css/bootstrap.css')}}" rel="stylesheet">
     <link href="{{asset('assets/css/about.css')}}" rel="stylesheet">
 
@@ -45,7 +45,7 @@
                     <div class="username_hidden">More</div>
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end">
-                    <li><a class="dropdown-item" href="{{route('userprofile')}}">Profile</a></li>
+                    <li><a class="dropdown-item" href="{{route('userprofile')}}">Login</a></li>
                     <li><form action="{{route('logout')}}" method="POST" style="display: inline;">
                             @csrf
                             <button type="submit" class="dropdown-item">Logout</button>
