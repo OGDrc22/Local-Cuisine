@@ -1,30 +1,39 @@
-# Use an official PHP image with Apache
-FROM php:8.2-apache
+# Stage 1 - Build Frontend (Vite)
+FROM node:18 AS frontend
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+RUN npm run build
 
-# Install required PHP extensions
+# Stage 2 - Backend (Laravel + PHP + Composer)
+FROM php:8.2-fpm AS backend
+
+# Install system dependencies
 RUN apt-get update && apt-get install -y \
-    libpq-dev \
-    libzip-dev \
-    unzip \
-    && docker-php-ext-install pdo pdo_pgsql zip
+    git curl unzip libpq-dev libonig-dev libzip-dev zip \
+    && docker-php-ext-install pdo pdo_mysql mbstring zip
 
 # Install Composer
-COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# Set the working directory
-WORKDIR /var/www/html
+WORKDIR /var/www
 
-# Copy application files to the container
+# Copy app files
 COPY . .
 
-# Set proper permissions
-RUN chown -R www-data:www-data /var/www/html
+# Copy built frontend from Stage 1
+COPY --from=frontend /app/public/dist ./public/dist
 
-# Install dependencies
-RUN composer install --no-dev --optimize-autoloader --prefer-dist
+# Install PHP dependencies
+RUN composer install --no-dev --optimize-autoloader
 
-# Expose port 10000
-EXPOSE 10000
+# Laravel setup
+RUN php artisan config:clear && \
+    php artisan route:clear && \
+    php artisan view:clear
 
-# Start Laravel's built-in server
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=10000"]
+CMD ["php-fpm"]
+
+
+# docker
