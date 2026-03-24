@@ -31,7 +31,8 @@ RUN composer install --no-dev --optimize-autoloader
 # Laravel setup
 RUN php artisan config:clear && \
     php artisan route:clear && \
-    php artisan view:clear
+    php artisan view:clear && \
+    php artisan migrate
 
 CMD ["php-fpm"]
 
